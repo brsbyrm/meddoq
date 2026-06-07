@@ -525,68 +525,145 @@ function CrCl() {
     </>
   );
 }
-
 function EGFR() {
   const [age, setAge] = useState("");
+  const [weight, setWeight] = useState("");
   const [creat, setCreat] = useState("");
   const [female, setFemale] = useState(false);
 
-  const result = useMemo(() => {
+  const egfr = useMemo(() => {
     if (!age || !creat) return "";
 
     const scr = Number(creat);
     const k = female ? 0.7 : 0.9;
     const alpha = female ? -0.241 : -0.302;
 
-    let egfr =
+    let value =
       142 *
       Math.pow(Math.min(scr / k, 1), alpha) *
       Math.pow(Math.max(scr / k, 1), -1.2) *
       Math.pow(0.9938, Number(age));
 
-    if (female) egfr *= 1.012;
+    if (female) value *= 1.012;
 
-    return egfr.toFixed(1);
+    return value.toFixed(1);
   }, [age, creat, female]);
 
-  function interpretEGFR(value) {
+  const crcl = useMemo(() => {
+    if (!age || !weight || !creat) return "";
+
+    let value = ((140 - Number(age)) * Number(weight)) / (72 * Number(creat));
+
+    if (female) value *= 0.85;
+
+    return value.toFixed(1);
+  }, [age, weight, creat, female]);
+
+  function interpretRenal(value) {
     const number = Number(value);
-    if (number < 30) return { text: "Severely reduced eGFR. CKD stage G4–G5 range depending on exact value and chronicity.", tone: "high" };
-    if (number < 60) return { text: "Reduced eGFR. CKD stage G3 range if persistent for at least 3 months.", tone: "moderate" };
-    return { text: "eGFR is ≥60 mL/min/1.73 m². Interpret with albuminuria and clinical context.", tone: "low" };
+
+    if (number < 15) {
+      return {
+        category: "Kidney failure range",
+        text: "eGFR is in the G5 range if persistent. Requires urgent clinical correlation, medication review and nephrology-directed management.",
+        tone: "high",
+      };
+    }
+
+    if (number < 30) {
+      return {
+        category: "Severely decreased",
+        text: "eGFR is in the G4 range if persistent. Review nephrotoxic exposure, medication dosing and contrast-related risk carefully.",
+        tone: "high",
+      };
+    }
+
+    if (number < 45) {
+      return {
+        category: "Moderately to severely decreased",
+        text: "eGFR is in the G3b range if persistent. Increased perioperative and contrast-related renal risk should be considered.",
+        tone: "moderate",
+      };
+    }
+
+    if (number < 60) {
+      return {
+        category: "Mildly to moderately decreased",
+        text: "eGFR is in the G3a range if persistent. Interpret with albuminuria, trend and clinical context.",
+        tone: "moderate",
+      };
+    }
+
+    if (number < 90) {
+      return {
+        category: "Mildly decreased or age-related range",
+        text: "eGFR is 60–89. CKD diagnosis requires additional evidence of kidney damage or persistent abnormality.",
+        tone: "low",
+      };
+    }
+
+    return {
+      category: "Normal or high",
+      text: "eGFR is ≥90. Interpret with age, muscle mass, albuminuria and clinical context.",
+      tone: "low",
+    };
   }
 
-  const egfrInfo = result ? interpretEGFR(result) : null;
+  function interpretCrCl(value) {
+    const number = Number(value);
+
+    if (number < 30) {
+      return "CrCl is <30 mL/min. Many renally cleared medications require dose adjustment or avoidance. Review contrast exposure and hydration strategy.";
+    }
+
+    if (number < 60) {
+      return "CrCl is 30–59 mL/min. Consider renal dose adjustment for relevant drugs and review peri-procedural renal risk.";
+    }
+
+    return "CrCl is ≥60 mL/min by Cockcroft-Gault. Continue to interpret with body habitus, renal trend and drug-specific recommendations.";
+  }
+
+  const renalInfo = egfr ? interpretRenal(egfr) : null;
 
   return (
     <>
       <div style={styles.formGrid}>
         <Input label="Age / Yaş" value={age} setValue={setAge} placeholder="65" />
+        <Input label="Weight / Kilo (kg)" value={weight} setValue={setWeight} placeholder="80" />
         <Input label="Creatinine / Kreatinin (mg/dL)" value={creat} setValue={setCreat} placeholder="1.2" />
       </div>
 
       <Checkbox label="Female sex" checked={female} setChecked={setFemale} />
 
-      {result && (
+      {egfr && (
         <ResultBox
           title="eGFR CKD-EPI 2021"
-          value={result}
+          value={egfr}
           unit="mL/min/1.73 m²"
-          interpretation={egfrInfo.text}
-          tone={egfrInfo.tone}
+          interpretation={`${renalInfo.category}: ${renalInfo.text}`}
+          tone={renalInfo.tone}
+        />
+      )}
+
+      {crcl && (
+        <ResultBox
+          title="Creatinine Clearance"
+          value={crcl}
+          unit="mL/min"
+          interpretation={interpretCrCl(crcl)}
+          tone={Number(crcl) < 30 ? "high" : Number(crcl) < 60 ? "moderate" : "low"}
         />
       )}
 
       <ClinicalNote
-        formula="CKD-EPI 2021 creatinine equation"
-        interpretation="Used for renal function assessment and CKD staging. CKD diagnosis requires chronicity and clinical correlation."
-        guideline="Interpret with urine albumin-creatinine ratio, trend, age, muscle mass and acute illness status."
-        reference="Inker LA et al. N Engl J Med. 2021."
+        formula="eGFR: CKD-EPI 2021 creatinine equation. CrCl: Cockcroft-Gault equation."
+        interpretation="eGFR is commonly used for CKD staging, while Cockcroft-Gault creatinine clearance is still frequently used for drug dosing decisions."
+        guideline="Interpret renal estimates with albuminuria, renal trend, acute illness status, muscle mass, body habitus and medication-specific dosing recommendations."
+        reference="Inker LA et al. N Engl J Med. 2021; Cockcroft DW, Gault MH. Nephron. 1976."
       />
     </>
   );
 }
-
 function CHA() {
   const items = [
     ["Congestive heart failure", 1],
