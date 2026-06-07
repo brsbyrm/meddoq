@@ -72,7 +72,7 @@ const categories = [
   },
   {
     title: "Renal",
-    text: "Renal function estimation for clinical assessment and medication dosing.",
+    text: "Renal ion estimation for clinical assessment and medication dosing.",
   },
   {
     title: "Perioperative",
@@ -80,7 +80,7 @@ const categories = [
   },
 ];
 
-export default function Home() {
+export default ion Home() {
   const [active, setActive] = useState("asi");
 
   const activeCalculator = calculators.find((item) => item.id === active);
@@ -224,7 +224,7 @@ export default function Home() {
   );
 }
 
-function Input({ label, value, setValue, placeholder }) {
+ion Input({ label, value, setValue, placeholder }) {
   return (
     <label style={styles.label}>
       <span>{label}</span>
@@ -239,7 +239,7 @@ function Input({ label, value, setValue, placeholder }) {
   );
 }
 
-function Checkbox({ label, checked, setChecked }) {
+ion Checkbox({ label, checked, setChecked }) {
   return (
     <label style={styles.checkboxLabel}>
       <input
@@ -252,7 +252,7 @@ function Checkbox({ label, checked, setChecked }) {
   );
 }
 
-function ResultBox({ title, value, unit, interpretation, tone = "neutral" }) {
+ion ResultBox({ title, value, unit, interpretation, tone = "neutral" }) {
   const toneStyle =
     tone === "high"
       ? styles.resultHigh
@@ -273,7 +273,7 @@ function ResultBox({ title, value, unit, interpretation, tone = "neutral" }) {
   );
 }
 
-function ClinicalNote({ formula, interpretation, reference, guideline }) {
+ion ClinicalNote({ formula, interpretation, reference, guideline }) {
   return (
     <div style={styles.clinicalNote}>
       <div style={styles.noteRow}>
@@ -301,7 +301,7 @@ function ClinicalNote({ formula, interpretation, reference, guideline }) {
   );
 }
 
-function BSA() {
+ion BSA() {
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
 
@@ -335,7 +335,7 @@ function BSA() {
   );
 }
 
-function ASI() {
+ion ASI() {
   const [diameter, setDiameter] = useState("");
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
@@ -350,7 +350,7 @@ function ASI() {
     return (Number(diameter) / Number(bsa)).toFixed(2);
   }, [diameter, bsa]);
 
-  function interpretASI(value) {
+  ion interpretASI(value) {
     const number = Number(value);
 
     if (number >= 2.75) {
@@ -429,7 +429,7 @@ function ASI() {
   );
 }
     
-function BMI() {
+ion BMI() {
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
 
@@ -438,7 +438,7 @@ function BMI() {
     return (Number(weight) / Math.pow(Number(height) / 100, 2)).toFixed(1);
   }, [height, weight]);
 
-  function interpretBMI(value) {
+  ion interpretBMI(value) {
     const number = Number(value);
     if (number >= 30) return { text: "Obesity range by standard BMI classification.", tone: "high" };
     if (number >= 25) return { text: "Overweight range by standard BMI classification.", tone: "moderate" };
@@ -474,7 +474,7 @@ function BMI() {
   );
 }
 
-function CrCl() {
+ion CrCl() {
   const [age, setAge] = useState("");
   const [weight, setWeight] = useState("");
   const [creat, setCreat] = useState("");
@@ -487,7 +487,7 @@ function CrCl() {
     return crcl.toFixed(1);
   }, [age, weight, creat, female]);
 
-  function interpretCrCl(value) {
+  ion interpretCrCl(value) {
     const number = Number(value);
     if (number < 30) return { text: "Markedly reduced creatinine clearance. Review renal dosing and contrast risk carefully.", tone: "high" };
     if (number < 60) return { text: "Reduced creatinine clearance. Consider renal dose adjustment where relevant.", tone: "moderate" };
@@ -727,14 +727,14 @@ function HASBLED() {
 
 function WellsDVT() {
   const items = [
-    ["Active cancer", 1],
-    ["Paralysis, paresis or recent plaster immobilization", 1],
-    ["Recently bedridden >3 days or major surgery", 1],
-    ["Localized tenderness along deep venous system", 1],
+    ["Active cancer: treatment ongoing, within previous 6 months, or palliative", 1],
+    ["Paralysis, paresis or recent plaster immobilization of lower extremity", 1],
+    ["Recently bedridden >3 days or major surgery within 12 weeks", 1],
+    ["Localized tenderness along the distribution of the deep venous system", 1],
     ["Entire leg swollen", 1],
     ["Calf swelling >3 cm compared with asymptomatic leg", 1],
-    ["Pitting edema confined to symptomatic leg", 1],
-    ["Collateral superficial veins", 1],
+    ["Pitting edema confined to the symptomatic leg", 1],
+    ["Collateral superficial veins, non-varicose", 1],
     ["Previously documented DVT", 1],
     ["Alternative diagnosis at least as likely as DVT", -2],
   ];
@@ -745,18 +745,32 @@ function WellsDVT() {
       items={items}
       resultUnit="points"
       interpret={(score) => {
-        if (score >= 3) return { text: "High pretest probability of DVT. Diagnostic imaging is usually required.", tone: "high" };
-        if (score >= 1) return { text: "Moderate pretest probability. Follow local diagnostic algorithm with D-dimer and/or ultrasound.", tone: "moderate" };
-        return { text: "Low pretest probability. D-dimer strategy may be appropriate depending on local protocol.", tone: "low" };
+        if (score >= 3) {
+          return {
+            text: "High pretest probability. Compression ultrasonography is usually required. Do not rely on D-dimer alone in this category.",
+            tone: "high",
+          };
+        }
+
+        if (score >= 1) {
+          return {
+            text: "Moderate pretest probability. Follow local diagnostic pathway using D-dimer and/or venous ultrasonography according to availability and clinical context.",
+            tone: "moderate",
+          };
+        }
+
+        return {
+          text: "Low pretest probability. If D-dimer is negative, DVT can often be excluded in appropriate outpatient settings. If positive, proceed to imaging according to local protocol.",
+          tone: "low",
+        };
       }}
-      formula="Clinical prediction rule for suspected deep vein thrombosis."
-      interpretation="Used to estimate pretest probability before D-dimer testing or venous ultrasound."
-      guideline="Do not use as a standalone diagnostic test. Follow local VTE diagnostic pathways."
-      reference="Wells PS et al. Lancet. 1997."
+      formula="Wells clinical prediction rule for suspected lower-extremity deep vein thrombosis."
+      interpretation="The score estimates pretest probability before D-dimer testing or venous ultrasonography. It should be used only when DVT is clinically suspected."
+      guideline="Use with caution in pregnancy, recurrent DVT, active anticoagulation, hospitalized patients and patients with strong clinical concern despite a low score. Follow local VTE diagnostic pathways."
+      reference="Wells PS et al. Lancet. 1997; NICE VTE diagnostic pathway."
     />
   );
 }
-
 function Score({
   title,
   items,
