@@ -666,12 +666,12 @@ function EGFR() {
 }
 function CHA() {
   const items = [
-    ["Congestive heart failure", 1],
+    ["Congestive heart failure / LV dysfunction", 1],
     ["Hypertension", 1],
     ["Age ≥75 years", 2],
     ["Diabetes mellitus", 1],
-    ["Stroke / TIA / thromboembolism", 2],
-    ["Vascular disease", 1],
+    ["Stroke / TIA / systemic embolism", 2],
+    ["Vascular disease: prior MI, PAD or aortic plaque", 1],
     ["Age 65–74 years", 1],
     ["Female sex", 1],
   ];
@@ -682,29 +682,50 @@ function CHA() {
       items={items}
       resultUnit="points"
       interpret={(score) => {
-        if (score >= 2) return { text: "Elevated thromboembolic risk. Anticoagulation is commonly considered according to AF guidelines and patient factors.", tone: "high" };
-        if (score === 1) return { text: "Intermediate risk. Anticoagulation decision should be individualized.", tone: "moderate" };
-        return { text: "Low score. Interpret according to sex-specific guideline recommendations.", tone: "low" };
+        if (score >= 3) {
+          return {
+            text: "Elevated thromboembolic risk. In most atrial fibrillation guidelines, oral anticoagulation is generally recommended unless contraindicated.",
+            tone: "high",
+          };
+        }
+
+        if (score === 2) {
+          return {
+            text: "Intermediate-to-elevated thromboembolic risk. Anticoagulation is commonly considered, especially when non-sex risk factors are present.",
+            tone: "moderate",
+          };
+        }
+
+        if (score === 1) {
+          return {
+            text: "Low-to-intermediate score. If the only point is female sex, this is usually considered low risk. Otherwise, individualize anticoagulation decision.",
+            tone: "moderate",
+          };
+        }
+
+        return {
+          text: "Low thromboembolic risk by this score. Anticoagulation is usually not indicated solely by CHA₂DS₂-VASc, but clinical context matters.",
+          tone: "low",
+        };
       }}
-      formula="Point-based clinical stroke-risk score in atrial fibrillation."
-      interpretation="Higher score indicates higher thromboembolic risk. Treatment decisions should include bleeding risk, patient preference and guideline recommendations."
-      guideline="Use only in the appropriate atrial fibrillation context."
-      reference="Lip GYH et al. Chest. 2010."
+      formula="Point-based clinical stroke-risk score in non-valvular atrial fibrillation."
+      interpretation="Higher score indicates higher thromboembolic risk. Female sex is considered a risk modifier rather than a standalone indication for anticoagulation."
+      guideline="Use in atrial fibrillation or atrial flutter context. Anticoagulation decisions should incorporate bleeding risk, renal function, patient preference, contraindications and current AF guidelines."
+      reference="Lip GYH et al. Chest. 2010; ESC and ACC/AHA atrial fibrillation guideline frameworks."
     />
   );
 }
-
 function HASBLED() {
   const items = [
-    ["Hypertension", 1],
+    ["Hypertension: uncontrolled systolic BP >160 mmHg", 1],
     ["Abnormal renal function", 1],
     ["Abnormal liver function", 1],
     ["Stroke history", 1],
-    ["Bleeding history or predisposition", 1],
-    ["Labile INR", 1],
+    ["Major bleeding history or bleeding predisposition", 1],
+    ["Labile INR if on warfarin", 1],
     ["Elderly age >65 years", 1],
-    ["Drugs predisposing to bleeding", 1],
-    ["Alcohol use", 1],
+    ["Drugs predisposing to bleeding: antiplatelet or NSAID", 1],
+    ["Alcohol excess", 1],
   ];
 
   return (
@@ -713,18 +734,32 @@ function HASBLED() {
       items={items}
       resultUnit="points"
       interpret={(score) => {
-        if (score >= 3) return { text: "Higher bleeding risk. Review modifiable risk factors and monitor more closely.", tone: "high" };
-        if (score >= 1) return { text: "Some bleeding risk factors present. Review modifiable factors.", tone: "moderate" };
-        return { text: "Low bleeding risk by this score.", tone: "low" };
+        if (score >= 3) {
+          return {
+            text: "High bleeding risk. This should trigger closer follow-up and correction of modifiable bleeding risk factors, not automatic withholding of anticoagulation.",
+            tone: "high",
+          };
+        }
+
+        if (score >= 1) {
+          return {
+            text: "Bleeding risk factors are present. Review modifiable factors such as blood pressure, interacting drugs, alcohol use, renal/liver dysfunction and INR control.",
+            tone: "moderate",
+          };
+        }
+
+        return {
+          text: "Low bleeding risk by HAS-BLED. Continue routine clinical assessment and reassess risk over time.",
+          tone: "low",
+        };
       }}
-      formula="Point-based bleeding risk score in anticoagulated atrial fibrillation patients."
-      interpretation="A high score should not automatically exclude anticoagulation; it highlights the need to correct modifiable bleeding risks."
-      guideline="Assess blood pressure, renal/liver function, interacting drugs, alcohol use and follow-up intensity."
-      reference="Pisters R et al. Chest. 2010."
+      formula="Point-based bleeding risk score for patients with atrial fibrillation receiving or being considered for anticoagulation."
+      interpretation="HAS-BLED estimates bleeding risk and highlights modifiable risk factors. It should not be used as a simple reason to deny anticoagulation."
+      guideline="Use together with CHA₂DS₂-VASc, renal function, medication review and patient-specific bleeding history. Reassess periodically because risk changes over time."
+      reference="Pisters R et al. Chest. 2010; ESC and ACC/AHA atrial fibrillation guideline frameworks."
     />
   );
 }
-
 function WellsDVT() {
   const items = [
     ["Active cancer: treatment ongoing, within previous 6 months, or palliative", 1],
