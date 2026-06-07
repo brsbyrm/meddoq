@@ -1,3 +1,5 @@
+import Script from "next/script";
+
 export const metadata = {
   title: "Meddoq | Clinical Calculators and Decision Support for Physicians",
   description:
@@ -40,10 +42,27 @@ export const metadata = {
   },
 };
 
+const GA_MEASUREMENT_ID = "G-EFPG9FH69Y";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
+      </body>
     </html>
   );
 }
