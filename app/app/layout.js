@@ -30,4 +30,20 @@ export const metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Meddoq |
+    title: "Meddoq | Clinical Calculators for Physicians",
+    description:
+      "Professional clinical calculators, risk scores and decision support tools for physicians.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
+}
