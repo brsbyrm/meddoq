@@ -1,137 +1,441 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 const calculators = [
-  "BSA",
-  "Aortic Size Index",
-  "BMI",
-  "Creatinine Clearance",
-  "eGFR",
-  "CHA₂DS₂-VASc",
-  "HAS-BLED",
-  "Wells DVT",
+  {
+    id: "asi",
+    name: "Aortic Size Index",
+    shortName: "ASI",
+    category: "Vascular",
+    description: "Index aortic diameter to body surface area for individualized aortic risk assessment.",
+  },
+  {
+    id: "egfr",
+    name: "eGFR",
+    shortName: "eGFR",
+    category: "Renal",
+    description: "Estimate glomerular filtration rate using the CKD-EPI 2021 creatinine equation.",
+  },
+  {
+    id: "crcl",
+    name: "Creatinine Clearance",
+    shortName: "CrCl",
+    category: "Renal",
+    description: "Estimate creatinine clearance using the Cockcroft-Gault equation for drug dosing.",
+  },
+  {
+    id: "cha",
+    name: "CHA₂DS₂-VASc",
+    shortName: "CHA₂DS₂-VASc",
+    category: "Cardiovascular",
+    description: "Estimate thromboembolic risk in patients with atrial fibrillation.",
+  },
+  {
+    id: "hasbled",
+    name: "HAS-BLED",
+    shortName: "HAS-BLED",
+    category: "Cardiovascular",
+    description: "Assess bleeding risk in patients receiving anticoagulation for atrial fibrillation.",
+  },
+  {
+    id: "wells",
+    name: "Wells DVT",
+    shortName: "Wells DVT",
+    category: "Vascular",
+    description: "Estimate pretest probability of deep vein thrombosis.",
+  },
+  {
+    id: "bsa",
+    name: "Body Surface Area",
+    shortName: "BSA",
+    category: "General",
+    description: "Calculate body surface area using the Mosteller formula.",
+  },
+  {
+    id: "bmi",
+    name: "Body Mass Index",
+    shortName: "BMI",
+    category: "General",
+    description: "Calculate body mass index and standard weight category.",
+  },
+];
+
+const categories = [
+  {
+    title: "Vascular",
+    text: "Aortic indexing, DVT probability, peripheral vascular workflow tools.",
+  },
+  {
+    title: "Cardiovascular",
+    text: "Stroke risk, bleeding risk and perioperative cardiovascular decision support.",
+  },
+  {
+    title: "Renal",
+    text: "Renal function estimation for clinical assessment and medication dosing.",
+  },
+  {
+    title: "Perioperative",
+    text: "Planned expansion for anticoagulation, bleeding and procedural risk tools.",
+  },
 ];
 
 export default function Home() {
-  const [active, setActive] = useState("BSA");
+  const [active, setActive] = useState("asi");
+
+  const activeCalculator = calculators.find((item) => item.id === active);
 
   return (
     <main style={styles.main}>
-      <section style={styles.container}>
-        <h1 style={styles.logo}>Meddoq</h1>
-        <p style={styles.subtitle}>Clinical calculators for modern physicians.</p>
-
-        <div style={styles.tabs}>
-          {calculators.map((c) => (
-            <button
-              key={c}
-              onClick={() => setActive(c)}
-              style={active === c ? styles.activeTab : styles.tab}
-            >
-              {c}
-            </button>
-          ))}
+      <header style={styles.header}>
+        <div style={styles.brand}>
+          <div style={styles.logoMark}>M</div>
+          <div>
+            <div style={styles.logoText}>Meddoq</div>
+            <div style={styles.logoSubtext}>Clinical Decision Support</div>
+          </div>
         </div>
 
-        <div style={styles.card}>
-          {active === "BSA" && <BSA />}
-          {active === "Aortic Size Index" && <ASI />}
-          {active === "BMI" && <BMI />}
-          {active === "Creatinine Clearance" && <CrCl />}
-          {active === "eGFR" && <EGFR />}
-          {active === "CHA₂DS₂-VASc" && <CHA />}
-          {active === "HAS-BLED" && <HASBLED />}
-          {active === "Wells DVT" && <WellsDVT />}
+        <nav style={styles.nav}>
+          <a href="#calculators" style={styles.navLink}>Calculators</a>
+          <a href="#categories" style={styles.navLink}>Categories</a>
+          <a href="#disclaimer" style={styles.navLink}>Disclaimer</a>
+        </nav>
+      </header>
+
+      <section style={styles.hero}>
+        <div style={styles.heroContent}>
+          <div style={styles.badge}>For healthcare professionals</div>
+          <h1 style={styles.heroTitle}>
+            Clinical calculators and decision support tools for physicians.
+          </h1>
+          <p style={styles.heroText}>
+            Meddoq is being developed as a professional clinical workflow platform with
+            vascular surgery focus, evidence-based calculators, risk scoring tools and
+            practical interpretation notes.
+          </p>
+
+          <div style={styles.heroActions}>
+            <a href="#calculators" style={styles.primaryButton}>Open calculators</a>
+            <a href="#categories" style={styles.secondaryButton}>View modules</a>
+          </div>
+        </div>
+
+        <div style={styles.heroPanel}>
+          <div style={styles.panelTitle}>Featured tools</div>
+          <div style={styles.panelGrid}>
+            {calculators.slice(0, 6).map((item) => (
+              <button
+                key={item.id}
+                onClick={() => setActive(item.id)}
+                style={active === item.id ? styles.panelItemActive : styles.panelItem}
+              >
+                <span style={styles.panelItemTitle}>{item.shortName}</span>
+                <span style={styles.panelItemCategory}>{item.category}</span>
+              </button>
+            ))}
+          </div>
         </div>
       </section>
+
+      <section id="categories" style={styles.section}>
+        <div style={styles.sectionHeader}>
+          <p style={styles.kicker}>Clinical modules</p>
+          <h2 style={styles.sectionTitle}>Built around real clinical workflows</h2>
+          <p style={styles.sectionText}>
+            The first version focuses on commonly used physician calculators. Later versions
+            can expand into vascular-specific algorithms, guideline pathways and procedural planning.
+          </p>
+        </div>
+
+        <div style={styles.categoryGrid}>
+          {categories.map((category) => (
+            <div key={category.title} style={styles.categoryCard}>
+              <h3 style={styles.categoryTitle}>{category.title}</h3>
+              <p style={styles.categoryText}>{category.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="calculators" style={styles.calculatorSection}>
+        <div style={styles.calculatorLayout}>
+          <aside style={styles.sidebar}>
+            <p style={styles.kicker}>Calculators</p>
+            <h2 style={styles.sidebarTitle}>Select a tool</h2>
+
+            <div style={styles.calculatorList}>
+              {calculators.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => setActive(item.id)}
+                  style={active === item.id ? styles.calculatorButtonActive : styles.calculatorButton}
+                >
+                  <span style={styles.calculatorName}>{item.name}</span>
+                  <span style={styles.calculatorDescription}>{item.description}</span>
+                  <span style={styles.categoryPill}>{item.category}</span>
+                </button>
+              ))}
+            </div>
+          </aside>
+
+          <section style={styles.calculatorCard}>
+            <div style={styles.toolHeader}>
+              <div>
+                <div style={styles.toolCategory}>{activeCalculator?.category}</div>
+                <h2 style={styles.toolTitle}>{activeCalculator?.name}</h2>
+                <p style={styles.toolDescription}>{activeCalculator?.description}</p>
+              </div>
+            </div>
+
+            <div style={styles.toolBody}>
+              {active === "bsa" && <BSA />}
+              {active === "asi" && <ASI />}
+              {active === "bmi" && <BMI />}
+              {active === "crcl" && <CrCl />}
+              {active === "egfr" && <EGFR />}
+              {active === "cha" && <CHA />}
+              {active === "hasbled" && <HASBLED />}
+              {active === "wells" && <WellsDVT />}
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section id="disclaimer" style={styles.disclaimerBox}>
+        <h2 style={styles.disclaimerTitle}>Medical disclaimer</h2>
+        <p style={styles.disclaimerText}>
+          Meddoq is intended for use by healthcare professionals. It does not replace clinical
+          judgment, local protocols, multidisciplinary evaluation or guideline-based individualized
+          decision-making. Results should always be interpreted in the full clinical context.
+        </p>
+      </section>
+
+      <footer style={styles.footer}>
+        <div>
+          <strong>Meddoq</strong>
+          <p style={styles.footerText}>Clinical decision support for physicians.</p>
+        </div>
+        <div style={styles.footerText}>
+          © {new Date().getFullYear()} Meddoq. Medical tools for professional use.
+        </div>
+      </footer>
     </main>
   );
 }
 
-function Input({ label, value, setValue }) {
+function Input({ label, value, setValue, placeholder }) {
   return (
     <label style={styles.label}>
-      {label}
+      <span>{label}</span>
       <input
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(event) => setValue(event.target.value)}
         style={styles.input}
         inputMode="decimal"
+        placeholder={placeholder || ""}
       />
     </label>
   );
 }
 
-function Info({ formula, interpretation, reference }) {
+function Checkbox({ label, checked, setChecked }) {
   return (
-    <div style={styles.info}>
-      <p><strong>Formula / Method:</strong> {formula}</p>
-      <p><strong>Interpretation:</strong> {interpretation}</p>
-      <p><strong>Reference:</strong> {reference}</p>
-      <p style={styles.disclaimer}>
+    <label style={styles.checkboxLabel}>
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={(event) => setChecked(event.target.checked)}
+      />
+      <span>{label}</span>
+    </label>
+  );
+}
+
+function ResultBox({ title, value, unit, interpretation, tone = "neutral" }) {
+  const toneStyle =
+    tone === "high"
+      ? styles.resultHigh
+      : tone === "moderate"
+      ? styles.resultModerate
+      : tone === "low"
+      ? styles.resultLow
+      : styles.resultNeutral;
+
+  return (
+    <div style={{ ...styles.resultBox, ...toneStyle }}>
+      <div style={styles.resultLabel}>{title}</div>
+      <div style={styles.resultValue}>
+        {value} <span style={styles.resultUnit}>{unit}</span>
+      </div>
+      {interpretation && <p style={styles.resultInterpretation}>{interpretation}</p>}
+    </div>
+  );
+}
+
+function ClinicalNote({ formula, interpretation, reference, guideline }) {
+  return (
+    <div style={styles.clinicalNote}>
+      <div style={styles.noteRow}>
+        <strong>Formula / method:</strong>
+        <span>{formula}</span>
+      </div>
+      <div style={styles.noteRow}>
+        <strong>Clinical interpretation:</strong>
+        <span>{interpretation}</span>
+      </div>
+      {guideline && (
+        <div style={styles.noteRow}>
+          <strong>Guideline note:</strong>
+          <span>{guideline}</span>
+        </div>
+      )}
+      <div style={styles.noteRow}>
+        <strong>Reference:</strong>
+        <span>{reference}</span>
+      </div>
+      <p style={styles.smallDisclaimer}>
         Clinical use note: This tool supports clinical judgment and does not replace physician assessment.
       </p>
     </div>
   );
 }
 
-function Result({ children }) {
-  return <div style={styles.result}>{children}</div>;
-}
-
 function BSA() {
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
-  const bsa = height && weight ? Math.sqrt((Number(height) * Number(weight)) / 3600).toFixed(2) : "";
 
-  return <>
-    <h2>Body Surface Area</h2>
-    <Input label="Height / Boy (cm)" value={height} setValue={setHeight} />
-    <Input label="Weight / Kilo (kg)" value={weight} setValue={setWeight} />
-    {bsa && <Result>BSA: {bsa} m²</Result>}
-    <Info
-      formula="Mosteller formula: √((height × weight) / 3600)"
-      interpretation="Used to index cardiovascular and vascular measurements such as aortic diameter."
-      reference="Mosteller RD. N Engl J Med. 1987."
-    />
-  </>;
+  const bsa = useMemo(() => {
+    if (!height || !weight) return "";
+    return Math.sqrt((Number(height) * Number(weight)) / 3600).toFixed(2);
+  }, [height, weight]);
+
+  return (
+    <>
+      <div style={styles.formGrid}>
+        <Input label="Height / Boy (cm)" value={height} setValue={setHeight} placeholder="183" />
+        <Input label="Weight / Kilo (kg)" value={weight} setValue={setWeight} placeholder="101" />
+      </div>
+
+      {bsa && (
+        <ResultBox
+          title="Body Surface Area"
+          value={bsa}
+          unit="m²"
+          interpretation="Used to index cardiovascular and vascular measurements such as aortic diameter."
+        />
+      )}
+
+      <ClinicalNote
+        formula="Mosteller formula: √((height × weight) / 3600)"
+        interpretation="Commonly used for indexing cardiac output, aortic diameter and drug dosing calculations."
+        reference="Mosteller RD. N Engl J Med. 1987."
+      />
+    </>
+  );
 }
 
 function ASI() {
   const [diameter, setDiameter] = useState("");
   const [bsa, setBsa] = useState("");
-  const asi = diameter && bsa ? (Number(diameter) / Number(bsa)).toFixed(2) : "";
 
-  return <>
-    <h2>Aortic Size Index</h2>
-    <Input label="Aortic diameter / Aort çapı (cm)" value={diameter} setValue={setDiameter} />
-    <Input label="BSA (m²)" value={bsa} setValue={setBsa} />
-    {asi && <Result>ASI: {asi} cm/m²</Result>}
-    <Info
-      formula="Aortic diameter / body surface area"
-      interpretation="Higher indexed aortic diameter may indicate higher relative aortic risk, especially in smaller patients."
-      reference="Davies RR et al. Ann Thorac Surg. 2006."
-    />
-  </>;
+  const asi = useMemo(() => {
+    if (!diameter || !bsa) return "";
+    return (Number(diameter) / Number(bsa)).toFixed(2);
+  }, [diameter, bsa]);
+
+  function interpretASI(value) {
+    const number = Number(value);
+    if (number >= 2.75) {
+      return {
+        text: "High indexed aortic size. Consider closer specialist assessment and individualized risk discussion.",
+        tone: "high",
+      };
+    }
+    if (number >= 2.0) {
+      return {
+        text: "Moderately increased indexed aortic size. Interpret with absolute diameter, growth rate and patient risk factors.",
+        tone: "moderate",
+      };
+    }
+    return {
+      text: "Lower indexed aortic size. Continue interpretation according to absolute diameter and clinical context.",
+      tone: "low",
+    };
+  }
+
+  const asiInfo = asi ? interpretASI(asi) : null;
+
+  return (
+    <>
+      <div style={styles.formGrid}>
+        <Input label="Aortic diameter / Aort çapı (cm)" value={diameter} setValue={setDiameter} placeholder="4.5" />
+        <Input label="BSA (m²)" value={bsa} setValue={setBsa} placeholder="2.27" />
+      </div>
+
+      {asi && (
+        <ResultBox
+          title="Aortic Size Index"
+          value={asi}
+          unit="cm/m²"
+          interpretation={asiInfo.text}
+          tone={asiInfo.tone}
+        />
+      )}
+
+      <ClinicalNote
+        formula="Aortic diameter / body surface area"
+        interpretation="ASI helps contextualize aortic diameter in smaller or larger patients. It should not be used alone for surgical decision-making."
+        guideline="Interpret alongside absolute aortic diameter, valve morphology, connective tissue disease, family history, symptoms and growth rate."
+        reference="Davies RR et al. Ann Thorac Surg. 2006."
+      />
+    </>
+  );
 }
 
 function BMI() {
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
-  const bmi = height && weight ? (Number(weight) / Math.pow(Number(height) / 100, 2)).toFixed(1) : "";
 
-  return <>
-    <h2>Body Mass Index</h2>
-    <Input label="Height / Boy (cm)" value={height} setValue={setHeight} />
-    <Input label="Weight / Kilo (kg)" value={weight} setValue={setWeight} />
-    {bmi && <Result>BMI: {bmi} kg/m²</Result>}
-    <Info
-      formula="Weight / height²"
-      interpretation="General weight classification: <18.5 underweight, 18.5–24.9 normal, 25–29.9 overweight, ≥30 obese."
-      reference="World Health Organization BMI classification."
-    />
-  </>;
+  const bmi = useMemo(() => {
+    if (!height || !weight) return "";
+    return (Number(weight) / Math.pow(Number(height) / 100, 2)).toFixed(1);
+  }, [height, weight]);
+
+  function interpretBMI(value) {
+    const number = Number(value);
+    if (number >= 30) return { text: "Obesity range by standard BMI classification.", tone: "high" };
+    if (number >= 25) return { text: "Overweight range by standard BMI classification.", tone: "moderate" };
+    if (number >= 18.5) return { text: "Normal BMI range by standard classification.", tone: "low" };
+    return { text: "Underweight range by standard BMI classification.", tone: "moderate" };
+  }
+
+  const bmiInfo = bmi ? interpretBMI(bmi) : null;
+
+  return (
+    <>
+      <div style={styles.formGrid}>
+        <Input label="Height / Boy (cm)" value={height} setValue={setHeight} placeholder="183" />
+        <Input label="Weight / Kilo (kg)" value={weight} setValue={setWeight} placeholder="101" />
+      </div>
+
+      {bmi && (
+        <ResultBox
+          title="Body Mass Index"
+          value={bmi}
+          unit="kg/m²"
+          interpretation={bmiInfo.text}
+          tone={bmiInfo.tone}
+        />
+      )}
+
+      <ClinicalNote
+        formula="Weight / height²"
+        interpretation="<18.5 underweight, 18.5–24.9 normal, 25–29.9 overweight, ≥30 obesity."
+        reference="World Health Organization BMI classification."
+      />
+    </>
+  );
 }
 
 function CrCl() {
@@ -140,26 +444,50 @@ function CrCl() {
   const [creat, setCreat] = useState("");
   const [female, setFemale] = useState(false);
 
-  let result = "";
-  if (age && weight && creat) {
+  const result = useMemo(() => {
+    if (!age || !weight || !creat) return "";
     let crcl = ((140 - Number(age)) * Number(weight)) / (72 * Number(creat));
     if (female) crcl *= 0.85;
-    result = crcl.toFixed(1);
+    return crcl.toFixed(1);
+  }, [age, weight, creat, female]);
+
+  function interpretCrCl(value) {
+    const number = Number(value);
+    if (number < 30) return { text: "Markedly reduced creatinine clearance. Review renal dosing and contrast risk carefully.", tone: "high" };
+    if (number < 60) return { text: "Reduced creatinine clearance. Consider renal dose adjustment where relevant.", tone: "moderate" };
+    return { text: "Creatinine clearance is not severely reduced by this estimate.", tone: "low" };
   }
 
-  return <>
-    <h2>Creatinine Clearance</h2>
-    <Input label="Age / Yaş" value={age} setValue={setAge} />
-    <Input label="Weight / Kilo (kg)" value={weight} setValue={setWeight} />
-    <Input label="Creatinine / Kreatinin (mg/dL)" value={creat} setValue={setCreat} />
-    <label><input type="checkbox" checked={female} onChange={(e) => setFemale(e.target.checked)} /> Female</label>
-    {result && <Result>CrCl: {result} mL/min</Result>}
-    <Info
-      formula="Cockcroft-Gault equation"
-      interpretation="Frequently used for drug dosing and renal function estimation. Use caution in extremes of body weight."
-      reference="Cockcroft DW, Gault MH. Nephron. 1976."
-    />
-  </>;
+  const crclInfo = result ? interpretCrCl(result) : null;
+
+  return (
+    <>
+      <div style={styles.formGrid}>
+        <Input label="Age / Yaş" value={age} setValue={setAge} placeholder="65" />
+        <Input label="Weight / Kilo (kg)" value={weight} setValue={setWeight} placeholder="80" />
+        <Input label="Creatinine / Kreatinin (mg/dL)" value={creat} setValue={setCreat} placeholder="1.2" />
+      </div>
+
+      <Checkbox label="Female sex" checked={female} setChecked={setFemale} />
+
+      {result && (
+        <ResultBox
+          title="Creatinine Clearance"
+          value={result}
+          unit="mL/min"
+          interpretation={crclInfo.text}
+          tone={crclInfo.tone}
+        />
+      )}
+
+      <ClinicalNote
+        formula="Cockcroft-Gault equation"
+        interpretation="Frequently used for medication dosing. Use caution in extremes of body weight, pregnancy, amputation and unstable renal function."
+        guideline="For drug dosing, Cockcroft-Gault may still be requested in many prescribing references, while eGFR is commonly used for CKD staging."
+        reference="Cockcroft DW, Gault MH. Nephron. 1976."
+      />
+    </>
+  );
 }
 
 function EGFR() {
@@ -167,42 +495,87 @@ function EGFR() {
   const [creat, setCreat] = useState("");
   const [female, setFemale] = useState(false);
 
-  let result = "";
-  if (age && creat) {
+  const result = useMemo(() => {
+    if (!age || !creat) return "";
+
+    const scr = Number(creat);
     const k = female ? 0.7 : 0.9;
     const alpha = female ? -0.241 : -0.302;
-    let egfr = 142 * Math.pow(Math.min(Number(creat) / k, 1), alpha) *
-      Math.pow(Math.max(Number(creat) / k, 1), -1.2) *
+
+    let egfr =
+      142 *
+      Math.pow(Math.min(scr / k, 1), alpha) *
+      Math.pow(Math.max(scr / k, 1), -1.2) *
       Math.pow(0.9938, Number(age));
+
     if (female) egfr *= 1.012;
-    result = egfr.toFixed(1);
+
+    return egfr.toFixed(1);
+  }, [age, creat, female]);
+
+  function interpretEGFR(value) {
+    const number = Number(value);
+    if (number < 30) return { text: "Severely reduced eGFR. CKD stage G4–G5 range depending on exact value and chronicity.", tone: "high" };
+    if (number < 60) return { text: "Reduced eGFR. CKD stage G3 range if persistent for at least 3 months.", tone: "moderate" };
+    return { text: "eGFR is ≥60 mL/min/1.73 m². Interpret with albuminuria and clinical context.", tone: "low" };
   }
 
-  return <>
-    <h2>eGFR CKD-EPI 2021</h2>
-    <Input label="Age / Yaş" value={age} setValue={setAge} />
-    <Input label="Creatinine / Kreatinin (mg/dL)" value={creat} setValue={setCreat} />
-    <label><input type="checkbox" checked={female} onChange={(e) => setFemale(e.target.checked)} /> Female</label>
-    {result && <Result>eGFR: {result} mL/min/1.73 m²</Result>}
-    <Info
-      formula="CKD-EPI 2021 creatinine equation"
-      interpretation="Used for chronic kidney disease staging and renal function assessment."
-      reference="Inker LA et al. N Engl J Med. 2021."
-    />
-  </>;
+  const egfrInfo = result ? interpretEGFR(result) : null;
+
+  return (
+    <>
+      <div style={styles.formGrid}>
+        <Input label="Age / Yaş" value={age} setValue={setAge} placeholder="65" />
+        <Input label="Creatinine / Kreatinin (mg/dL)" value={creat} setValue={setCreat} placeholder="1.2" />
+      </div>
+
+      <Checkbox label="Female sex" checked={female} setChecked={setFemale} />
+
+      {result && (
+        <ResultBox
+          title="eGFR CKD-EPI 2021"
+          value={result}
+          unit="mL/min/1.73 m²"
+          interpretation={egfrInfo.text}
+          tone={egfrInfo.tone}
+        />
+      )}
+
+      <ClinicalNote
+        formula="CKD-EPI 2021 creatinine equation"
+        interpretation="Used for renal function assessment and CKD staging. CKD diagnosis requires chronicity and clinical correlation."
+        guideline="Interpret with urine albumin-creatinine ratio, trend, age, muscle mass and acute illness status."
+        reference="Inker LA et al. N Engl J Med. 2021."
+      />
+    </>
+  );
 }
 
 function CHA() {
   const items = [
-    ["CHF", 1], ["Hypertension", 1], ["Age ≥75", 2], ["Diabetes", 1],
-    ["Stroke/TIA", 2], ["Vascular disease", 1], ["Age 65–74", 1], ["Female sex", 1]
+    ["Congestive heart failure", 1],
+    ["Hypertension", 1],
+    ["Age ≥75 years", 2],
+    ["Diabetes mellitus", 1],
+    ["Stroke / TIA / thromboembolism", 2],
+    ["Vascular disease", 1],
+    ["Age 65–74 years", 1],
+    ["Female sex", 1],
   ];
+
   return (
     <Score
       title="CHA₂DS₂-VASc"
       items={items}
+      resultUnit="points"
+      interpret={(score) => {
+        if (score >= 2) return { text: "Elevated thromboembolic risk. Anticoagulation is commonly considered according to AF guidelines and patient factors.", tone: "high" };
+        if (score === 1) return { text: "Intermediate risk. Anticoagulation decision should be individualized.", tone: "moderate" };
+        return { text: "Low score. Interpret according to sex-specific guideline recommendations.", tone: "low" };
+      }}
       formula="Point-based clinical stroke-risk score in atrial fibrillation."
-      interpretation="Higher score indicates higher thromboembolic risk. Anticoagulation decisions should follow current AF guidelines."
+      interpretation="Higher score indicates higher thromboembolic risk. Treatment decisions should include bleeding risk, patient preference and guideline recommendations."
+      guideline="Use only in the appropriate atrial fibrillation context."
       reference="Lip GYH et al. Chest. 2010."
     />
   );
@@ -210,15 +583,30 @@ function CHA() {
 
 function HASBLED() {
   const items = [
-    ["Hypertension", 1], ["Abnormal renal/liver function", 1], ["Stroke", 1],
-    ["Bleeding history", 1], ["Labile INR", 1], ["Elderly >65", 1], ["Drugs/alcohol", 1]
+    ["Hypertension", 1],
+    ["Abnormal renal function", 1],
+    ["Abnormal liver function", 1],
+    ["Stroke history", 1],
+    ["Bleeding history or predisposition", 1],
+    ["Labile INR", 1],
+    ["Elderly age >65 years", 1],
+    ["Drugs predisposing to bleeding", 1],
+    ["Alcohol use", 1],
   ];
+
   return (
     <Score
       title="HAS-BLED"
       items={items}
-      formula="Point-based bleeding risk score in anticoagulated AF patients."
-      interpretation="A score ≥3 suggests higher bleeding risk and need for closer review of modifiable risk factors."
+      resultUnit="points"
+      interpret={(score) => {
+        if (score >= 3) return { text: "Higher bleeding risk. Review modifiable risk factors and monitor more closely.", tone: "high" };
+        if (score >= 1) return { text: "Some bleeding risk factors present. Review modifiable factors.", tone: "moderate" };
+        return { text: "Low bleeding risk by this score.", tone: "low" };
+      }}
+      formula="Point-based bleeding risk score in anticoagulated atrial fibrillation patients."
+      interpretation="A high score should not automatically exclude anticoagulation; it highlights the need to correct modifiable bleeding risks."
+      guideline="Assess blood pressure, renal/liver function, interacting drugs, alcohol use and follow-up intensity."
       reference="Pisters R et al. Chest. 2010."
     />
   );
@@ -226,126 +614,554 @@ function HASBLED() {
 
 function WellsDVT() {
   const items = [
-    ["Active cancer", 1], ["Paralysis or immobilization", 1], ["Recently bedridden/surgery", 1],
-    ["Tenderness along deep veins", 1], ["Entire leg swollen", 1], ["Calf swelling >3 cm", 1],
-    ["Pitting edema", 1], ["Collateral superficial veins", 1], ["Previous DVT", 1],
-    ["Alternative diagnosis as likely", -2]
+    ["Active cancer", 1],
+    ["Paralysis, paresis or recent plaster immobilization", 1],
+    ["Recently bedridden >3 days or major surgery", 1],
+    ["Localized tenderness along deep venous system", 1],
+    ["Entire leg swollen", 1],
+    ["Calf swelling >3 cm compared with asymptomatic leg", 1],
+    ["Pitting edema confined to symptomatic leg", 1],
+    ["Collateral superficial veins", 1],
+    ["Previously documented DVT", 1],
+    ["Alternative diagnosis at least as likely as DVT", -2],
   ];
+
   return (
     <Score
       title="Wells DVT Score"
       items={items}
+      resultUnit="points"
+      interpret={(score) => {
+        if (score >= 3) return { text: "High pretest probability of DVT. Diagnostic imaging is usually required.", tone: "high" };
+        if (score >= 1) return { text: "Moderate pretest probability. Follow local diagnostic algorithm with D-dimer and/or ultrasound.", tone: "moderate" };
+        return { text: "Low pretest probability. D-dimer strategy may be appropriate depending on local protocol.", tone: "low" };
+      }}
       formula="Clinical prediction rule for suspected deep vein thrombosis."
-      interpretation="Commonly interpreted as low, moderate or high pretest probability depending on total score and local protocol."
+      interpretation="Used to estimate pretest probability before D-dimer testing or venous ultrasound."
+      guideline="Do not use as a standalone diagnostic test. Follow local VTE diagnostic pathways."
       reference="Wells PS et al. Lancet. 1997."
     />
   );
 }
 
-function Score({ title, items, formula, interpretation, reference }) {
+function Score({
+  title,
+  items,
+  resultUnit,
+  interpret,
+  formula,
+  interpretation,
+  guideline,
+  reference,
+}) {
   const [checked, setChecked] = useState({});
 
-  const score = items.reduce((sum, [name, points]) => checked[name] ? sum + points : sum, 0);
+  const score = items.reduce((sum, [name, points]) => {
+    return checked[name] ? sum + points : sum;
+  }, 0);
 
-  return <>
-    <h2>{title}</h2>
-    {items.map(([name, points]) => (
-      <label key={name} style={{ display: "block", marginBottom: 10 }}>
-        <input
-          type="checkbox"
-          checked={!!checked[name]}
-          onChange={() => setChecked({ ...checked, [name]: !checked[name] })}
-        />{" "}
-        {name} ({points > 0 ? "+" : ""}{points})
-      </label>
-    ))}
-    <Result>Score: {score}</Result>
-    <Info formula={formula} interpretation={interpretation} reference={reference} />
-  </>;
+  const info = interpret(score);
+
+  return (
+    <>
+      <div style={styles.scoreList}>
+        {items.map(([name, points]) => (
+          <label key={name} style={styles.scoreItem}>
+            <input
+              type="checkbox"
+              checked={!!checked[name]}
+              onChange={() => setChecked({ ...checked, [name]: !checked[name] })}
+            />
+            <span style={styles.scoreItemText}>{name}</span>
+            <span style={styles.scorePoints}>{points > 0 ? "+" : ""}{points}</span>
+          </label>
+        ))}
+      </div>
+
+      <ResultBox
+        title={title}
+        value={score}
+        unit={resultUnit}
+        interpretation={info.text}
+        tone={info.tone}
+      />
+
+      <ClinicalNote
+        formula={formula}
+        interpretation={interpretation}
+        guideline={guideline}
+        reference={reference}
+      />
+    </>
+  );
 }
 
 const styles = {
   main: {
     minHeight: "100vh",
-    padding: 24,
-    fontFamily: "Arial, sans-serif",
-    background: "linear-gradient(135deg, #f8fafc, #eef6ff)",
-    color: "#0f172a"
-  },
-  container: {
-    maxWidth: 1100,
-    margin: "0 auto"
-  },
-  logo: {
-    fontSize: 52,
-    marginBottom: 8
-  },
-  subtitle: {
-    fontSize: 22,
-    color: "#475569"
-  },
-  tabs: {
-    display: "flex",
-    gap: 10,
-    flexWrap: "wrap",
-    margin: "32px 0"
-  },
-  tab: {
-    padding: "12px 16px",
-    borderRadius: 12,
-    border: "1px solid #cbd5e1",
-    background: "white",
+    fontFamily:
+      'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    background: "linear-gradient(180deg, #f8fafc 0%, #eef6ff 45%, #f8fafc 100%)",
     color: "#0f172a",
-    fontWeight: 700
+    padding: "20px",
   },
-  activeTab: {
-    padding: "12px 16px",
-    borderRadius: 12,
-    border: "2px solid #0f172a",
+  header: {
+    maxWidth: 1180,
+    margin: "0 auto",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 20,
+    padding: "18px 0",
+  },
+  brand: {
+    display: "flex",
+    alignItems: "center",
+    gap: 12,
+  },
+  logoMark: {
+    width: 44,
+    height: 44,
+    borderRadius: 14,
+    background: "linear-gradient(135deg, #0f172a, #1d4ed8)",
+    color: "white",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontWeight: 900,
+    fontSize: 22,
+    boxShadow: "0 12px 30px rgba(15, 23, 42, 0.18)",
+  },
+  logoText: {
+    fontSize: 24,
+    fontWeight: 900,
+    letterSpacing: "-0.04em",
+  },
+  logoSubtext: {
+    fontSize: 12,
+    color: "#64748b",
+    fontWeight: 700,
+    textTransform: "uppercase",
+    letterSpacing: "0.08em",
+  },
+  nav: {
+    display: "flex",
+    gap: 18,
+    flexWrap: "wrap",
+  },
+  navLink: {
+    color: "#334155",
+    textDecoration: "none",
+    fontSize: 14,
+    fontWeight: 700,
+  },
+  hero: {
+    maxWidth: 1180,
+    margin: "24px auto 0",
+    display: "grid",
+    gridTemplateColumns: "minmax(0, 1.25fr) minmax(320px, 0.75fr)",
+    gap: 28,
+    alignItems: "stretch",
+  },
+  heroContent: {
+    background: "rgba(255,255,255,0.82)",
+    border: "1px solid #e2e8f0",
+    borderRadius: 28,
+    padding: 36,
+    boxShadow: "0 24px 70px rgba(15,23,42,0.08)",
+  },
+  badge: {
+    display: "inline-flex",
+    alignItems: "center",
+    border: "1px solid #bfdbfe",
+    background: "#eff6ff",
+    color: "#1d4ed8",
+    borderRadius: 999,
+    padding: "8px 12px",
+    fontSize: 13,
+    fontWeight: 800,
+    marginBottom: 18,
+  },
+  heroTitle: {
+    fontSize: "clamp(38px, 6vw, 68px)",
+    lineHeight: 0.98,
+    letterSpacing: "-0.07em",
+    margin: "0 0 18px",
+    color: "#0f172a",
+  },
+  heroText: {
+    fontSize: 18,
+    lineHeight: 1.65,
+    color: "#475569",
+    maxWidth: 760,
+    margin: 0,
+  },
+  heroActions: {
+    display: "flex",
+    gap: 12,
+    flexWrap: "wrap",
+    marginTop: 28,
+  },
+  primaryButton: {
     background: "#0f172a",
     color: "white",
-    fontWeight: 700
+    padding: "14px 18px",
+    borderRadius: 14,
+    fontWeight: 800,
+    textDecoration: "none",
+    boxShadow: "0 14px 30px rgba(15,23,42,0.2)",
   },
-  card: {
+  secondaryButton: {
+    background: "white",
+    color: "#0f172a",
+    padding: "14px 18px",
+    borderRadius: 14,
+    fontWeight: 800,
+    textDecoration: "none",
+    border: "1px solid #cbd5e1",
+  },
+  heroPanel: {
+    background: "#0f172a",
+    color: "white",
+    borderRadius: 28,
+    padding: 24,
+    boxShadow: "0 24px 70px rgba(15,23,42,0.18)",
+  },
+  panelTitle: {
+    fontSize: 16,
+    fontWeight: 900,
+    marginBottom: 16,
+  },
+  panelGrid: {
+    display: "grid",
+    gap: 10,
+  },
+  panelItem: {
+    textAlign: "left",
+    border: "1px solid rgba(255,255,255,0.12)",
+    background: "rgba(255,255,255,0.06)",
+    color: "white",
+    borderRadius: 16,
+    padding: 14,
+    cursor: "pointer",
+  },
+  panelItemActive: {
+    textAlign: "left",
+    border: "1px solid #93c5fd",
+    background: "#1d4ed8",
+    color: "white",
+    borderRadius: 16,
+    padding: 14,
+    cursor: "pointer",
+  },
+  panelItemTitle: {
+    display: "block",
+    fontSize: 15,
+    fontWeight: 900,
+  },
+  panelItemCategory: {
+    display: "block",
+    fontSize: 12,
+    color: "#cbd5e1",
+    marginTop: 4,
+  },
+  section: {
+    maxWidth: 1180,
+    margin: "56px auto 0",
+  },
+  sectionHeader: {
+    maxWidth: 760,
+    marginBottom: 22,
+  },
+  kicker: {
+    margin: "0 0 8px",
+    color: "#1d4ed8",
+    textTransform: "uppercase",
+    letterSpacing: "0.12em",
+    fontSize: 12,
+    fontWeight: 900,
+  },
+  sectionTitle: {
+    margin: 0,
+    fontSize: 34,
+    letterSpacing: "-0.04em",
+  },
+  sectionText: {
+    color: "#475569",
+    lineHeight: 1.65,
+    fontSize: 16,
+  },
+  categoryGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))",
+    gap: 16,
+  },
+  categoryCard: {
     background: "white",
     border: "1px solid #e2e8f0",
-    borderRadius: 20,
-    padding: 28,
-    boxShadow: "0 20px 50px rgba(15,23,42,0.08)"
+    borderRadius: 22,
+    padding: 22,
+    boxShadow: "0 16px 40px rgba(15,23,42,0.06)",
+  },
+  categoryTitle: {
+    margin: "0 0 8px",
+    fontSize: 20,
+  },
+  categoryText: {
+    color: "#64748b",
+    lineHeight: 1.55,
+    margin: 0,
+  },
+  calculatorSection: {
+    maxWidth: 1180,
+    margin: "56px auto 0",
+  },
+  calculatorLayout: {
+    display: "grid",
+    gridTemplateColumns: "360px minmax(0, 1fr)",
+    gap: 22,
+    alignItems: "start",
+  },
+  sidebar: {
+    background: "white",
+    border: "1px solid #e2e8f0",
+    borderRadius: 24,
+    padding: 20,
+    boxShadow: "0 18px 45px rgba(15,23,42,0.07)",
+  },
+  sidebarTitle: {
+    margin: "0 0 16px",
+    fontSize: 26,
+    letterSpacing: "-0.04em",
+  },
+  calculatorList: {
+    display: "grid",
+    gap: 10,
+  },
+  calculatorButton: {
+    border: "1px solid #e2e8f0",
+    background: "#f8fafc",
+    borderRadius: 16,
+    padding: 14,
+    cursor: "pointer",
+    textAlign: "left",
+    color: "#0f172a",
+  },
+  calculatorButtonActive: {
+    border: "1px solid #1d4ed8",
+    background: "#eff6ff",
+    borderRadius: 16,
+    padding: 14,
+    cursor: "pointer",
+    textAlign: "left",
+    color: "#0f172a",
+    boxShadow: "0 10px 24px rgba(29,78,216,0.12)",
+  },
+  calculatorName: {
+    display: "block",
+    fontWeight: 900,
+    marginBottom: 5,
+  },
+  calculatorDescription: {
+    display: "block",
+    color: "#64748b",
+    lineHeight: 1.45,
+    fontSize: 13,
+    marginBottom: 10,
+  },
+  categoryPill: {
+    display: "inline-flex",
+    color: "#1d4ed8",
+    background: "white",
+    border: "1px solid #bfdbfe",
+    borderRadius: 999,
+    padding: "4px 8px",
+    fontSize: 11,
+    fontWeight: 900,
+  },
+  calculatorCard: {
+    background: "white",
+    border: "1px solid #e2e8f0",
+    borderRadius: 24,
+    boxShadow: "0 22px 60px rgba(15,23,42,0.08)",
+    overflow: "hidden",
+  },
+  toolHeader: {
+    padding: 26,
+    borderBottom: "1px solid #e2e8f0",
+    background: "linear-gradient(135deg, #ffffff, #f8fafc)",
+  },
+  toolCategory: {
+    color: "#1d4ed8",
+    fontWeight: 900,
+    fontSize: 12,
+    textTransform: "uppercase",
+    letterSpacing: "0.12em",
+    marginBottom: 8,
+  },
+  toolTitle: {
+    margin: "0 0 8px",
+    fontSize: 32,
+    letterSpacing: "-0.04em",
+  },
+  toolDescription: {
+    margin: 0,
+    color: "#64748b",
+    lineHeight: 1.55,
+  },
+  toolBody: {
+    padding: 26,
+  },
+  formGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+    gap: 16,
+    marginBottom: 16,
   },
   label: {
-    display: "block",
-    marginBottom: 14,
-    fontWeight: 600
+    display: "grid",
+    gap: 7,
+    fontWeight: 800,
+    color: "#334155",
+    fontSize: 14,
   },
   input: {
-    display: "block",
     width: "100%",
-    maxWidth: 360,
-    marginTop: 6,
-    padding: 12,
-    borderRadius: 10,
-    border: "1px solid #cbd5e1",
-    fontSize: 16
-  },
-  result: {
-    marginTop: 20,
-    marginBottom: 20,
-    fontSize: 24,
-    fontWeight: 800,
-    color: "#0f172a"
-  },
-  info: {
-    marginTop: 22,
-    padding: 18,
+    boxSizing: "border-box",
+    padding: "13px 14px",
     borderRadius: 14,
+    border: "1px solid #cbd5e1",
+    fontSize: 16,
+    outline: "none",
+    background: "#ffffff",
+    color: "#0f172a",
+  },
+  checkboxLabel: {
+    display: "flex",
+    alignItems: "center",
+    gap: 10,
+    margin: "8px 0 18px",
+    fontWeight: 800,
+    color: "#334155",
+  },
+  resultBox: {
+    borderRadius: 20,
+    padding: 20,
+    margin: "22px 0",
+    border: "1px solid #e2e8f0",
+  },
+  resultNeutral: {
+    background: "#f8fafc",
+  },
+  resultLow: {
+    background: "#f0fdf4",
+    borderColor: "#bbf7d0",
+  },
+  resultModerate: {
+    background: "#fffbeb",
+    borderColor: "#fde68a",
+  },
+  resultHigh: {
+    background: "#fef2f2",
+    borderColor: "#fecaca",
+  },
+  resultLabel: {
+    fontSize: 13,
+    color: "#64748b",
+    fontWeight: 900,
+    textTransform: "uppercase",
+    letterSpacing: "0.1em",
+    marginBottom: 8,
+  },
+  resultValue: {
+    fontSize: 34,
+    fontWeight: 950,
+    letterSpacing: "-0.04em",
+    color: "#0f172a",
+  },
+  resultUnit: {
+    fontSize: 17,
+    color: "#475569",
+    fontWeight: 800,
+  },
+  resultInterpretation: {
+    margin: "10px 0 0",
+    color: "#334155",
+    lineHeight: 1.55,
+  },
+  clinicalNote: {
     background: "#f8fafc",
     border: "1px solid #e2e8f0",
-    color: "#334155",
-    lineHeight: 1.5
+    borderRadius: 20,
+    padding: 20,
+    display: "grid",
+    gap: 12,
   },
-  disclaimer: {
+  noteRow: {
+    display: "grid",
+    gap: 4,
+    color: "#334155",
+    lineHeight: 1.5,
+  },
+  smallDisclaimer: {
+    margin: "6px 0 0",
+    color: "#64748b",
     fontSize: 13,
-    color: "#64748b"
-  }
+    lineHeight: 1.5,
+  },
+  scoreList: {
+    display: "grid",
+    gap: 10,
+  },
+  scoreItem: {
+    display: "grid",
+    gridTemplateColumns: "22px 1fr auto",
+    gap: 10,
+    alignItems: "center",
+    border: "1px solid #e2e8f0",
+    background: "#f8fafc",
+    borderRadius: 14,
+    padding: 12,
+    cursor: "pointer",
+  },
+  scoreItemText: {
+    color: "#334155",
+    fontWeight: 750,
+  },
+  scorePoints: {
+    color: "#0f172a",
+    fontWeight: 950,
+  },
+  disclaimerBox: {
+    maxWidth: 1180,
+    margin: "56px auto 0",
+    background: "#0f172a",
+    color: "white",
+    borderRadius: 24,
+    padding: 26,
+    boxShadow: "0 20px 50px rgba(15,23,42,0.18)",
+  },
+  disclaimerTitle: {
+    margin: "0 0 10px",
+    fontSize: 24,
+  },
+  disclaimerText: {
+    margin: 0,
+    color: "#cbd5e1",
+    lineHeight: 1.65,
+  },
+  footer: {
+    maxWidth: 1180,
+    margin: "28px auto 0",
+    padding: "24px 0 10px",
+    display: "flex",
+    justifyContent: "space-between",
+    gap: 20,
+    color: "#475569",
+    flexWrap: "wrap",
+  },
+  footerText: {
+    margin: "4px 0 0",
+    color: "#64748b",
+  },
 };
