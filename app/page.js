@@ -337,7 +337,13 @@ function BSA() {
 
 function ASI() {
   const [diameter, setDiameter] = useState("");
-  const [bsa, setBsa] = useState("");
+  const [height, setHeight] = useState("");
+  const [weight, setWeight] = useState("");
+
+  const bsa = useMemo(() => {
+    if (!height || !weight) return "";
+    return Math.sqrt((Number(height) * Number(weight)) / 3600).toFixed(2);
+  }, [height, weight]);
 
   const asi = useMemo(() => {
     if (!diameter || !bsa) return "";
@@ -346,21 +352,27 @@ function ASI() {
 
   function interpretASI(value) {
     const number = Number(value);
+
     if (number >= 2.75) {
       return {
-        text: "High indexed aortic size. Consider closer specialist assessment and individualized risk discussion.",
+        text: "High indexed aortic size. This range has been associated with increased aortic risk in indexed-diameter models. Consider specialist assessment, absolute diameter, growth rate and patient-specific risk factors.",
         tone: "high",
+        category: "High indexed risk",
       };
     }
+
     if (number >= 2.0) {
       return {
-        text: "Moderately increased indexed aortic size. Interpret with absolute diameter, growth rate and patient risk factors.",
+        text: "Moderately increased indexed aortic size. Interpret together with absolute aortic diameter, valve morphology, family history, connective tissue disease and growth rate.",
         tone: "moderate",
+        category: "Moderately increased indexed size",
       };
     }
+
     return {
-      text: "Lower indexed aortic size. Continue interpretation according to absolute diameter and clinical context.",
+      text: "Lower indexed aortic size. Continue interpretation according to absolute aortic diameter, symptoms, growth rate and guideline-based thresholds.",
       tone: "low",
+      category: "Lower indexed size",
     };
   }
 
@@ -369,30 +381,54 @@ function ASI() {
   return (
     <>
       <div style={styles.formGrid}>
-        <Input label="Aortic diameter / Aort çapı (cm)" value={diameter} setValue={setDiameter} placeholder="4.5" />
-        <Input label="BSA (m²)" value={bsa} setValue={setBsa} placeholder="2.27" />
+        <Input
+          label="Aortic diameter / Aort çapı (cm)"
+          value={diameter}
+          setValue={setDiameter}
+          placeholder="4.5"
+        />
+
+        <Input
+          label="Height / Boy (cm)"
+          value={height}
+          setValue={setHeight}
+          placeholder="183"
+        />
+
+        <Input
+          label="Weight / Kilo (kg)"
+          value={weight}
+          setValue={setWeight}
+          placeholder="101"
+        />
       </div>
+
+      {bsa && (
+        <div style={styles.inlineResult}>
+          Calculated BSA: <strong>{bsa} m²</strong>
+        </div>
+      )}
 
       {asi && (
         <ResultBox
           title="Aortic Size Index"
           value={asi}
           unit="cm/m²"
-          interpretation={asiInfo.text}
+          interpretation={`${asiInfo.category}: ${asiInfo.text}`}
           tone={asiInfo.tone}
         />
       )}
 
       <ClinicalNote
-        formula="Aortic diameter / body surface area"
-        interpretation="ASI helps contextualize aortic diameter in smaller or larger patients. It should not be used alone for surgical decision-making."
-        guideline="Interpret alongside absolute aortic diameter, valve morphology, connective tissue disease, family history, symptoms and growth rate."
-        reference="Davies RR et al. Ann Thorac Surg. 2006."
+        formula="BSA by Mosteller formula: √((height × weight) / 3600). ASI: aortic diameter / BSA."
+        interpretation="Aortic Size Index helps contextualize aortic diameter according to body size. It is particularly useful when absolute aortic diameter may underestimate relative risk in smaller patients."
+        guideline="Do not use ASI alone for intervention decisions. Interpret with absolute diameter, symptoms, aortic growth rate, valve morphology, connective tissue disease, bicuspid valve status, family history and current guideline thresholds."
+        reference="Davies RR et al. Ann Thorac Surg. 2006; Mosteller RD. N Engl J Med. 1987."
       />
     </>
   );
 }
-
+    
 function BMI() {
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
@@ -1018,6 +1054,15 @@ const styles = {
     gap: 16,
     marginBottom: 16,
   },
+  inlineResult: {
+  background: "#eff6ff",
+  border: "1px solid #bfdbfe",
+  color: "#1e3a8a",
+  borderRadius: 16,
+  padding: 14,
+  margin: "8px 0 18px",
+  fontWeight: 800,
+},
   label: {
     display: "grid",
     gap: 7,
