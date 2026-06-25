@@ -42,7 +42,7 @@ export const metadata = {
   },
 };
 
-const GA_MEASUREMENT_ID = "G-EFPG9FH69Y";
+const GA_MEASUREMENT_ID = "G-K7V1PRDWQY";
 
 export default function RootLayout({ children }) {
   return (
