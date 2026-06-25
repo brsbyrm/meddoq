@@ -1,4 +1,4 @@
-import Script from "next/script";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata = {
   title: "Meddoq | Clinical Calculators and Decision Support for Physicians",
@@ -47,22 +47,8 @@ const GA_MEASUREMENT_ID = "G-K7V1PRDWQY";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
-        {children}
-
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA_MEASUREMENT_ID}');
-          `}
-        </Script>
-      </body>
+      <body>{children}</body>
+      <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />
     </html>
   );
 }
