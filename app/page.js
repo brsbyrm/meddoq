@@ -100,6 +100,7 @@ export default function Home() {
           <a href="#calculators" style={styles.navLink}>Calculators</a>
           <a href="#categories" style={styles.navLink}>Categories</a>
           <a href="#disclaimer" style={styles.navLink}>Disclaimer</a>
+          <a href="mailto:contact@meddoq.com" style={styles.navButton}>Contact</a>
         </nav>
       </header>
 
@@ -107,22 +108,27 @@ export default function Home() {
         <div style={styles.heroContent}>
           <div style={styles.badge}>For healthcare professionals</div>
           <h1 style={styles.heroTitle}>
-            Clinical calculators and decision support tools for physicians.
+            Clinical calculators for vascular and cardiovascular care.
           </h1>
           <p style={styles.heroText}>
-            Meddoq is being developed as a professional clinical workflow platform with
-            vascular surgery focus, evidence-based calculators, risk scoring tools and
-            practical interpretation notes.
+            Meddoq brings fast, evidence-oriented medical calculators into a clean
+            physician-focused interface for vascular, cardiovascular, renal and
+            perioperative decision support.
           </p>
 
           <div style={styles.heroActions}>
             <a href="#calculators" style={styles.primaryButton}>Open calculators</a>
             <a href="#categories" style={styles.secondaryButton}>View modules</a>
+            <a href="mailto:contact@meddoq.com" style={styles.secondaryButton}>Contact</a>
           </div>
         </div>
 
         <div style={styles.heroPanel}>
-          <div style={styles.panelTitle}>Featured tools</div>
+          <div style={styles.panelEyebrow}>Meddoq platform</div>
+          <div style={styles.panelTitle}>Featured clinical tools</div>
+          <p style={styles.panelSubtitle}>
+            Built for fast bedside and workflow-oriented calculations.
+          </p>
           <div style={styles.panelGrid}>
             {calculators.slice(0, 6).map((item) => (
               <button
@@ -872,7 +878,8 @@ const styles = {
     minHeight: "100vh",
     fontFamily:
       'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-    background: "linear-gradient(180deg, #f8fafc 0%, #eef6ff 45%, #f8fafc 100%)",
+    background:
+      "radial-gradient(circle at top left, rgba(37,99,235,0.16), transparent 34%), radial-gradient(circle at top right, rgba(14,165,233,0.13), transparent 30%), linear-gradient(180deg, #f8fafc 0%, #eef6ff 45%, #f8fafc 100%)",
     color: "#0f172a",
     padding: "20px",
   },
@@ -883,7 +890,15 @@ const styles = {
     alignItems: "center",
     justifyContent: "space-between",
     gap: 20,
-    padding: "18px 0",
+    padding: "14px 18px",
+    position: "sticky",
+    top: 12,
+    zIndex: 20,
+    backdropFilter: "blur(16px)",
+    background: "rgba(255,255,255,0.72)",
+    border: "1px solid rgba(226,232,240,0.9)",
+    borderRadius: 22,
+    boxShadow: "0 18px 45px rgba(15,23,42,0.08)",
   },
   brand: {
     display: "flex",
@@ -926,6 +941,16 @@ const styles = {
     fontSize: 14,
     fontWeight: 700,
   },
+  navButton: {
+    color: "white",
+    background: "#0f172a",
+    textDecoration: "none",
+    fontSize: 14,
+    fontWeight: 800,
+    padding: "9px 12px",
+    borderRadius: 999,
+    boxShadow: "0 10px 24px rgba(15,23,42,0.16)",
+  },
   hero: {
     maxWidth: 1180,
     margin: "24px auto 0",
@@ -935,17 +960,18 @@ const styles = {
     alignItems: "stretch",
   },
   heroContent: {
-    background: "rgba(255,255,255,0.82)",
+    background: "rgba(255,255,255,0.9)",
+    backdropFilter: "blur(18px)",
     border: "1px solid #e2e8f0",
     borderRadius: 28,
     padding: 36,
-    boxShadow: "0 24px 70px rgba(15,23,42,0.08)",
+    boxShadow: "0 30px 90px rgba(15,23,42,0.10)",
   },
   badge: {
     display: "inline-flex",
     alignItems: "center",
     border: "1px solid #bfdbfe",
-    background: "#eff6ff",
+    background: "linear-gradient(135deg, #eff6ff, #ecfeff)",
     color: "#1d4ed8",
     borderRadius: 999,
     padding: "8px 12px",
@@ -974,7 +1000,7 @@ const styles = {
     marginTop: 28,
   },
   primaryButton: {
-    background: "#0f172a",
+    background: "linear-gradient(135deg, #0f172a, #1e3a8a)",
     color: "white",
     padding: "14px 18px",
     borderRadius: 14,
@@ -996,12 +1022,26 @@ const styles = {
     color: "white",
     borderRadius: 28,
     padding: 24,
-    boxShadow: "0 24px 70px rgba(15,23,42,0.18)",
+    boxShadow: "0 30px 90px rgba(15,23,42,0.24)",
+  },
+  panelEyebrow: {
+    color: "#93c5fd",
+    fontSize: 12,
+    fontWeight: 900,
+    textTransform: "uppercase",
+    letterSpacing: "0.12em",
+    marginBottom: 8,
   },
   panelTitle: {
-    fontSize: 16,
-    fontWeight: 900,
-    marginBottom: 16,
+    fontSize: 22,
+    fontWeight: 950,
+    marginBottom: 8,
+  },
+  panelSubtitle: {
+    color: "#cbd5e1",
+    lineHeight: 1.55,
+    margin: "0 0 18px",
+    fontSize: 14,
   },
   panelGrid: {
     display: "grid",
