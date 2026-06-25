@@ -217,6 +217,13 @@ export default function Home() {
           <p style={styles.footerText}>Clinical decision support for physicians.</p>
         </div>
         <div style={styles.footerText}>
+          Contact:{" "}
+          <a href="mailto:contact@meddoq.com" style={styles.footerLink}>
+            contact@meddoq.com
+          </a>
+        </div>
+
+        <div style={styles.footerText}>
           © {new Date().getFullYear()} Meddoq. Medical tools for professional use.
         </div>
       </footer>
@@ -1336,5 +1343,10 @@ const styles = {
   footerText: {
     margin: "4px 0 0",
     color: "#64748b",
+  },
+  footerLink: {
+    color: "#2563eb",
+    fontWeight: 800,
+    textDecoration: "none",
   },
 };
