@@ -87,6 +87,8 @@ export default function Home() {
 
   return (
     <main style={styles.main}>
+      <div style={styles.backgroundGlowOne} />
+      <div style={styles.backgroundGlowTwo} />
       <header style={styles.header}>
         <div style={styles.brand}>
           <div style={styles.logoMark}>M</div>
@@ -121,25 +123,42 @@ export default function Home() {
             <a href="#categories" style={styles.secondaryButton}>View modules</a>
             <a href="mailto:contact@meddoq.com" style={styles.secondaryButton}>Contact</a>
           </div>
+
+          <div style={styles.heroStats}>
+            <div style={styles.statCard}>
+              <strong>8+</strong>
+              <span>Clinical tools</span>
+            </div>
+            <div style={styles.statCard}>
+              <strong>4</strong>
+              <span>Core modules</span>
+            </div>
+            <div style={styles.statCard}>
+              <strong>24/7</strong>
+              <span>Web access</span>
+            </div>
+          </div>
         </div>
 
         <div style={styles.heroPanel}>
-          <div style={styles.panelEyebrow}>Meddoq platform</div>
-          <div style={styles.panelTitle}>Featured clinical tools</div>
-          <p style={styles.panelSubtitle}>
-            Built for fast bedside and workflow-oriented calculations.
-          </p>
-          <div style={styles.panelGrid}>
-            {calculators.slice(0, 6).map((item) => (
-              <button
-                key={item.id}
-                onClick={() => setActive(item.id)}
-                style={active === item.id ? styles.panelItemActive : styles.panelItem}
-              >
-                <span style={styles.panelItemTitle}>{item.shortName}</span>
-                <span style={styles.panelItemCategory}>{item.category}</span>
-              </button>
-            ))}
+          <div style={styles.platformCard}>
+            <div style={styles.platformTopline}>Physician workflow</div>
+            <h2 style={styles.platformTitle}>Fast calculations. Clear interpretation.</h2>
+            <p style={styles.platformText}>
+              Meddoq focuses on practical, clinically interpretable outputs rather than isolated numbers.
+            </p>
+
+            <div style={styles.platformChecklist}>
+              <div>✓ Vascular-focused calculators</div>
+              <div>✓ Renal and cardiovascular tools</div>
+              <div>✓ Clinical interpretation notes</div>
+              <div>✓ Built for mobile and desktop use</div>
+            </div>
+
+            <div style={styles.platformMetric}>
+              <span>Featured now</span>
+              <strong>{calculators.length} calculators</strong>
+            </div>
           </div>
         </div>
       </section>
@@ -876,6 +895,8 @@ function Score({
 const styles = {
   main: {
     minHeight: "100vh",
+    position: "relative",
+    overflow: "hidden",
     fontFamily:
       'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
     background:
@@ -883,7 +904,33 @@ const styles = {
     color: "#0f172a",
     padding: "20px",
   },
+  backgroundGlowOne: {
+    position: "fixed",
+    width: 520,
+    height: 520,
+    borderRadius: "50%",
+    background: "rgba(37,99,235,0.18)",
+    filter: "blur(70px)",
+    top: -160,
+    right: -130,
+    pointerEvents: "none",
+    zIndex: 0,
+  },
+  backgroundGlowTwo: {
+    position: "fixed",
+    width: 420,
+    height: 420,
+    borderRadius: "50%",
+    background: "rgba(14,165,233,0.16)",
+    filter: "blur(80px)",
+    bottom: 80,
+    left: -160,
+    pointerEvents: "none",
+    zIndex: 0,
+  },
   header: {
+    position: "relative",
+    zIndex: 1,
     maxWidth: 1180,
     margin: "0 auto",
     display: "flex",
@@ -952,6 +999,8 @@ const styles = {
     boxShadow: "0 10px 24px rgba(15,23,42,0.16)",
   },
   hero: {
+    position: "relative",
+    zIndex: 1,
     maxWidth: 1180,
     margin: "24px auto 0",
     display: "grid",
@@ -999,6 +1048,21 @@ const styles = {
     flexWrap: "wrap",
     marginTop: 28,
   },
+  heroStats: {
+    display: "grid",
+    gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+    gap: 12,
+    marginTop: 28,
+  },
+  statCard: {
+    background: "rgba(255,255,255,0.82)",
+    border: "1px solid #dbeafe",
+    borderRadius: 18,
+    padding: 16,
+    display: "grid",
+    gap: 4,
+    boxShadow: "0 16px 36px rgba(15,23,42,0.06)",
+  },
   primaryButton: {
     background: "linear-gradient(135deg, #0f172a, #1e3a8a)",
     color: "white",
@@ -1023,6 +1087,48 @@ const styles = {
     borderRadius: 28,
     padding: 24,
     boxShadow: "0 30px 90px rgba(15,23,42,0.24)",
+  },
+  platformCard: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    width: "100%",
+  },
+  platformTopline: {
+    color: "#93c5fd",
+    fontSize: 12,
+    fontWeight: 900,
+    textTransform: "uppercase",
+    letterSpacing: "0.14em",
+    marginBottom: 14,
+  },
+  platformTitle: {
+    fontSize: "clamp(28px, 4vw, 44px)",
+    lineHeight: 1.02,
+    letterSpacing: "-0.06em",
+    margin: "0 0 16px",
+  },
+  platformText: {
+    color: "#dbeafe",
+    lineHeight: 1.6,
+    fontSize: 16,
+    margin: "0 0 22px",
+  },
+  platformChecklist: {
+    display: "grid",
+    gap: 12,
+    color: "#f8fafc",
+    fontWeight: 750,
+    lineHeight: 1.5,
+    marginBottom: 26,
+  },
+  platformMetric: {
+    background: "rgba(255,255,255,0.10)",
+    border: "1px solid rgba(255,255,255,0.16)",
+    borderRadius: 22,
+    padding: 18,
+    display: "grid",
+    gap: 6,
   },
   panelEyebrow: {
     color: "#93c5fd",
@@ -1077,6 +1183,8 @@ const styles = {
     marginTop: 4,
   },
   section: {
+    position: "relative",
+    zIndex: 1,
     maxWidth: 1180,
     margin: "56px auto 0",
   },
@@ -1124,6 +1232,8 @@ const styles = {
     margin: 0,
   },
   calculatorSection: {
+    position: "relative",
+    zIndex: 1,
     maxWidth: 1180,
     margin: "56px auto 0",
   },
@@ -1353,6 +1463,8 @@ const styles = {
     fontWeight: 950,
   },
   disclaimerBox: {
+    position: "relative",
+    zIndex: 1,
     maxWidth: 1180,
     margin: "56px auto 0",
     background: "#0f172a",
@@ -1371,6 +1483,8 @@ const styles = {
     lineHeight: 1.65,
   },
   footer: {
+    position: "relative",
+    zIndex: 1,
     maxWidth: 1180,
     margin: "28px auto 0",
     padding: "24px 0 10px",
