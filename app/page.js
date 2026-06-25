@@ -72,7 +72,7 @@ const categories = [
   },
   {
     title: "Renal",
-    text: "Renal ion estimation for clinical assessment and medication dosing.",
+    text: "Renal function estimation for clinical assessment and medication dosing.",
   },
   {
     title: "Perioperative",
@@ -80,7 +80,7 @@ const categories = [
   },
 ];
 
-export default ion Home() {
+export default function Home() {
   const [active, setActive] = useState("asi");
 
   const activeCalculator = calculators.find((item) => item.id === active);
@@ -224,7 +224,7 @@ export default ion Home() {
   );
 }
 
-ion Input({ label, value, setValue, placeholder }) {
+function Input({ label, value, setValue, placeholder }) {
   return (
     <label style={styles.label}>
       <span>{label}</span>
@@ -239,7 +239,7 @@ ion Input({ label, value, setValue, placeholder }) {
   );
 }
 
-ion Checkbox({ label, checked, setChecked }) {
+function Checkbox({ label, checked, setChecked }) {
   return (
     <label style={styles.checkboxLabel}>
       <input
@@ -252,7 +252,7 @@ ion Checkbox({ label, checked, setChecked }) {
   );
 }
 
-ion ResultBox({ title, value, unit, interpretation, tone = "neutral" }) {
+function ResultBox({ title, value, unit, interpretation, tone = "neutral" }) {
   const toneStyle =
     tone === "high"
       ? styles.resultHigh
@@ -273,7 +273,7 @@ ion ResultBox({ title, value, unit, interpretation, tone = "neutral" }) {
   );
 }
 
-ion ClinicalNote({ formula, interpretation, reference, guideline }) {
+function ClinicalNote({ formula, interpretation, reference, guideline }) {
   return (
     <div style={styles.clinicalNote}>
       <div style={styles.noteRow}>
@@ -301,7 +301,7 @@ ion ClinicalNote({ formula, interpretation, reference, guideline }) {
   );
 }
 
-ion BSA() {
+function BSA() {
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
 
@@ -335,7 +335,7 @@ ion BSA() {
   );
 }
 
-ion ASI() {
+function ASI() {
   const [diameter, setDiameter] = useState("");
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
@@ -350,7 +350,7 @@ ion ASI() {
     return (Number(diameter) / Number(bsa)).toFixed(2);
   }, [diameter, bsa]);
 
-  ion interpretASI(value) {
+  function interpretASI(value) {
     const number = Number(value);
 
     if (number >= 2.75) {
@@ -429,7 +429,7 @@ ion ASI() {
   );
 }
     
-ion BMI() {
+function BMI() {
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
 
@@ -438,7 +438,7 @@ ion BMI() {
     return (Number(weight) / Math.pow(Number(height) / 100, 2)).toFixed(1);
   }, [height, weight]);
 
-  ion interpretBMI(value) {
+  function interpretBMI(value) {
     const number = Number(value);
     if (number >= 30) return { text: "Obesity range by standard BMI classification.", tone: "high" };
     if (number >= 25) return { text: "Overweight range by standard BMI classification.", tone: "moderate" };
@@ -474,7 +474,7 @@ ion BMI() {
   );
 }
 
-ion CrCl() {
+function CrCl() {
   const [age, setAge] = useState("");
   const [weight, setWeight] = useState("");
   const [creat, setCreat] = useState("");
@@ -487,7 +487,9 @@ ion CrCl() {
     return crcl.toFixed(1);
   }, [age, weight, creat, female]);
 
-  ion interpretCrCl(value) {
+  function name(params) {
+    
+  }function interpretCrCl(value) {
     const number = Number(value);
     if (number < 30) return { text: "Markedly reduced creatinine clearance. Review renal dosing and contrast risk carefully.", tone: "high" };
     if (number < 60) return { text: "Reduced creatinine clearance. Consider renal dose adjustment where relevant.", tone: "moderate" };
