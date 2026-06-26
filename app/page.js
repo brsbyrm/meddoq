@@ -98,12 +98,9 @@ export default function Home() {
           </div>
         </div>
 
-        <nav style={styles.nav}>
-          <a href="#calculators" style={styles.navLink}>Calculators</a>
-          <a href="#categories" style={styles.navLink}>Categories</a>
-          <a href="#disclaimer" style={styles.navLink}>Disclaimer</a>
-          <div style={styles.navEmail}>Contact</div>
-        </nav>
+        <a href="mailto:contact@meddoq.com" style={styles.navEmail}>
+          Contact
+        </a>
       </header>
 
       <section style={styles.hero}>
@@ -930,19 +927,16 @@ const styles = {
   },
   header: {
     position: "relative",
-    zIndex: 1,
+    zIndex: 20,
     maxWidth: 1180,
     margin: "0 auto",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    gap: 20,
-    padding: "14px 18px",
-    position: "sticky",
-    top: 12,
-    zIndex: 20,
+    gap: 12,
+    padding: "14px 16px",
     backdropFilter: "blur(16px)",
-    background: "rgba(255,255,255,0.72)",
+    background: "rgba(255,255,255,0.78)",
     border: "1px solid rgba(226,232,240,0.9)",
     borderRadius: 22,
     boxShadow: "0 18px 45px rgba(15,23,42,0.08)",
