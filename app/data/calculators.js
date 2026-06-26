@@ -71,4 +71,12 @@ export const calculators = [
     icon: "🩸",
     description: "Estimate venous thromboembolism risk in surgical patients.",
   },
+  {
+    id: "revised-cardiac-risk-index",
+    name: "Revised Cardiac Risk Index",
+    category: "Perioperative",
+    href: "/calculators/revised-cardiac-risk-index",
+    icon: "❤️",
+    description: "Estimate perioperative cardiac risk before non-cardiac surgery.",
+  },
 ];
