@@ -1,3 +1,14 @@
+const calculatorSlugs = [
+  "aortic-size-index",
+  "egfr",
+  "creatinine-clearance",
+  "body-surface-area",
+  "body-mass-index",
+  "cha2ds2-vasc",
+  "has-bled",
+  "wells-dvt",
+];
+
 export default function sitemap() {
   return [
     {
@@ -6,11 +17,11 @@ export default function sitemap() {
       changeFrequency: "weekly",
       priority: 1,
     },
-    {
-      url: "https://meddoq.com/calculators/aortic-size-index",
+    ...calculatorSlugs.map((slug) => ({
+      url: `https://meddoq.com/calculators/${slug}`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.9,
-    },
+    })),
   ];
 }

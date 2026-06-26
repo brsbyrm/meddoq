@@ -181,10 +181,18 @@ export default function Home() {
 
         <div style={styles.directoryGrid}>
           {calculators.map((item) => {
-            const href =
-              item.id === "asi"
-                ? "/calculators/aortic-size-index"
-                : "#calculators";
+            const slugMap = {
+              asi: "aortic-size-index",
+              egfr: "egfr",
+              crcl: "creatinine-clearance",
+              bsa: "body-surface-area",
+              bmi: "body-mass-index",
+              cha: "cha2ds2-vasc",
+              hasbled: "has-bled",
+              wells: "wells-dvt",
+            };
+
+            const href = `/calculators/${slugMap[item.id]}`;
 
             return (
               <a
@@ -196,7 +204,7 @@ export default function Home() {
                 <h3 style={styles.directoryTitle}>{item.name}</h3>
                 <p style={styles.directoryText}>{item.description}</p>
                 <strong style={styles.directoryAction}>
-                  {item.id === "asi" ? "Open calculator →" : "Dedicated page coming soon"}
+                  "Open calculator →"
                 </strong>
               </a>
             );
