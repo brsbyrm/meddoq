@@ -231,14 +231,14 @@ const styles = {
     color: "#020617",
   },
   logoImage: {
-    height: 90,
+    height: 115,
     width: "auto",
     display: "block",
   },
 
   logoMark: {
     width: 42,
-    height: 90,
+    height: 115,
     borderRadius: 14,
     display: "grid",
     placeItems: "center",
@@ -383,7 +383,7 @@ const styles = {
   },
   visualLine: {
     width: "70%",
-    height: 90,
+    height: 115,
     borderRadius: 999,
     background: "#dbeafe",
   },
@@ -447,7 +447,7 @@ const styles = {
   },
   iconBubble: {
     width: 52,
-    height: 90,
+    height: 115,
     borderRadius: 18,
     background: "#eff6ff",
     display: "grid",
