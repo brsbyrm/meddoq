@@ -102,7 +102,7 @@ export default function Home() {
           <a href="#calculators" style={styles.navLink}>Calculators</a>
           <a href="#categories" style={styles.navLink}>Categories</a>
           <a href="#disclaimer" style={styles.navLink}>Disclaimer</a>
-          <a href="mailto:contact@meddoq.com" style={styles.navButton}>Contact</a>
+          <div style={styles.navEmail}>contact@meddoq.com</div>
         </nav>
       </header>
 
@@ -243,9 +243,9 @@ export default function Home() {
         </div>
         <div style={styles.footerText}>
           Contact:{" "}
-          <a href="mailto:contact@meddoq.com" style={styles.footerLink}>
-            contact@meddoq.com
-          </a>
+          <div style={styles.navEmail}>
+        contact@meddoq.com
+        </div>
         </div>
 
         <div style={styles.footerText}>
@@ -988,15 +988,15 @@ const styles = {
     fontSize: 14,
     fontWeight: 700,
   },
-  navButton: {
-    color: "white",
-    background: "#0f172a",
-    textDecoration: "none",
+    navEmail: {
+    color: "#475569",
+    background: "#f8fafc",
+    border: "1px solid #e2e8f0",
     fontSize: 14,
-    fontWeight: 800,
-    padding: "9px 12px",
+    fontWeight: 700,
+    padding: "9px 14px",
     borderRadius: 999,
-    boxShadow: "0 10px 24px rgba(15,23,42,0.16)",
+    userSelect: "all",
   },
   hero: {
     position: "relative",

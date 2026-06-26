@@ -1,0 +1,31 @@
+
+@media (max-width: 768px) {
+  main {
+    padding: 12px !important;
+  }
+
+  header {
+    position: relative !important;
+    top: auto !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  nav {
+    width: 100% !important;
+    gap: 10px !important;
+  }
+
+  section {
+    grid-template-columns: 1fr !important;
+  }
+
+  aside {
+    width: 100% !important;
+  }
+
+  button, a, input {
+    max-width: 100% !important;
+  }
+}
+
