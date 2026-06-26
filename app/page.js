@@ -117,9 +117,10 @@ export default function Home() {
 
         {menuOpen && (
           <div className="mobile-menu-panel" style={styles.mobileMenu}>
-            <a href="#calculators" style={styles.mobileMenuLink}>Calculators</a>
-            <a href="#categories" style={styles.mobileMenuLink}>Categories</a>
-            <a href="#disclaimer" style={styles.mobileMenuLink}>Disclaimer</a>
+            <div style={styles.mobileMenuTitle}>Meddoq</div>
+            <a onClick={() => setMenuOpen(false)} href="#calculators" style={styles.mobileMenuLink}>Calculators</a>
+            <a onClick={() => setMenuOpen(false)} href="#categories" style={styles.mobileMenuLink}>Categories</a>
+            <a onClick={() => setMenuOpen(false)} href="#disclaimer" style={styles.mobileMenuLink}>Disclaimer</a>
             <div style={styles.mobileMenuEmail}>✉ contact@meddoq.com</div>
           </div>
         )}
@@ -1047,6 +1048,13 @@ const styles = {
     borderRadius: 18,
     padding: 14,
     marginTop: 10,
+  },
+  mobileMenuTitle: {
+    fontSize: 22,
+    fontWeight: 950,
+    letterSpacing: "-0.04em",
+    color: "#0f172a",
+    marginBottom: 6,
   },
   mobileMenuLink: {
     color: "#0f172a",

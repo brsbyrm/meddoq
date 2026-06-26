@@ -662,3 +662,10 @@ nav a {
     display: none !important;
   }
 }
+
+@media (max-width: 768px) {
+  .mobile-menu-panel {
+    border-radius: 22px !important;
+    box-shadow: 0 24px 70px rgba(15,23,42,0.18) !important;
+  }
+}
