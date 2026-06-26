@@ -95,4 +95,12 @@ export const calculators = [
     icon: "🩸",
     description: "Estimate VTE risk in hospitalized medical patients.",
   },
+  {
+    id: "improve-bleeding-risk-score",
+    name: "IMPROVE Bleeding Risk Score",
+    category: "Perioperative",
+    href: "/calculators/improve-bleeding-risk-score",
+    icon: "🩸",
+    description: "Estimate bleeding risk in hospitalized medical patients.",
+  },
 ];
