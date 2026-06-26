@@ -111,4 +111,12 @@ export const calculators = [
     icon: "🫁",
     description: "Estimate clinical probability of pulmonary embolism.",
   },
+  {
+    id: "duke-activity-status-index",
+    name: "Duke Activity Status Index",
+    category: "Perioperative",
+    href: "/calculators/duke-activity-status-index",
+    icon: "🏃",
+    description: "Estimate functional capacity before non-cardiac surgery.",
+  },
 ];
