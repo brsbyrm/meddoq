@@ -231,7 +231,7 @@ const styles = {
     color: "#020617",
   },
   logoImage: {
-    height: 56,
+    height: 92,
     width: "auto",
     display: "block",
   },
