@@ -634,3 +634,31 @@ nav a {
     width: 100% !important;
   }
 }
+
+.desktop-nav {
+  display: flex !important;
+}
+
+.mobile-menu-button {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none !important;
+  }
+
+  .mobile-menu-button {
+    display: inline-flex !important;
+  }
+
+  .mobile-menu-panel {
+    width: 100% !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-menu-panel {
+    display: none !important;
+  }
+}

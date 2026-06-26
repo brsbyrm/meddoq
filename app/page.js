@@ -99,16 +99,24 @@ export default function Home() {
           </div>
         </div>
 
+        <nav className="desktop-nav" style={styles.nav}>
+          <a href="#calculators" style={styles.navLink}>Calculators</a>
+          <a href="#categories" style={styles.navLink}>Categories</a>
+          <a href="#disclaimer" style={styles.navLink}>Disclaimer</a>
+          <span style={styles.navEmail}>contact@meddoq.com</span>
+        </nav>
+
         <button
           type="button"
+          className="mobile-menu-button"
           onClick={() => setMenuOpen(!menuOpen)}
           style={styles.menuButton}
         >
-          ☰ Menu
+          ☰
         </button>
 
         {menuOpen && (
-          <div style={styles.mobileMenu}>
+          <div className="mobile-menu-panel" style={styles.mobileMenu}>
             <a href="#calculators" style={styles.mobileMenuLink}>Calculators</a>
             <a href="#categories" style={styles.mobileMenuLink}>Categories</a>
             <a href="#disclaimer" style={styles.mobileMenuLink}>Disclaimer</a>
