@@ -902,7 +902,7 @@ const styles = {
     background:
       "radial-gradient(circle at top left, rgba(37,99,235,0.16), transparent 34%), radial-gradient(circle at top right, rgba(14,165,233,0.13), transparent 30%), linear-gradient(180deg, #f8fafc 0%, #eef6ff 45%, #f8fafc 100%)",
     color: "#0f172a",
-    padding: "20px",
+    padding: "clamp(12px, 3vw, 20px)",
   },
   backgroundGlowOne: {
     position: "fixed",
@@ -1004,7 +1004,7 @@ const styles = {
     maxWidth: 1180,
     margin: "24px auto 0",
     display: "grid",
-    gridTemplateColumns: "minmax(0, 1.25fr) minmax(320px, 0.75fr)",
+    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
     gap: 28,
     alignItems: "stretch",
   },
@@ -1050,7 +1050,7 @@ const styles = {
   },
   heroStats: {
     display: "grid",
-    gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))",
     gap: 12,
     marginTop: 28,
   },
@@ -1239,7 +1239,7 @@ const styles = {
   },
   calculatorLayout: {
     display: "grid",
-    gridTemplateColumns: "360px minmax(0, 1fr)",
+    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
     gap: 22,
     alignItems: "start",
   },
