@@ -119,4 +119,12 @@ export const calculators = [
     icon: "🏃",
     description: "Estimate functional capacity before non-cardiac surgery.",
   },
+  {
+    id: "gupta-mica",
+    name: "Gupta MICA Risk Calculator",
+    category: "Perioperative",
+    href: "/calculators/gupta-mica",
+    icon: "❤️",
+    description: "Estimate perioperative myocardial infarction or cardiac arrest risk.",
+  },
 ];
