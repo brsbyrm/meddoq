@@ -579,3 +579,58 @@ nav a {
     width: 100%;
   }
 }
+
+@media (max-width: 768px) {
+  .site {
+    padding: 12px !important;
+    overflow-x: hidden !important;
+  }
+
+  .header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .header nav {
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+  }
+
+  .navEmail {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .hero,
+  .calculatorShell,
+  .categoryGrid,
+  .formGrid,
+  .stats {
+    grid-template-columns: 1fr !important;
+  }
+
+  .heroTextBlock,
+  .heroCard,
+  .calculatorList,
+  .toolCard {
+    padding: 20px !important;
+    width: 100% !important;
+  }
+
+  .hero h1 {
+    font-size: 36px !important;
+    line-height: 1.02 !important;
+  }
+
+  .heroActions {
+    flex-direction: column !important;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    width: 100% !important;
+  }
+}
