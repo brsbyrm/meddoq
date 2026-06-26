@@ -80,9 +80,8 @@ __html:JSON.stringify({
 
 {children}
 
-</body>
-
-      <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />
+<GoogleAnalytics gaId={GA_MEASUREMENT_ID} />
+      </body>
     </html>
   );
 }
