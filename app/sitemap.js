@@ -29,6 +29,12 @@ export default function sitemap() {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    {
+      url: "https://meddoq.com/faq",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
     ...calculatorSlugs.map((slug) => ({
       url: `https://meddoq.com/calculators/${slug}`,
       lastModified: new Date(),
