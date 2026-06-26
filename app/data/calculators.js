@@ -79,4 +79,12 @@ export const calculators = [
     icon: "❤️",
     description: "Estimate perioperative cardiac risk before non-cardiac surgery.",
   },
+  {
+    id: "padua-score",
+    name: "Padua Prediction Score",
+    category: "Perioperative",
+    href: "/calculators/padua-score",
+    icon: "🩸",
+    description: "Estimate VTE risk in hospitalized medical patients.",
+  },
 ];
