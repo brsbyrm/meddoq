@@ -116,13 +116,7 @@ export default function Home() {
         </button>
 
         {menuOpen && (
-          <>
-            <div
-              className="mobile-menu-backdrop"
-              style={styles.mobileMenuBackdrop}
-              onClick={() => setMenuOpen(false)}
-            />
-            <div className="mobile-menu-panel" style={styles.mobileMenu}>
+          <div className="mobile-menu-panel" style={styles.mobileMenu}>
             <div style={styles.mobileMenuTop}>
               <div style={styles.mobileMenuTitle}>Meddoq</div>
               <button
@@ -137,8 +131,7 @@ export default function Home() {
             <a onClick={() => setMenuOpen(false)} href="#categories" style={styles.mobileMenuLink}>Categories</a>
             <a onClick={() => setMenuOpen(false)} href="#disclaimer" style={styles.mobileMenuLink}>Disclaimer</a>
             <div style={styles.mobileMenuEmail}>✉ contact@meddoq.com</div>
-            </div>
-          </>
+          </div>
         )}
       </header>
 
@@ -1054,12 +1047,6 @@ const styles = {
     fontWeight: 900,
     fontSize: 14,
     cursor: "pointer",
-  },
-  mobileMenuBackdrop: {
-    position: "fixed",
-    inset: 0,
-    background: "rgba(15,23,42,0.18)",
-    zIndex: 18,
   },
   mobileMenu: {
     width: "100%",
