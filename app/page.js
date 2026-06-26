@@ -979,8 +979,9 @@ const styles = {
   },
   nav: {
     display: "flex",
-    gap: 18,
+    gap: 10,
     flexWrap: "wrap",
+    maxWidth: "100%",
   },
   navLink: {
     color: "#334155",
