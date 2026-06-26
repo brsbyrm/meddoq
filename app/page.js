@@ -174,8 +174,8 @@ export default function Home() {
           <p style={styles.kicker}>Calculator directory</p>
           <h2 style={styles.sectionTitle}>Choose a clinical calculator</h2>
           <p style={styles.sectionText}>
-            Each calculator will have its own dedicated SEO page with formula,
-            interpretation, references and clinical notes.
+            Select a calculator to open the clinical tool with formula,
+            interpretation notes and references.
           </p>
         </div>
 
