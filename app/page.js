@@ -925,7 +925,7 @@ const styles = {
   main: {
     minHeight: "100vh",
     position: "relative",
-    overflow: "hidden",
+    overflowX: "hidden",
     fontFamily:
       'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
     background:
@@ -1106,7 +1106,7 @@ const styles = {
     maxWidth: 1180,
     margin: "24px auto 0",
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
     gap: 28,
     alignItems: "stretch",
   },
@@ -1343,7 +1343,7 @@ const styles = {
   },
   calculatorLayout: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
     gap: 22,
     alignItems: "start",
   },
@@ -1444,7 +1444,7 @@ const styles = {
   },
   formGrid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 220px), 1fr))",
     gap: 16,
     marginBottom: 16,
   },
