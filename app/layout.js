@@ -22,7 +22,12 @@ export const metadata = {
   creator: "Meddoq",
   publisher: "Meddoq",
   metadataBase: new URL("https://meddoq.com"),
+  icons: {
+    icon: "/icon.png",
+    apple: "/apple-icon.png",
+  },
   openGraph: {
+    images: ["/logo.png"],
     title: "Meddoq | Clinical Calculators for Physicians",
     description:
       "Professional clinical calculators, risk scores and decision support tools for physicians.",
@@ -70,7 +75,7 @@ __html:JSON.stringify({
 "@type":"MedicalOrganization",
 "name":"Meddoq",
 "url":"https://meddoq.com",
-"logo":"https://meddoq.com/icon.png",
+"logo":"https://meddoq.com/logo.png",
 "email":"contact@meddoq.com"
 }
 ]
