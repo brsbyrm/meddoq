@@ -103,4 +103,12 @@ export const calculators = [
     icon: "🩸",
     description: "Estimate bleeding risk in hospitalized medical patients.",
   },
+  {
+    id: "wells-pe",
+    name: "Wells PE Score",
+    category: "Vascular",
+    href: "/calculators/wells-pe",
+    icon: "🫁",
+    description: "Estimate clinical probability of pulmonary embolism.",
+  },
 ];
