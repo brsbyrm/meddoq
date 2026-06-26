@@ -102,7 +102,7 @@ export default function Home() {
           <a href="#calculators" style={styles.navLink}>Calculators</a>
           <a href="#categories" style={styles.navLink}>Categories</a>
           <a href="#disclaimer" style={styles.navLink}>Disclaimer</a>
-          <div style={styles.navEmail}>contact@meddoq.com</div>
+          <div style={styles.navEmail}>Contact</div>
         </nav>
       </header>
 
@@ -243,9 +243,9 @@ export default function Home() {
         </div>
         <div style={styles.footerText}>
           Contact:{" "}
-          <div style={styles.navEmail}>
-        contact@meddoq.com
-        </div>
+          <a href="mailto:contact@meddoq.com" style={styles.navEmail}>
+  ✉ contact@meddoq.com
+</a>
         </div>
 
         <div style={styles.footerText}>
@@ -982,6 +982,7 @@ const styles = {
     gap: 10,
     flexWrap: "wrap",
     maxWidth: "100%",
+    justifyContent: "flex-end",
   },
   navLink: {
     color: "#334155",
@@ -989,16 +990,28 @@ const styles = {
     fontSize: 14,
     fontWeight: 700,
   },
-    navEmail: {
+  navEmail: {
     color: "#475569",
     background: "#f8fafc",
     border: "1px solid #e2e8f0",
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: 700,
-    padding: "9px 14px",
+    padding: "8px 12px",
     borderRadius: 999,
     userSelect: "all",
-  },
+
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+
+  maxWidth: "100%",
+  boxSizing: "border-box",
+  overflow: "hidden",
+  whiteSpace: "nowrap",
+  textOverflow: "ellipsis",
+
+  textDecoration: "none",
+},
   hero: {
     position: "relative",
     zIndex: 1,
