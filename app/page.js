@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Header from "./components/Header";
 
 const calculators = [
   {
@@ -82,7 +83,6 @@ const categories = [
 
 export default function Home() {
   const [active, setActive] = useState("asi");
-  const [menuOpen, setMenuOpen] = useState(false);
 
   const activeCalculator = calculators.find((item) => item.id === active);
 
@@ -90,50 +90,7 @@ export default function Home() {
     <main style={styles.main}>
       <div style={styles.backgroundGlowOne} />
       <div style={styles.backgroundGlowTwo} />
-      <header style={styles.header}>
-        <div style={styles.brand}>
-          <div style={styles.logoMark}>M</div>
-          <div>
-            <div style={styles.logoText}>Meddoq</div>
-            <div style={styles.logoSubtext}>Clinical Decision Support</div>
-          </div>
-        </div>
-
-        <nav className="desktop-nav" style={styles.nav}>
-          <a href="#calculators" style={styles.navLink}>Calculators</a>
-          <a href="#categories" style={styles.navLink}>Categories</a>
-          <a href="#disclaimer" style={styles.navLink}>Disclaimer</a>
-          <span style={styles.navEmail}>contact@meddoq.com</span>
-        </nav>
-
-        <button
-          type="button"
-          className="mobile-menu-button"
-          onClick={() => setMenuOpen(!menuOpen)}
-          style={styles.menuButton}
-        >
-          ☰
-        </button>
-
-        {menuOpen && (
-          <div className="mobile-menu-panel" style={styles.mobileMenu}>
-            <div style={styles.mobileMenuTop}>
-              <div style={styles.mobileMenuTitle}>Meddoq</div>
-              <button
-                type="button"
-                onClick={() => setMenuOpen(false)}
-                style={styles.mobileMenuClose}
-              >
-                ×
-              </button>
-            </div>
-            <a onClick={() => setMenuOpen(false)} href="#calculators" style={styles.mobileMenuLink}>Calculators</a>
-            <a onClick={() => setMenuOpen(false)} href="#categories" style={styles.mobileMenuLink}>Categories</a>
-            <a onClick={() => setMenuOpen(false)} href="#disclaimer" style={styles.mobileMenuLink}>Disclaimer</a>
-            <div style={styles.mobileMenuEmail}>✉ contact@meddoq.com</div>
-          </div>
-        )}
-      </header>
+      <Header />
 
       <section style={styles.hero}>
         <div style={styles.heroContent}>
