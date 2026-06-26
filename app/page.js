@@ -67,6 +67,14 @@ const calculators = [
     icon: "⚖️",
     description: "Calculate body mass index and standard weight category.",
   },
+  {
+    id: "caprini-score",
+    name: "Caprini Score",
+    category: "Perioperative",
+    href: "/calculators/caprini-score",
+    icon: "🩸",
+    description: "Estimate venous thromboembolism risk in surgical patients.",
+  },
 ];
 
 const categoryColors = {
