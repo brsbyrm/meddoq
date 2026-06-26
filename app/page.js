@@ -77,12 +77,7 @@ export default function Home() {
     <main style={styles.page}>
       <header style={styles.header}>
         <a href="/" style={styles.brand}>
-          <img src="/icon.png" alt="Meddoq icon" style={styles.logoIcon} />
-          <span style={styles.logoWord}>MEDDOQ</span>
-          <div>
-            <div style={styles.logoText}>Meddoq</div>
-            <div style={styles.logoSubtext}>Clinical calculators</div>
-          </div>
+          <img src="/brand.png" alt="Meddoq" style={styles.logoImage} />
         </a>
 
         <nav style={styles.nav}>
@@ -245,14 +240,14 @@ const styles = {
   },
 
   logoImage: {
-    height: 115,
+    height: 105,
     width: "auto",
     display: "block",
   },
 
   logoMark: {
     width: 42,
-    height: 115,
+    height: 105,
     borderRadius: 14,
     display: "grid",
     placeItems: "center",
@@ -397,7 +392,7 @@ const styles = {
   },
   visualLine: {
     width: "70%",
-    height: 115,
+    height: 105,
     borderRadius: 999,
     background: "#dbeafe",
   },
@@ -461,7 +456,7 @@ const styles = {
   },
   iconBubble: {
     width: 52,
-    height: 115,
+    height: 105,
     borderRadius: 18,
     background: "#eff6ff",
     display: "grid",
