@@ -127,4 +127,12 @@ export const calculators = [
     icon: "❤️",
     description: "Estimate perioperative myocardial infarction or cardiac arrest risk.",
   },
+  {
+    id: "apfel-score",
+    name: "Apfel Score",
+    category: "Perioperative",
+    href: "/calculators/apfel-score",
+    icon: "🤢",
+    description: "Estimate postoperative nausea and vomiting risk.",
+  },
 ];
