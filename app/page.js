@@ -1318,20 +1318,22 @@ const styles = {
     gap: 16,
   },
   categoryCard: {
-    background: "white",
+    background: "linear-gradient(180deg, #ffffff, #f8fafc)",
     border: "1px solid #e2e8f0",
-    borderRadius: 22,
-    padding: 22,
-    boxShadow: "0 16px 40px rgba(15,23,42,0.06)",
+    borderRadius: 24,
+    padding: 24,
+    boxShadow: "0 18px 44px rgba(15,23,42,0.07)",
   },
   categoryTitle: {
     margin: "0 0 8px",
-    fontSize: 20,
+    fontSize: 22,
+    letterSpacing: "-0.03em",
   },
   categoryText: {
     color: "#64748b",
-    lineHeight: 1.55,
+    lineHeight: 1.6,
     margin: 0,
+    fontWeight: 600,
   },
   calculatorSection: {
     position: "relative",
