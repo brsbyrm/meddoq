@@ -117,7 +117,16 @@ export default function Home() {
 
         {menuOpen && (
           <div className="mobile-menu-panel" style={styles.mobileMenu}>
-            <div style={styles.mobileMenuTitle}>Meddoq</div>
+            <div style={styles.mobileMenuTop}>
+              <div style={styles.mobileMenuTitle}>Meddoq</div>
+              <button
+                type="button"
+                onClick={() => setMenuOpen(false)}
+                style={styles.mobileMenuClose}
+              >
+                ×
+              </button>
+            </div>
             <a onClick={() => setMenuOpen(false)} href="#calculators" style={styles.mobileMenuLink}>Calculators</a>
             <a onClick={() => setMenuOpen(false)} href="#categories" style={styles.mobileMenuLink}>Categories</a>
             <a onClick={() => setMenuOpen(false)} href="#disclaimer" style={styles.mobileMenuLink}>Disclaimer</a>
@@ -1048,6 +1057,25 @@ const styles = {
     borderRadius: 18,
     padding: 14,
     marginTop: 10,
+  },
+  mobileMenuTop: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 12,
+    marginBottom: 8,
+  },
+  mobileMenuClose: {
+    border: "1px solid #e2e8f0",
+    background: "#f8fafc",
+    color: "#0f172a",
+    width: 34,
+    height: 34,
+    borderRadius: 999,
+    fontSize: 22,
+    lineHeight: 1,
+    fontWeight: 800,
+    cursor: "pointer",
   },
   mobileMenuTitle: {
     fontSize: 22,
