@@ -87,4 +87,12 @@ export const calculators = [
     icon: "🩸",
     description: "Estimate VTE risk in hospitalized medical patients.",
   },
+  {
+    id: "improve-vte-risk-score",
+    name: "IMPROVE VTE Risk Score",
+    category: "Perioperative",
+    href: "/calculators/improve-vte-risk-score",
+    icon: "🩸",
+    description: "Estimate VTE risk in hospitalized medical patients.",
+  },
 ];
