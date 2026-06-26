@@ -1410,16 +1410,16 @@ const styles = {
     fontWeight: 950,
   },
   calculatorCard: {
-    background: "white",
-    border: "1px solid #e2e8f0",
-    borderRadius: 24,
-    boxShadow: "0 22px 60px rgba(15,23,42,0.08)",
+    background: "rgba(255,255,255,0.96)",
+    border: "1px solid #dbeafe",
+    borderRadius: 28,
+    boxShadow: "0 28px 80px rgba(15,23,42,0.10)",
     overflow: "hidden",
   },
   toolHeader: {
-    padding: 26,
-    borderBottom: "1px solid #e2e8f0",
-    background: "linear-gradient(135deg, #ffffff, #f8fafc)",
+    padding: "clamp(22px, 4vw, 32px)",
+    borderBottom: "1px solid #dbeafe",
+    background: "linear-gradient(135deg, #ffffff, #eff6ff)",
   },
   toolCategory: {
     color: "#1d4ed8",
@@ -1431,8 +1431,8 @@ const styles = {
   },
   toolTitle: {
     margin: "0 0 8px",
-    fontSize: 32,
-    letterSpacing: "-0.04em",
+    fontSize: "clamp(28px, 4vw, 38px)",
+    letterSpacing: "-0.05em",
   },
   toolDescription: {
     margin: 0,
@@ -1440,7 +1440,7 @@ const styles = {
     lineHeight: 1.55,
   },
   toolBody: {
-    padding: 26,
+    padding: "clamp(22px, 4vw, 32px)",
   },
   formGrid: {
     display: "grid",
