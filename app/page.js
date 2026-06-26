@@ -120,14 +120,18 @@ export default function Home() {
         </div>
 
         <div style={styles.heroVisual}>
-          <div style={styles.visualCard}>
-            <div style={styles.calculatorIcon}>▦</div>
-            <div style={styles.visualLine} />
-            <div style={styles.visualGrid}>
-              <span>+</span>
-              <span>−</span>
-              <span>×</span>
-              <span>=</span>
+          <div style={styles.trustPanel}>
+            <div style={styles.trustCard}>
+              <strong>Evidence-Based</strong>
+              <p>Clinical calculators developed from established formulas and guideline recommendations.</p>
+            </div>
+            <div style={styles.trustCard}>
+              <strong>Built for Physicians</strong>
+              <p>Designed for rapid bedside use with clinical interpretation and references.</p>
+            </div>
+            <div style={styles.trustCard}>
+              <strong>Professional Platform</strong>
+              <p>Medical calculators, clinical guides and decision support in one place.</p>
             </div>
           </div>
         </div>
@@ -201,6 +205,18 @@ export default function Home() {
 }
 
 const styles = {
+  trustPanel: {
+    display: "grid",
+    gap: 18,
+  },
+  trustCard: {
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: 24,
+    padding: 24,
+    boxShadow: "0 20px 60px rgba(15,23,42,.08)",
+  },
+
   page: {
     minHeight: "100vh",
     fontFamily:
