@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -8,11 +9,14 @@ export default function Header() {
   return (
     <header style={styles.header}>
       <div style={styles.brand}>
-        <div style={styles.logoMark}>M</div>
-        <div>
-          <div style={styles.logoText}>Meddoq</div>
-          <div style={styles.logoSubtext}>Clinical Decision Support</div>
-        </div>
+        <Image
+          src="/logo.png"
+          alt="Meddoq"
+          width={170}
+          height={52}
+          priority
+          style={styles.logoImage}
+        />
       </div>
 
       <nav className="desktop-nav" style={styles.nav}>
@@ -77,18 +81,9 @@ const styles = {
     alignItems: "center",
     gap: 12,
   },
-  logoMark: {
-    width: 44,
-    height: 44,
-    borderRadius: 14,
-    background: "linear-gradient(135deg, #0f172a, #1d4ed8)",
-    color: "white",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontWeight: 900,
-    fontSize: 22,
-    boxShadow: "0 12px 30px rgba(15, 23, 42, 0.18)",
+  logoImage: {
+    height: "52px",
+    width: "auto",
   },
   logoText: {
     fontSize: 24,
