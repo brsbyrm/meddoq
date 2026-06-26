@@ -74,6 +74,7 @@ const categoryColors = {
   Renal: "#16a34a",
   Cardiovascular: "#dc2626",
   General: "#7c3aed",
+  Perioperative: "#ea580c",
 };
 
 export default function Home() {
