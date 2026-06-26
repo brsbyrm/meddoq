@@ -48,7 +48,40 @@ const GA_MEASUREMENT_ID = "G-K7V1PRDWQY";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      
+<body>
+<script
+type="application/ld+json"
+dangerouslySetInnerHTML={{
+__html:JSON.stringify({
+"@context":"https://schema.org",
+"@graph":[
+{
+"@type":"WebSite",
+"url":"https://meddoq.com",
+"name":"Meddoq",
+"potentialAction":{
+"@type":"SearchAction",
+"target":"https://meddoq.com/search?q={search_term_string}",
+"query-input":"required name=search_term_string"
+}
+},
+{
+"@type":"MedicalOrganization",
+"name":"Meddoq",
+"url":"https://meddoq.com",
+"logo":"https://meddoq.com/icon.png",
+"email":"contact@meddoq.com"
+}
+]
+})
+}}
+/>
+
+{children}
+
+</body>
+
       <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />
     </html>
   );
