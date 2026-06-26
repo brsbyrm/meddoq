@@ -1,3 +1,7 @@
+"use client";
+
+import { useMemo, useState } from "react";
+
 const calculators = [
   {
     id: "asi",
@@ -73,6 +77,20 @@ const categoryColors = {
 };
 
 export default function Home() {
+  const [query, setQuery] = useState("");
+
+  const filteredCalculators = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return calculators;
+
+    return calculators.filter((item) =>
+      [item.name, item.category, item.description, item.id]
+        .join(" ")
+        .toLowerCase()
+        .includes(q)
+    );
+  }, [query]);
+
   return (
     <main style={styles.page}>
       <header style={styles.header}>
@@ -134,6 +152,23 @@ export default function Home() {
               <p>Medical calculators, clinical guides and decision support in one place.</p>
             </div>
           </div>
+          {filteredCalculators.length === 0 && (
+            <div style={styles.noResults}>
+              No calculator found. Try eGFR, DVT, BMI, aortic or CHA₂DS₂-VASc.
+            </div>
+          )}
+        </div>
+      </section>
+
+      <section style={styles.searchSection}>
+        <div style={styles.searchBox}>
+          <span style={styles.searchIcon}>⌕</span>
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search calculators, scores, diseases..."
+            style={styles.searchInput}
+          />
         </div>
       </section>
 
@@ -149,7 +184,7 @@ export default function Home() {
         </div>
 
         <div style={styles.calculatorGrid}>
-          {calculators.map((item) => (
+          {filteredCalculators.map((item) => (
             <a key={item.id} href={item.href} style={styles.card}>
               <div style={styles.cardTop}>
                 <div style={styles.iconBubble}>{item.icon}</div>
@@ -205,6 +240,45 @@ export default function Home() {
 }
 
 const styles = {
+  searchSection: {
+    maxWidth: 900,
+    margin: "28px auto 0",
+    padding: "0 16px",
+  },
+  searchBox: {
+    display: "flex",
+    alignItems: "center",
+    gap: 14,
+    background: "#ffffff",
+    border: "1px solid #dbeafe",
+    borderRadius: 999,
+    padding: "16px 22px",
+    boxShadow: "0 22px 70px rgba(15,23,42,0.10)",
+  },
+  searchIcon: {
+    fontSize: 24,
+    color: "#2563eb",
+    fontWeight: 900,
+  },
+  searchInput: {
+    width: "100%",
+    border: "none",
+    outline: "none",
+    fontSize: 18,
+    fontWeight: 700,
+    color: "#0f172a",
+    background: "transparent",
+  },
+  noResults: {
+    gridColumn: "1 / -1",
+    background: "#fff7ed",
+    border: "1px solid #fed7aa",
+    color: "#9a3412",
+    borderRadius: 18,
+    padding: 20,
+    fontWeight: 800,
+  },
+
   trustPanel: {
     display: "grid",
     gap: 18,
