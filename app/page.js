@@ -82,6 +82,7 @@ const categories = [
 
 export default function Home() {
   const [active, setActive] = useState("asi");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const activeCalculator = calculators.find((item) => item.id === active);
 
@@ -98,9 +99,22 @@ export default function Home() {
           </div>
         </div>
 
-        <a href="mailto:contact@meddoq.com" style={styles.navEmail}>
-          Contact
-        </a>
+        <button
+          type="button"
+          onClick={() => setMenuOpen(!menuOpen)}
+          style={styles.menuButton}
+        >
+          ☰ Menu
+        </button>
+
+        {menuOpen && (
+          <div style={styles.mobileMenu}>
+            <a href="#calculators" style={styles.mobileMenuLink}>Calculators</a>
+            <a href="#categories" style={styles.mobileMenuLink}>Categories</a>
+            <a href="#disclaimer" style={styles.mobileMenuLink}>Disclaimer</a>
+            <div style={styles.mobileMenuEmail}>✉ contact@meddoq.com</div>
+          </div>
+        )}
       </header>
 
       <section style={styles.hero}>
@@ -1006,6 +1020,42 @@ const styles = {
 
   textDecoration: "none",
 },
+  menuButton: {
+    border: "1px solid #cbd5e1",
+    background: "#ffffff",
+    color: "#0f172a",
+    borderRadius: 999,
+    padding: "10px 14px",
+    fontWeight: 900,
+    fontSize: 14,
+    cursor: "pointer",
+  },
+  mobileMenu: {
+    width: "100%",
+    display: "grid",
+    gap: 10,
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: 18,
+    padding: 14,
+    marginTop: 10,
+  },
+  mobileMenuLink: {
+    color: "#0f172a",
+    textDecoration: "none",
+    fontWeight: 850,
+    padding: "8px 4px",
+  },
+  mobileMenuEmail: {
+    color: "#2563eb",
+    background: "#eff6ff",
+    border: "1px solid #bfdbfe",
+    borderRadius: 14,
+    padding: "10px 12px",
+    fontWeight: 850,
+    userSelect: "all",
+    overflowWrap: "anywhere",
+  },
   hero: {
     position: "relative",
     zIndex: 1,
