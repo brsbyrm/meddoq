@@ -77,7 +77,8 @@ export default function Home() {
     <main style={styles.page}>
       <header style={styles.header}>
         <a href="/" style={styles.brand}>
-          <img src="/brand.png" alt="Meddoq" style={styles.logoImage} />
+          <img src="/icon.png" alt="Meddoq icon" style={styles.logoIcon} />
+          <span style={styles.logoWord}>MEDDOQ</span>
           <div>
             <div style={styles.logoText}>Meddoq</div>
             <div style={styles.logoSubtext}>Clinical calculators</div>
@@ -230,6 +231,19 @@ const styles = {
     textDecoration: "none",
     color: "#020617",
   },
+  logoIcon: {
+    height: 72,
+    width: 72,
+    display: "block",
+    objectFit: "contain",
+  },
+  logoWord: {
+    fontSize: 34,
+    fontWeight: 950,
+    letterSpacing: "-0.04em",
+    color: "#0f172a",
+  },
+
   logoImage: {
     height: 115,
     width: "auto",
