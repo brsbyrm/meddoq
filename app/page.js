@@ -170,54 +170,37 @@ export default function Home() {
       </section>
 
       <section id="calculators" style={styles.calculatorSection}>
-        <div style={styles.calculatorLayout}>
-          <aside style={styles.sidebar}>
-            <p style={styles.kicker}>Calculators</p>
-            <h2 style={styles.sidebarTitle}>Select a tool</h2>
+        <div style={styles.sectionHeader}>
+          <p style={styles.kicker}>Calculator directory</p>
+          <h2 style={styles.sectionTitle}>Choose a clinical calculator</h2>
+          <p style={styles.sectionText}>
+            Each calculator will have its own dedicated SEO page with formula,
+            interpretation, references and clinical notes.
+          </p>
+        </div>
 
-            <div style={styles.calculatorList}>
-              {calculators.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => setActive(item.id)}
-                  style={active === item.id ? styles.calculatorButtonActive : styles.calculatorButton}
-                >
-                  <span style={styles.calculatorName}>{item.name}</span>
-                  <span style={styles.calculatorDescription}>{item.description}</span>
-                  <span style={styles.categoryPill}>{item.category}</span>
-                  {item.id === "asi" && (
-                    <a
-                      href="/calculators/aortic-size-index"
-                      style={styles.seoLink}
-                    >
-                      Open dedicated page →
-                    </a>
-                  )}
-                </button>
-              ))}
-            </div>
-          </aside>
+        <div style={styles.directoryGrid}>
+          {calculators.map((item) => {
+            const href =
+              item.id === "asi"
+                ? "/calculators/aortic-size-index"
+                : "#calculators";
 
-          <section style={styles.calculatorCard}>
-            <div style={styles.toolHeader}>
-              <div>
-                <div style={styles.toolCategory}>{activeCalculator?.category}</div>
-                <h2 style={styles.toolTitle}>{activeCalculator?.name}</h2>
-                <p style={styles.toolDescription}>{activeCalculator?.description}</p>
-              </div>
-            </div>
-
-            <div style={styles.toolBody}>
-              {active === "bsa" && <BSA />}
-              {active === "asi" && <ASI />}
-              {active === "bmi" && <BMI />}
-              {active === "crcl" && <CrCl />}
-              {active === "egfr" && <EGFR />}
-              {active === "cha" && <CHA />}
-              {active === "hasbled" && <HASBLED />}
-              {active === "wells" && <WellsDVT />}
-            </div>
-          </section>
+            return (
+              <a
+                key={item.id}
+                href={href}
+                style={styles.directoryCard}
+              >
+                <span style={styles.categoryPill}>{item.category}</span>
+                <h3 style={styles.directoryTitle}>{item.name}</h3>
+                <p style={styles.directoryText}>{item.description}</p>
+                <strong style={styles.directoryAction}>
+                  {item.id === "asi" ? "Open calculator →" : "Dedicated page coming soon"}
+                </strong>
+              </a>
+            );
+          })}
         </div>
       </section>
 
