@@ -1484,10 +1484,11 @@ const styles = {
     color: "#334155",
   },
   resultBox: {
-    borderRadius: 20,
-    padding: 20,
-    margin: "22px 0",
+    borderRadius: 24,
+    padding: 24,
+    margin: "24px 0",
     border: "1px solid #e2e8f0",
+    boxShadow: "0 18px 44px rgba(15,23,42,0.06)",
   },
   resultNeutral: {
     background: "#f8fafc",
@@ -1513,9 +1514,9 @@ const styles = {
     marginBottom: 8,
   },
   resultValue: {
-    fontSize: 34,
+    fontSize: "clamp(32px, 5vw, 42px)",
     fontWeight: 950,
-    letterSpacing: "-0.04em",
+    letterSpacing: "-0.05em",
     color: "#0f172a",
   },
   resultUnit: {
@@ -1529,12 +1530,13 @@ const styles = {
     lineHeight: 1.55,
   },
   clinicalNote: {
-    background: "#f8fafc",
+    background: "linear-gradient(180deg, #f8fafc, #ffffff)",
     border: "1px solid #e2e8f0",
-    borderRadius: 20,
-    padding: 20,
+    borderRadius: 24,
+    padding: 22,
     display: "grid",
-    gap: 12,
+    gap: 14,
+    boxShadow: "0 14px 34px rgba(15,23,42,0.04)",
   },
   noteRow: {
     display: "grid",
