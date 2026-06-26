@@ -185,6 +185,14 @@ export default function Home() {
                   <span style={styles.calculatorName}>{item.name}</span>
                   <span style={styles.calculatorDescription}>{item.description}</span>
                   <span style={styles.categoryPill}>{item.category}</span>
+                  {item.id === "asi" && (
+                    <a
+                      href="/calculators/aortic-size-index"
+                      style={styles.seoLink}
+                    >
+                      Open dedicated page →
+                    </a>
+                  )}
                 </button>
               ))}
             </div>
