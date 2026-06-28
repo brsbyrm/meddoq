@@ -290,7 +290,7 @@ const styles = {
     textDecoration: "none",
   },
   logoImage: {
-    height: 44,
+    height: 64,
     width: "auto",
     display: "block",
   },
