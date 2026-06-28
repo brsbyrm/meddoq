@@ -403,6 +403,7 @@ export const calculators = [
   },
   {
     id: "heart-score",
+    icon: "❤️",
     title: "HEART Score",
     category: "Cardiology",
     href: "/calculators/heart-score",
@@ -411,6 +412,7 @@ export const calculators = [
   },
   {
     id: "timi-nstemi-ua-score",
+    icon: "❤️",
     title: "TIMI NSTEMI/UA Score",
     category: "Cardiology",
     href: "/calculators/timi-nstemi-ua-score",
@@ -419,6 +421,7 @@ export const calculators = [
   },
   {
     id: "curb-65-score",
+    icon: "🫁",
     title: "CURB-65 Score",
     category: "Pulmonology",
     href: "/calculators/curb-65-score",
