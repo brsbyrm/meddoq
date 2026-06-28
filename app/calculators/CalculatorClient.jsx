@@ -118,8 +118,17 @@ function Input({ label, value, setValue, placeholder }) {
 function Result({ title, value, unit }) {
   return (
     <div style={styles.result}>
-      <span>{title}</span>
-      <strong>{value} <small style={{fontSize: 14, fontWeight: 800, color: "#64748b"}}>{unit}</small></strong>
+      <div style={{fontSize:14,fontWeight:700,color:"#475569",marginBottom:8}}>
+        {title}
+      </div>
+
+      <div style={{fontSize:42,fontWeight:800,lineHeight:1,color:"#0f172a"}}>
+        {value}
+      </div>
+
+      <div style={{marginTop:6,fontSize:16,color:"#64748b",fontWeight:600}}>
+        {unit}
+      </div>
     </div>
   );
 }
