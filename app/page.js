@@ -157,10 +157,10 @@ export default function Home() {
         </div>
 
         <div style={styles.footerLinks}>
-          <a href="/calculators">Calculators</a>
-          <a href="/search">Search</a>
-          <a href="/faq">FAQ</a>
-          <a href="mailto:contact@meddoq.com">Contact</a>
+          <a href="/calculators" style={styles.footerLink}>Calculators</a>
+          <a href="/search" style={styles.footerLink}>Search</a>
+          <a href="/faq" style={styles.footerLink}>FAQ</a>
+          <a href="mailto:contact@meddoq.com" style={styles.footerLink}>Contact</a>
         </div>
 
         <div style={styles.footerCopy}>© {new Date().getFullYear()} Meddoq</div>
@@ -204,7 +204,7 @@ const styles = {
       'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
   },
   header: {
-    height: 92,
+    height: 122,
     maxWidth: 1320,
     margin: "0 auto",
     padding: "0 36px",
@@ -220,7 +220,7 @@ const styles = {
     textDecoration: "none",
   },
   brandLogo: {
-    height: 76,
+    height: 104,
     width: "auto",
     display: "block",
   },
@@ -251,8 +251,8 @@ const styles = {
     overflow: "hidden",
     maxWidth: 1320,
     margin: "0 auto",
-    minHeight: 520,
-    padding: "78px 36px 54px",
+    minHeight: 460,
+    padding: "54px 36px 42px",
     display: "grid",
     gridTemplateColumns: "minmax(0, 1fr) minmax(380px, 0.9fr)",
     alignItems: "center",
@@ -332,9 +332,9 @@ const styles = {
     justifyContent: "center",
   },
   heroEmblem: {
-    width: "min(520px, 92%)",
+    width: "min(720px, 110%)",
     height: "auto",
-    opacity: 0.16,
+    opacity: 0.24,
     filter: "saturate(0.95)",
     display: "block",
   },
@@ -482,15 +482,19 @@ const styles = {
     gap: 12,
   },
   footerLogo: {
-    height: 54,
+    height: 72,
     width: "auto",
     display: "block",
-    filter: "brightness(0) invert(1)",
   },
   footerLinks: {
     display: "flex",
     gap: 18,
     flexWrap: "wrap",
+  },
+  footerLink: {
+    color: "#ffffff",
+    textDecoration: "none",
+    fontWeight: 850,
   },
   footerCopy: {
     color: "#bfdbfe",
