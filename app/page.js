@@ -166,7 +166,7 @@ export default function Home() {
           {categoryStats.map((item) => (
             <a
               key={item.category}
-              href={`/calculators?category=${encodeURIComponent(item.category)}`}
+              href={`/calculators#${encodeURIComponent(item.category)}`}
               style={{
                 ...styles.categoryCard,
                 borderColor: `${categoryColors[item.category] || "#334155"}33`,
