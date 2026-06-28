@@ -1,0 +1,87 @@
+"use client";
+
+import { useMemo, useState } from "react";
+
+export default function Page() {
+  const [na, setNa] = useState("");
+  const [cl, setCl] = useState("");
+  const [hco3, setHco3] = useState("");
+
+  const result = useMemo(() => {
+    const sodium = Number(na);
+    const chloride = Number(cl);
+    const bicarbonate = Number(hco3);
+
+    if (!sodium || !chloride || !bicarbonate) return null;
+
+    const ag = sodium - (chloride + bicarbonate);
+    const deltaRatio = (ag - 12) / (24 - bicarbonate);
+
+    let interpretation = "Indeterminate";
+    if (deltaRatio < 0.4) interpretation = "High anion gap acidosis plus normal anion gap metabolic acidosis likely";
+    else if (deltaRatio < 0.8) interpretation = "Mixed high anion gap and normal anion gap metabolic acidosis possible";
+    else if (deltaRatio <= 2) interpretation = "Consistent with uncomplicated high anion gap metabolic acidosis";
+    else interpretation = "Concurrent metabolic alkalosis or chronic respiratory acidosis possible";
+
+    return { ag, deltaRatio, interpretation };
+  }, [na, cl, hco3]);
+
+  return (
+    <main style={styles.main}>
+      <a href="/" style={styles.back}>← Back to Meddoq</a>
+
+      <section style={styles.hero}>
+        <p style={styles.kicker}>Acid-Base Calculator</p>
+        <h1>Delta Ratio Calculator</h1>
+        <p>Evaluate mixed metabolic acid-base disorders using anion gap and bicarbonate.</p>
+      </section>
+
+      <section style={styles.card}>
+        <div style={styles.grid}>
+          <label style={styles.label}>Sodium Na⁺ (mEq/L)
+            <input style={styles.input} value={na} onChange={(e) => setNa(e.target.value)} inputMode="decimal" placeholder="140" />
+          </label>
+
+          <label style={styles.label}>Chloride Cl⁻ (mEq/L)
+            <input style={styles.input} value={cl} onChange={(e) => setCl(e.target.value)} inputMode="decimal" placeholder="104" />
+          </label>
+
+          <label style={styles.label}>Bicarbonate HCO₃⁻ (mEq/L)
+            <input style={styles.input} value={hco3} onChange={(e) => setHco3(e.target.value)} inputMode="decimal" placeholder="12" />
+          </label>
+        </div>
+
+        <div style={styles.result}>
+          <span>Delta Ratio</span>
+          <strong>{result ? result.deltaRatio.toFixed(2) : "—"}</strong>
+          {result && <p>Anion gap: <b>{result.ag.toFixed(1)} mEq/L</b></p>}
+          {result && <p><b>{result.interpretation}</b></p>}
+        </div>
+      </section>
+
+      <section style={styles.content}>
+        <h2>Formula</h2>
+        <p><strong>Delta ratio = (Anion gap − 12) / (24 − HCO₃⁻)</strong></p>
+
+        <h2>Clinical use</h2>
+        <p>Delta ratio helps identify additional metabolic processes in high anion gap metabolic acidosis.</p>
+
+        <h2>Limitations</h2>
+        <p>Interpret with pH, PaCO₂, albumin-corrected anion gap, lactate, ketones and clinical context.</p>
+      </section>
+    </main>
+  );
+}
+
+const styles = {
+  main: { maxWidth: 980, margin: "0 auto", padding: 24, fontFamily: "Inter,system-ui,sans-serif", color: "#0f172a" },
+  back: { color: "#2563eb", fontWeight: 800, textDecoration: "none" },
+  hero: { marginTop: 32, background: "linear-gradient(135deg,#fff,#eff6ff)", border: "1px solid #dbeafe", borderRadius: 28, padding: 40 },
+  kicker: { color: "#2563eb", fontWeight: 900, fontSize: 12, textTransform: "uppercase" },
+  card: { marginTop: 24, background: "#fff", border: "1px solid #e2e8f0", borderRadius: 24, padding: 24 },
+  grid: { display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,220px),1fr))", gap: 16 },
+  label: { display: "grid", gap: 8, fontWeight: 700 },
+  input: { padding: 14, borderRadius: 12, border: "1px solid #cbd5e1" },
+  result: { marginTop: 24, background: "#eff6ff", padding: 20, borderRadius: 18, border: "1px solid #bfdbfe" },
+  content: { marginTop: 32, lineHeight: 1.7, fontSize: 17 },
+};

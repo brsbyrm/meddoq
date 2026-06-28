@@ -311,4 +311,13 @@ export const calculators = [
     icon:"🧪",
     description:"Estimate expected PaCO₂ compensation in metabolic acidosis.",
   },
+
+  {
+    id:"delta-ratio",
+    name:"Delta Ratio",
+    category:"Renal",
+    href:"/calculators/delta-ratio",
+    icon:"🧪",
+    description:"Evaluate mixed metabolic acid-base disorders.",
+  },
 ];
