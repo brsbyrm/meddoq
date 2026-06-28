@@ -46,6 +46,9 @@ const calculators = [
   ["Oxygenation Index", "Critical Care", "/calculators/oxygenation-index", "Assess oxygenation impairment."],
   ["Body Surface Area", "General", "/calculators/body-surface-area", "Calculate body surface area using Mosteller formula."],
   ["Body Mass Index", "General", "/calculators/body-mass-index", "Calculate BMI and standard weight category."],
+  ["HEART Score", "Cardiology", "/calculators/heart-score", "Chest pain and suspected ACS risk stratification."],
+  ["TIMI NSTEMI/UA Score", "Cardiology", "/calculators/timi-nstemi-ua-score", "Unstable angina and NSTEMI short-term ischemic risk."],
+  ["CURB-65 Score", "Pulmonology", "/calculators/curb-65-score", "Community-acquired pneumonia severity and mortality risk."],
 ];
 
 export const metadata = {

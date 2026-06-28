@@ -7,6 +7,9 @@ const calculatorSlugs = [
   "cha2ds2-vasc",
   "has-bled",
   "wells-dvt",
+  "heart-score",
+  "timi-nstemi-ua-score",
+  "curb-65-score",
 ];
 
 export default function sitemap() {

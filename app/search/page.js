@@ -11,6 +11,9 @@ const calculators = [
   ["CHA₂DS₂-VASc", "Cardiovascular", "/calculators/cha2ds2-vasc", "atrial fibrillation stroke risk anticoagulation"],
   ["HAS-BLED", "Cardiovascular", "/calculators/has-bled", "bleeding risk anticoagulation atrial fibrillation"],
   ["Wells DVT", "Vascular", "/calculators/wells-dvt", "deep vein thrombosis DVT probability"],
+  ["HEART Score", "Cardiology", "/calculators/heart-score", "chest pain ACS troponin ECG MACE"],
+  ["TIMI NSTEMI/UA Score", "Cardiology", "/calculators/timi-nstemi-ua-score", "NSTEMI unstable angina ACS ischemic risk"],
+  ["CURB-65 Score", "Pulmonology", "/calculators/curb-65-score", "pneumonia CAP confusion urea respiratory rate blood pressure age"],
 ];
 
 export default function SearchPage() {

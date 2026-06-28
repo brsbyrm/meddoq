@@ -401,4 +401,28 @@ export const calculators = [
     icon: "📊",
     description: "Modified Early Warning Score.",
   },
+  {
+    id: "heart-score",
+    title: "HEART Score",
+    category: "Cardiology",
+    href: "/calculators/heart-score",
+    description: "Chest pain and suspected ACS risk stratification.",
+    keywords: ["heart", "chest pain", "acs", "troponin", "ecg", "mace"],
+  },
+  {
+    id: "timi-nstemi-ua-score",
+    title: "TIMI NSTEMI/UA Score",
+    category: "Cardiology",
+    href: "/calculators/timi-nstemi-ua-score",
+    description: "Unstable angina and NSTEMI short-term ischemic risk.",
+    keywords: ["timi", "nstemi", "unstable angina", "acs", "ischemic risk"],
+  },
+  {
+    id: "curb-65-score",
+    title: "CURB-65 Score",
+    category: "Pulmonology",
+    href: "/calculators/curb-65-score",
+    description: "Community-acquired pneumonia severity and mortality risk.",
+    keywords: ["curb65", "curb-65", "pneumonia", "cap", "urea", "confusion"],
+  },
 ];
