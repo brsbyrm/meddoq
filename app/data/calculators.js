@@ -338,4 +338,67 @@ export const calculators = [
     icon:"🫁",
     description:"Calculate oxygenation index from FiO₂, MAP and PaO₂.",
   },
+
+  {
+    id: "khorana-score",
+    name: "Khorana Score",
+    category: "Oncology",
+    href: "/calculators/khorana-score",
+    icon: "🩸",
+    description: "Estimate cancer-associated venous thromboembolism risk.",
+  },
+
+  {
+    id: "pesi-score",
+    name: "PESI Score",
+    category: "Pulmonary",
+    href: "/calculators/pesi-score",
+    icon: "🫁",
+    description: "Pulmonary Embolism Severity Index for 30-day mortality risk.",
+  },
+
+  {
+    id: "spesi-score",
+    name: "sPESI Score",
+    category: "Pulmonary",
+    href: "/calculators/spesi-score",
+    icon: "🫁",
+    description: "Simplified Pulmonary Embolism Severity Index.",
+  },
+
+  {
+    id: "qsofa-score",
+    name: "qSOFA Score",
+    category: "Critical Care",
+    href: "/calculators/qsofa-score",
+    icon: "🚑",
+    description: "Quick Sequential Organ Failure Assessment.",
+  },
+
+  {
+    id: "sofa-score",
+    name: "SOFA Score",
+    category: "Critical Care",
+    href: "/calculators/sofa-score",
+    icon: "🏥",
+    description: "Sequential Organ Failure Assessment score.",
+  },
+
+  {
+    id: "news2-score",
+    name: "NEWS2 Score",
+    category: "Critical Care",
+    href: "/calculators/news2-score",
+    icon: "📈",
+    description: "National Early Warning Score 2.",
+  },
+
+  {
+    id: "mews-score",
+    name: "MEWS Score",
+    category: "Critical Care",
+    href: "/calculators/mews-score",
+    icon: "📊",
+    description: "Modified Early Warning Score.",
+  },
 ];
