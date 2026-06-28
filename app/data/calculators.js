@@ -293,4 +293,13 @@ export const calculators = [
     icon:"🧪",
     description:"Calculate serum osmolality and osmolar gap.",
   },
+
+  {
+    id:"corrected-sodium",
+    name:"Corrected Sodium",
+    category:"Renal",
+    href:"/calculators/corrected-sodium",
+    icon:"🧪",
+    description:"Correct serum sodium for hyperglycemia.",
+  },
 ];
