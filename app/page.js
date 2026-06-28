@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { calculators } from "./data/calculators";
+import CalculatorIcon from "./components/CalculatorIcon";
 
 const categoryColors = {
   Vascular: "#2563eb",
@@ -9,6 +10,10 @@ const categoryColors = {
   Cardiovascular: "#dc2626",
   General: "#7c3aed",
   Perioperative: "#ea580c",
+  Cardiology: "#dc2626",
+  Pulmonology: "#0891b2",
+  "Pulmonary Embolism": "#0891b2",
+  "Critical Care": "#7c3aed",
 };
 
 export default function Home() {
@@ -122,13 +127,13 @@ export default function Home() {
           {filteredCalculators.map((item) => (
             <a key={item.id} href={item.href} style={styles.card}>
               <div style={styles.cardTop}>
-                <div style={styles.iconBubble}>{item.icon}</div>
+                <div style={styles.iconBubble}><CalculatorIcon icon={item.icon} category={item.category} /></div>
                 <span
                   style={{
                     ...styles.categoryBadge,
-                    color: categoryColors[item.category],
-                    background: `${categoryColors[item.category]}12`,
-                    borderColor: `${categoryColors[item.category]}33`,
+                    color: categoryColors[item.category] || "#334155",
+                    background: `${categoryColors[item.category] || "#334155"}12`,
+                    borderColor: `${categoryColors[item.category] || "#334155"}33`,
                   }}
                 >
                   {item.category}
