@@ -40,96 +40,90 @@ export default function Home() {
 
   return (
     <main style={styles.page}>
-      <header style={styles.header}>
-        <a href="/" style={styles.brand}>
-          <img src="/brand.png" alt="Meddoq" style={styles.brandLogo} />
-        </a>
+      <div style={styles.shell}>
+        <header style={styles.header}>
+          <a href="/" style={styles.brand}>
+            <img src="/brand.png" alt="Meddoq" style={styles.brandLogo} />
+          </a>
 
-        <nav style={styles.nav}>
-          <a href="/calculators" style={styles.navLink}>Calculators</a>
-          <a href="/search" style={styles.navLink}>Search</a>
-          <a href="/faq" style={styles.navLink}>FAQ</a>
-          <a href="mailto:contact@meddoq.com" style={styles.contactButton}>Contact</a>
-        </nav>
-      </header>
+          <nav style={styles.nav}>
+            <a href="/calculators" style={styles.navLink}>Calculators</a>
+            <a href="/search" style={styles.navLink}>Search</a>
+            <a href="/faq" style={styles.navLink}>FAQ</a>
+            <a href="mailto:contact@meddoq.com" style={styles.contactButton}>Contact</a>
+          </nav>
+        </header>
 
-      <section style={styles.hero}>
-        <div style={styles.heroContent}>
-          <h1 style={styles.heroTitle}>
-            Clinical Calculators
-            <br />
-            & Decision Support
-          </h1>
+        <section style={styles.hero}>
+          <div style={styles.heroContent}>
+            <h1 style={styles.heroTitle}>
+              Clinical Calculators
+              <br />
+              & Decision Support
+            </h1>
 
-          <p style={styles.heroText}>
-            Evidence-based tools to help physicians make better clinical decisions, faster.
-          </p>
+            <p style={styles.heroText}>
+              Evidence-based tools to help physicians make better clinical decisions, faster.
+            </p>
 
-          <div style={styles.searchBox}>
-            <span style={styles.searchIcon}>⌕</span>
-            <input
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search calculators..."
-              style={styles.searchInput}
-            />
+            <div style={styles.searchBox}>
+              <span style={styles.searchIcon}>⌕</span>
+              <input
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Search calculators..."
+                style={styles.searchInput}
+              />
+            </div>
+
+            <div style={styles.trustRow}>
+              <span>🛡️ Evidence Based</span>
+              <span>🔒 Secure & Private</span>
+              <span>👨‍⚕️ Physician Focused</span>
+            </div>
           </div>
 
-          <div style={styles.trustRow}>
-            <span>🛡️ Evidence Based</span>
-            <span>🔒 Secure & Private</span>
-            <span>👨‍⚕️ Physician Focused</span>
+          <div style={styles.heroEmblemWrap}>
+            <img src="/icon.png" alt="" aria-hidden="true" style={styles.heroEmblem} />
           </div>
-        </div>
+        </section>
 
-        <div style={styles.heroEmblemWrap}>
-          <img src="/icon.png" alt="" aria-hidden="true" style={styles.heroEmblem} />
-        </div>
-      </section>
-
-      <section style={styles.featuredSection}>
-        <div style={styles.sectionTop}>
-          <h2 style={styles.sectionTitle}>{query ? "Search Results" : "Featured Calculators"}</h2>
-          <a href="/calculators" style={styles.sectionLink}>View all calculators →</a>
-        </div>
-
-        <div style={styles.cardGrid}>
-          {results.slice(0, 4).map((item) => (
-            <CalculatorCard key={item.id} item={item} />
-          ))}
-        </div>
-
-        {query && results.length === 0 && (
-          <div style={styles.emptyState}>
-            <img src="/icon.png" alt="" style={styles.emptyIcon} />
-            <strong>No calculators found</strong>
-            <span>Try another clinical score, formula or specialty.</span>
+        <section style={styles.featuredSection}>
+          <div style={styles.sectionTop}>
+            <h2 style={styles.sectionTitle}>{query ? "Search Results" : "Featured Calculators"}</h2>
+            <a href="/calculators" style={styles.sectionLink}>View all calculators →</a>
           </div>
-        )}
-      </section>
 
-      <section style={styles.benefits}>
-        <Benefit icon="◎" title="Accurate" text="Built around validated clinical scores and formulas." />
-        <Benefit icon="◇" title="Reliable" text="Designed for consistent bedside workflow use." />
-        <Benefit icon="⚡" title="Fast" text="Clean inputs, clear results and interpretation." />
-        <Benefit icon="☤" title="For Physicians" text="Clinical decision support for medical practice." />
-      </section>
+          <div style={styles.cardGrid}>
+            {results.slice(0, 4).map((item) => (
+              <CalculatorCard key={item.id} item={item} />
+            ))}
+          </div>
+        </section>
 
-      <footer style={styles.footer}>
-        <div style={styles.footerBrand}>
-          <img src="/brand.png" alt="Meddoq" style={styles.footerLogo} />
-          <p>Evidence-based clinical calculators for physicians.</p>
-        </div>
+        <section style={styles.benefits}>
+          <Benefit icon="◎" title="Accurate" text="Validated clinical scores and formulas." />
+          <Benefit icon="◇" title="Reliable" text="Consistent bedside workflow use." />
+          <Benefit icon="⚡" title="Fast" text="Clean inputs and clear results." />
+          <Benefit icon="☤" title="For Physicians" text="Built for modern medical practice." />
+        </section>
 
-        <div style={styles.footerLinks}>
-          <a href="/calculators" style={styles.footerLink}>Calculators</a>
-          <a href="/search" style={styles.footerLink}>Search</a>
-          <a href="/faq" style={styles.footerLink}>FAQ</a>
-          <a href="mailto:contact@meddoq.com" style={styles.footerLink}>Contact</a>
-        </div>
+        <footer style={styles.footer}>
+          <div style={styles.footerBrand}>
+            <img src="/brand.png" alt="Meddoq" style={styles.footerLogo} />
+            <p>Evidence-based clinical calculators for physicians.</p>
+          </div>
 
-        <div style={styles.footerCopy}>© {new Date().getFullYear()} Meddoq</div>
-      </footer>
+          <div style={styles.footerLinks}>
+            <a href="/calculators" style={styles.footerLink}>Calculators</a>
+            <a href="/search" style={styles.footerLink}>Search</a>
+            <a href="/faq" style={styles.footerLink}>FAQ</a>
+            <a href="mailto:contact@meddoq.com" style={styles.footerLink}>Contact</a>
+          </div>
+
+          <div style={styles.footerCopy}>© {new Date().getFullYear()} Meddoq</div>
+        </footer>
+      </div>
     </main>
   );
 }
@@ -175,21 +169,26 @@ function Benefit({ icon, title, text }) {
 const styles = {
   page: {
     minHeight: "100vh",
-    background: "#f8fbff",
+    background: "#f4f8ff",
     color: "#071a3d",
     fontFamily:
       'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
   },
-  header: {
-    height: 68,
-    maxWidth: 1320,
+  shell: {
+    width: "min(100%, 1440px)",
     margin: "0 auto",
-    padding: "0 36px",
+    background: "#ffffff",
+    boxShadow: "0 0 0 1px #e8eef8",
+  },
+  header: {
+    height: 70,
+    padding: "0 56px",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
     gap: 24,
-    background: "rgba(255,255,255,0.95)",
+    background: "rgba(255,255,255,0.96)",
+    borderBottom: "1px solid #e8eef8",
   },
   brand: {
     display: "inline-flex",
@@ -197,47 +196,44 @@ const styles = {
     textDecoration: "none",
   },
   brandLogo: {
-    height: 74,
+    height: 86,
     width: "auto",
     display: "block",
   },
   nav: {
     display: "flex",
     alignItems: "center",
-    gap: 26,
+    gap: 28,
     flexWrap: "wrap",
     justifyContent: "flex-end",
   },
   navLink: {
     color: "#071a3d",
     textDecoration: "none",
-    fontWeight: 800,
-    fontSize: 15,
+    fontWeight: 850,
+    fontSize: 14,
   },
   contactButton: {
     background: "linear-gradient(135deg, #083074, #075bb8)",
     color: "#ffffff",
     textDecoration: "none",
-    padding: "13px 20px",
+    padding: "12px 20px",
     borderRadius: 10,
-    fontWeight: 900,
-    boxShadow: "0 14px 28px rgba(8, 48, 116, 0.2)",
+    fontWeight: 950,
+    boxShadow: "0 12px 26px rgba(8, 48, 116, 0.22)",
   },
   hero: {
     position: "relative",
     overflow: "hidden",
-    maxWidth: 1320,
-    margin: "0 auto",
-    minHeight: 315,
-    padding: "24px 36px 20px",
+    height: 370,
+    padding: "32px 56px 28px",
     display: "grid",
-    gridTemplateColumns: "minmax(0, 1fr) minmax(390px, 0.85fr)",
+    gridTemplateColumns: "minmax(0, 1fr) minmax(430px, 0.9fr)",
     alignItems: "center",
     gap: 26,
-    borderTop: "1px solid #e8eef8",
-    borderBottom: "1px solid #e8eef8",
     background:
-      "linear-gradient(135deg, #ffffff 0%, #f3f8ff 52%, #eef6ff 100%)",
+      "linear-gradient(135deg, #ffffff 0%, #f3f8ff 52%, #eaf4ff 100%)",
+    borderBottom: "1px solid #e8eef8",
   },
   heroContent: {
     position: "relative",
@@ -247,47 +243,47 @@ const styles = {
   heroTitle: {
     margin: 0,
     color: "#071a3d",
-    fontSize: "clamp(38px, 4vw, 54px)",
+    fontSize: "clamp(44px, 4.2vw, 64px)",
     lineHeight: 1.02,
     letterSpacing: "-0.055em",
     fontWeight: 950,
   },
   heroText: {
-    margin: "12px 0 0",
+    margin: "14px 0 0",
     maxWidth: 620,
     color: "#334155",
-    fontSize: 17,
-    lineHeight: 1.5,
+    fontSize: 18,
+    lineHeight: 1.45,
     fontWeight: 500,
   },
   searchBox: {
-    marginTop: 16,
+    marginTop: 20,
     display: "flex",
     alignItems: "center",
     gap: 14,
-    width: "min(100%, 620px)",
+    width: "min(100%, 560px)",
     background: "#ffffff",
     border: "1px solid #dbe7f8",
     borderRadius: 12,
     padding: "0 18px",
-    boxShadow: "0 18px 42px rgba(15, 23, 42, 0.08)",
+    boxShadow: "0 16px 36px rgba(15, 23, 42, 0.08)",
   },
   searchIcon: {
     color: "#365b91",
-    fontSize: 25,
+    fontSize: 24,
     fontWeight: 900,
   },
   searchInput: {
     width: "100%",
     border: 0,
     outline: 0,
-    padding: "13px 0",
+    padding: "14px 0",
     background: "transparent",
     color: "#071a3d",
-    fontSize: 17,
+    fontSize: 16,
   },
   trustRow: {
-    marginTop: 14,
+    marginTop: 18,
     display: "flex",
     alignItems: "center",
     gap: 28,
@@ -298,22 +294,21 @@ const styles = {
   },
   heroEmblemWrap: {
     position: "relative",
-    minHeight: 260,
+    height: 340,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
   heroEmblem: {
-    width: "min(620px, 120%)",
-    height: "auto",
-    opacity: 0.30,
+    width: 520,
+    height: 520,
+    objectFit: "contain",
+    opacity: 0.24,
     filter: "saturate(0.95)",
     display: "block",
   },
   featuredSection: {
-    maxWidth: 1320,
-    margin: "0 auto",
-    padding: "20px 36px 18px",
+    padding: "22px 56px 20px",
     background: "#ffffff",
   },
   sectionTop: {
@@ -321,18 +316,19 @@ const styles = {
     alignItems: "center",
     justifyContent: "space-between",
     gap: 18,
-    marginBottom: 12,
+    marginBottom: 14,
   },
   sectionTitle: {
     margin: 0,
     color: "#071a3d",
-    fontSize: 24,
+    fontSize: 25,
     letterSpacing: "-0.035em",
   },
   sectionLink: {
     color: "#075bb8",
     textDecoration: "none",
-    fontWeight: 900,
+    fontWeight: 950,
+    fontSize: 14,
   },
   cardGrid: {
     display: "grid",
@@ -340,7 +336,7 @@ const styles = {
     gap: 18,
   },
   card: {
-    minHeight: 150,
+    height: 172,
     display: "flex",
     flexDirection: "column",
     textDecoration: "none",
@@ -348,114 +344,93 @@ const styles = {
     background: "#ffffff",
     border: "1px solid #dce6f4",
     borderRadius: 16,
-    padding: 14,
-    boxShadow: "0 14px 34px rgba(15, 23, 42, 0.055)",
+    padding: 15,
+    boxShadow: "0 12px 30px rgba(15, 23, 42, 0.055)",
   },
   cardTop: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     gap: 10,
-    marginBottom: 16,
+    marginBottom: 12,
   },
   iconBubble: {
     width: 44,
     height: 44,
-    borderRadius: 14,
+    borderRadius: 13,
     display: "grid",
     placeItems: "center",
     background: "#eff6ff",
-    fontSize: 22,
+    fontSize: 25,
   },
   categoryBadge: {
     border: "1px solid #bfdbfe",
     borderRadius: 999,
-    padding: "6px 9px",
-    fontSize: 11,
+    padding: "5px 8px",
+    fontSize: 10,
     fontWeight: 950,
   },
   cardTitle: {
     margin: 0,
     color: "#071a3d",
     fontSize: 17,
-    lineHeight: 1.22,
+    lineHeight: 1.18,
     letterSpacing: "-0.025em",
   },
   cardText: {
-    margin: "7px 0 10px",
+    margin: "7px 0 9px",
     color: "#334155",
-    lineHeight: 1.45,
-    fontSize: 14,
+    lineHeight: 1.35,
+    fontSize: 13,
     flex: 1,
+    overflow: "hidden",
   },
   cardAction: {
     color: "#075bb8",
     fontWeight: 950,
-  },
-  emptyState: {
-    marginTop: 18,
-    minHeight: 170,
-    border: "1px solid #dce6f4",
-    borderRadius: 18,
-    background: "#f8fbff",
-    display: "grid",
-    placeItems: "center",
-    textAlign: "center",
-    color: "#334155",
-    padding: 22,
-  },
-  emptyIcon: {
-    width: 82,
-    height: 82,
-    objectFit: "contain",
-    opacity: 0.45,
+    fontSize: 13,
   },
   benefits: {
-    maxWidth: 1320,
-    margin: "0 auto",
-    padding: "14px 36px",
+    padding: "16px 56px",
     display: "grid",
     gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-    gap: 20,
+    gap: 18,
     background: "#ffffff",
     borderTop: "1px solid #e8eef8",
   },
   benefitItem: {
     display: "grid",
-    gridTemplateColumns: "42px 1fr",
-    gap: 14,
+    gridTemplateColumns: "36px 1fr",
+    gap: 12,
     alignItems: "start",
-    paddingRight: 12,
+    minWidth: 0,
   },
   benefitIcon: {
-    width: 32,
-    height: 32,
-    borderRadius: 14,
+    width: 34,
+    height: 34,
+    borderRadius: 12,
     display: "grid",
     placeItems: "center",
     color: "#075bb8",
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 900,
   },
   footer: {
-    maxWidth: 1320,
-    margin: "0 auto",
-    background:
-      "linear-gradient(135deg, #061b3f, #072e6f)",
+    minHeight: 112,
+    background: "linear-gradient(135deg, #061b3f, #072e6f)",
     color: "#ffffff",
-    borderRadius: "18px 18px 0 0",
-    padding: "16px 36px",
+    padding: "18px 56px",
     display: "grid",
-    gridTemplateColumns: "1.3fr 1fr auto",
+    gridTemplateColumns: "1.2fr 1fr auto",
     gap: 24,
     alignItems: "center",
   },
   footerBrand: {
     display: "grid",
-    gap: 8,
+    gap: 6,
   },
   footerLogo: {
-    height: 52,
+    height: 58,
     width: "auto",
     display: "block",
   },
@@ -468,9 +443,11 @@ const styles = {
     color: "#ffffff",
     textDecoration: "none",
     fontWeight: 850,
+    fontSize: 14,
   },
   footerCopy: {
     color: "#bfdbfe",
     fontWeight: 800,
+    whiteSpace: "nowrap",
   },
 };
