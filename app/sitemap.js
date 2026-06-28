@@ -1,87 +1,23 @@
-const calculatorSlugs = [
-  "aortic-size-index",
-  "egfr",
-  "creatinine-clearance",
-  "cha2ds2-vasc",
-  "has-bled",
-  "wells-dvt",
-  "body-surface-area",
-  "body-mass-index",
-  "caprini-score",
-  "revised-cardiac-risk-index",
-  "padua-score",
-  "improve-vte-risk-score",
-  "improve-bleeding-risk-score",
-  "wells-pe",
-  "duke-activity-status-index",
-  "gupta-mica",
-  "apfel-score",
-  "venous-clinical-severity-score",
-  "villalta-score",
-  "rutherford-classification",
-  "fontaine-classification",
-  "wifi-classification",
-  "ceap-classification",
-  "glasgow-blatchford-score",
-  "rockall-score",
-  "child-pugh-score",
-  "meld-score",
-  "meld-na-score",
-  "fib-4-index",
-  "apri-score",
-  "albi-score",
-  "nafld-fibrosis-score",
-  "ckd-epi-2021-cystatin-c",
-  "anion-gap",
-  "serum-osmolality",
-  "corrected-sodium",
-  "winters-formula",
-  "delta-ratio",
-  "base-excess",
-  "oxygenation-index",
-  "khorana-score",
-  "pesi-score",
-  "spesi-score",
-  "qsofa-score",
-  "sofa-score",
-  "news2-score",
-  "mews-score",
-  "heart-score",
-  "timi-nstemi-ua-score",
-  "curb-65-score",
-];
+import { calculators } from "./data/calculators";
 
 export default function sitemap() {
-  return [
-    {
-      url: "https://meddoq.com",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: "https://meddoq.com/calculators",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.95,
-    },
-    {
-      url: "https://meddoq.com/search",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: "https://meddoq.com/faq",
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.75,
-    },
-    ...calculatorSlugs.map((slug) => ({
-      url: `https://meddoq.com/calculators/${slug}`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    })),
-  ];
+  const baseUrl = "https://meddoq.com";
+
+  const staticRoutes = ["", "/calculators", "/search", "/faq"];
+
+  const staticEntries = staticRoutes.map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date(),
+    changeFrequency: route === "" ? "weekly" : "monthly",
+    priority: route === "" ? 1 : 0.8,
+  }));
+
+  const calculatorEntries = calculators.map((item) => ({
+    url: `${baseUrl}${item.href}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  return [...staticEntries, ...calculatorEntries];
 }
