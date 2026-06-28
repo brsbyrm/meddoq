@@ -107,6 +107,9 @@ export default function Home() {
 
         <div style={styles.heroVisual}>
           <div style={styles.heroPanel}>
+            <div style={styles.heroBrandMark}>
+              <img src="/icon.png" alt="Meddoq emblem" style={styles.heroBrandImage} />
+            </div>
             <div style={styles.heroPanelTop}>
               <span>Featured tools</span>
               <strong>Meddoq</strong>
@@ -390,6 +393,17 @@ const styles = {
   },
   heroVisual: {
     minWidth: 0,
+  },
+  heroBrandMark: {
+    display: "flex",
+    justifyContent: "center",
+    marginBottom: 18,
+  },
+  heroBrandImage: {
+    width: 180,
+    height: 180,
+    objectFit: "contain",
+    display: "block",
   },
   heroPanel: {
     background: "rgba(255,255,255,0.86)",
