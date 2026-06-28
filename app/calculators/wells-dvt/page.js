@@ -124,12 +124,138 @@ export default function WellsDvtPage() {
         />
       </CalculatorPanel>
 
-      <CalculatorReferencePage content={content} />
+      <section style={styles.reference}>
+        <div style={styles.referenceHeader}>
+          <p style={styles.referenceKicker}>Clinical Reference</p>
+          <h2 style={styles.referenceTitle}>Wells DVT Clinical Reference</h2>
+          <p style={styles.referenceIntro}>
+            The Wells DVT score estimates pretest probability of lower-extremity deep vein thrombosis and supports structured decisions about D-dimer testing and venous ultrasound.
+          </p>
+        </div>
+
+        <div style={styles.referenceGrid}>
+          <article style={styles.referenceCard}>
+            <h3>When to use</h3>
+            <p>
+              Use in symptomatic patients with suspected lower-extremity DVT, such as unilateral swelling, pain, tenderness, edema, or clinical concern for venous thrombosis.
+            </p>
+          </article>
+
+          <article style={styles.referenceCard}>
+            <h3>How to interpret</h3>
+            <p>
+              In the two-level model, a score of 2 or more is commonly considered DVT likely, while a score below 2 is considered DVT unlikely.
+            </p>
+          </article>
+
+          <article style={styles.referenceCard}>
+            <h3>Clinical limitations</h3>
+            <p>
+              The score should not be used as a stand-alone rule-out test. It is less reliable in unusual anatomy, recurrent DVT, pregnancy, major trauma, or complex inpatient illness.
+            </p>
+          </article>
+
+          <article style={styles.referenceCard}>
+            <h3>Next clinical step</h3>
+            <p>
+              Combine the score with D-dimer strategy, compression ultrasonography, anticoagulation bleeding risk, symptom severity, and local diagnostic protocols.
+            </p>
+          </article>
+        </div>
+
+        <div style={styles.faqBox}>
+          <h3>FAQ</h3>
+          <details style={styles.detail}>
+            <summary>Can Wells DVT rule out DVT by itself?</summary>
+            <p>No. DVT exclusion usually requires a validated diagnostic pathway combining clinical probability, D-dimer testing, and/or compression ultrasonography.</p>
+          </details>
+          <details style={styles.detail}>
+            <summary>What does “alternative diagnosis at least as likely” mean?</summary>
+            <p>It means another diagnosis such as cellulitis, muscle injury, Baker cyst, hematoma, or edema is at least as plausible as DVT based on clinical assessment.</p>
+          </details>
+          <details style={styles.detail}>
+            <summary>What if the patient has severe symptoms despite a low score?</summary>
+            <p>Strong clinical concern, limb threat, phlegmasia, severe swelling, or high-risk context should prompt urgent imaging regardless of the score.</p>
+          </details>
+        </div>
+
+        <div style={styles.referencesBox}>
+          <h3>References</h3>
+          <ol>
+            <li>Wells PS et al. Value of assessment of pretest probability of deep-vein thrombosis in clinical management. Lancet. 1997.</li>
+            <li>Wells PS et al. Evaluation of D-dimer in the diagnosis of suspected deep-vein thrombosis. N Engl J Med. 2003.</li>
+            <li>NICE guideline NG158. Venous thromboembolic diseases: diagnosis, management and thrombophilia testing.</li>
+          </ol>
+        </div>
+      </section>
     </CalculatorShell>
   );
 }
 
 const styles = {
+  reference: {
+    marginTop: 28,
+    display: "grid",
+    gap: 18,
+  },
+  referenceHeader: {
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: 24,
+    padding: 24,
+    boxShadow: "0 18px 44px rgba(15, 23, 42, 0.06)",
+  },
+  referenceKicker: {
+    margin: 0,
+    color: "#2563eb",
+    fontWeight: 900,
+    textTransform: "uppercase",
+    letterSpacing: "0.08em",
+    fontSize: 12,
+  },
+  referenceTitle: {
+    margin: "8px 0",
+    color: "#0f172a",
+    fontSize: 30,
+    letterSpacing: "-0.04em",
+  },
+  referenceIntro: {
+    margin: 0,
+    color: "#475569",
+    fontSize: 16,
+    lineHeight: 1.65,
+  },
+  referenceGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+    gap: 14,
+  },
+  referenceCard: {
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: 20,
+    padding: 18,
+    boxShadow: "0 14px 34px rgba(15, 23, 42, 0.05)",
+  },
+  faqBox: {
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: 22,
+    padding: 22,
+  },
+  referencesBox: {
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: 22,
+    padding: 22,
+    color: "#334155",
+    lineHeight: 1.65,
+  },
+  detail: {
+    borderTop: "1px solid #e2e8f0",
+    padding: "12px 0",
+    color: "#334155",
+  },
   grid: { display: "grid", gap: 12 },
   option: {
     display: "grid",
