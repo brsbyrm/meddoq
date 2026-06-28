@@ -1,11 +1,3 @@
-import { calculatorMetadata } from "../../lib/calculatorSeo";
-
-export const metadata = calculatorMetadata({
-  name: "Rockall Score",
-  category: "Gastroenterology",
-  path: "/calculators/rockall-score",
-});
-
 "use client";
 
 import { useMemo, useState } from "react";

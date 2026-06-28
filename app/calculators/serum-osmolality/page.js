@@ -1,11 +1,3 @@
-import { calculatorMetadata } from "../../lib/calculatorSeo";
-
-export const metadata = calculatorMetadata({
-  name: "Serum Osmolality",
-  category: "Electrolytes",
-  path: "/calculators/serum-osmolality",
-});
-
 "use client";
 
 import { useMemo, useState } from "react";

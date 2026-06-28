@@ -1,11 +1,3 @@
-import { calculatorMetadata } from "../../lib/calculatorSeo";
-
-export const metadata = calculatorMetadata({
-  name: "Gupta MICA",
-  category: "Perioperative",
-  path: "/calculators/gupta-mica",
-});
-
 "use client";
 
 import { useMemo, useState } from "react";

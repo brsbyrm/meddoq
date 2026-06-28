@@ -1,11 +1,3 @@
-import { calculatorMetadata } from "../../lib/calculatorSeo";
-
-export const metadata = calculatorMetadata({
-  name: "Revised Cardiac Risk Index",
-  category: "Perioperative",
-  path: "/calculators/revised-cardiac-risk-index",
-});
-
 "use client";
 
 import { useMemo, useState } from "react";

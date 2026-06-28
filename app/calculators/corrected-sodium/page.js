@@ -1,11 +1,3 @@
-import { calculatorMetadata } from "../../lib/calculatorSeo";
-
-export const metadata = calculatorMetadata({
-  name: "Corrected Sodium",
-  category: "Electrolytes",
-  path: "/calculators/corrected-sodium",
-});
-
 "use client";
 
 import { useMemo, useState } from "react";

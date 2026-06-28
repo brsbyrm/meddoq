@@ -1,11 +1,3 @@
-import { calculatorMetadata } from "../../lib/calculatorSeo";
-
-export const metadata = calculatorMetadata({
-  name: "Duke Activity Status Index",
-  category: "Perioperative",
-  path: "/calculators/duke-activity-status-index",
-});
-
 "use client";
 
 import { useMemo, useState } from "react";

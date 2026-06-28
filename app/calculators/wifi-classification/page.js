@@ -1,11 +1,3 @@
-import { calculatorMetadata } from "../../lib/calculatorSeo";
-
-export const metadata = calculatorMetadata({
-  name: "WIfI Classification",
-  category: "Vascular",
-  path: "/calculators/wifi-classification",
-});
-
 "use client";
 
 import { useMemo, useState } from "react";

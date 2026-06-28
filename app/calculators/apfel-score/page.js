@@ -1,11 +1,3 @@
-import { calculatorMetadata } from "../../lib/calculatorSeo";
-
-export const metadata = calculatorMetadata({
-  name: "Apfel Score",
-  category: "Perioperative",
-  path: "/calculators/apfel-score",
-});
-
 "use client";
 
 import { useMemo, useState } from "react";

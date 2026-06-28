@@ -1,11 +1,3 @@
-import { calculatorMetadata } from "../../lib/calculatorSeo";
-
-export const metadata = calculatorMetadata({
-  name: "Rutherford Classification",
-  category: "Vascular",
-  path: "/calculators/rutherford-classification",
-});
-
 "use client";
 
 import { useMemo, useState } from "react";

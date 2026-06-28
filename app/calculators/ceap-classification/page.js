@@ -1,11 +1,3 @@
-import { calculatorMetadata } from "../../lib/calculatorSeo";
-
-export const metadata = calculatorMetadata({
-  name: "CEAP Classification",
-  category: "Vascular",
-  path: "/calculators/ceap-classification",
-});
-
 "use client";
 
 import { useState } from "react";

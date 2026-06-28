@@ -1,11 +1,3 @@
-import { calculatorMetadata } from "../../lib/calculatorSeo";
-
-export const metadata = calculatorMetadata({
-  name: "Winter's Formula",
-  category: "Acid–Base",
-  path: "/calculators/winters-formula",
-});
-
 "use client";
 
 import { useMemo, useState } from "react";

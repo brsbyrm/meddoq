@@ -1,11 +1,3 @@
-import { calculatorMetadata } from "../../lib/calculatorSeo";
-
-export const metadata = calculatorMetadata({
-  name: "APRI Score",
-  category: "Hepatology",
-  path: "/calculators/apri-score",
-});
-
 "use client";
 
 import { useMemo, useState } from "react";

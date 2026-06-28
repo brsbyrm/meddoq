@@ -1,11 +1,3 @@
-import { calculatorMetadata } from "../../lib/calculatorSeo";
-
-export const metadata = calculatorMetadata({
-  name: "MELD-Na Score",
-  category: "Hepatology",
-  path: "/calculators/meld-na-score",
-});
-
 "use client";
 
 import { useMemo, useState } from "react";

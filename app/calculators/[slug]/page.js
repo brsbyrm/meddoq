@@ -1,5 +1,3 @@
-import { calculatorMetadata } from "../../lib/calculatorSeo";
-
 const calculatorSeoMap = {
   "aortic-size-index": { name: "Aortic Size Index", category: "Vascular" },
   egfr: { name: "eGFR", category: "Nephrology" },

@@ -1,11 +1,3 @@
-import { calculatorMetadata } from "../../lib/calculatorSeo";
-
-export const metadata = calculatorMetadata({
-  name: "Villalta Score",
-  category: "Vascular",
-  path: "/calculators/villalta-score",
-});
-
 "use client";
 
 import { useMemo, useState } from "react";
