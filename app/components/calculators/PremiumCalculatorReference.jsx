@@ -95,7 +95,7 @@ export default function PremiumCalculatorReference() {
       <div style={styles.container}>
         <div style={styles.header}>
           <p style={styles.kicker}>{data.category} Calculator + Medical Reference</p>
-          <h2 style={styles.title}>{data.title} Clinical Guide</h2>
+          <h2 style={styles.title}>{data.title} Clinical Reference</h2>
           <p style={styles.lead}>
             Evidence-informed interpretation, severity explanation, clinical pearls,
             common pitfalls, next-step guidance, FAQ, related calculators, and references.
