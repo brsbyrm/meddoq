@@ -167,4 +167,13 @@ export const calculators = [
     icon: "🦵",
     description: "Classify peripheral arterial disease severity using Fontaine stages.",
   },
+
+  {
+    id:"wifi-classification",
+    name:"WIfI Classification",
+    category:"Vascular",
+    href:"/calculators/wifi-classification",
+    icon:"🦶",
+    description:"Assess limb threat using Wound, Ischemia and foot Infection.",
+  },
 ];
