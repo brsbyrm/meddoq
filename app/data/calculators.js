@@ -230,4 +230,13 @@ export const calculators = [
     icon:"🧬",
     description:"Estimate liver disease severity using MELD-Na.",
   },
+
+  {
+    id:"fib-4-index",
+    name:"FIB-4 Index",
+    category:"General",
+    href:"/calculators/fib-4-index",
+    icon:"🧬",
+    description:"Estimate risk of advanced liver fibrosis.",
+  },
 ];
