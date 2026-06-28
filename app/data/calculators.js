@@ -143,4 +143,12 @@ export const calculators = [
     icon: "🦵",
     description: "Calculate VCSS for chronic venous disease severity.",
   },
+  {
+    id: "villalta-score",
+    name: "Villalta Score",
+    category: "Vascular",
+    href: "/calculators/villalta-score",
+    icon: "🦵",
+    description: "Assess post-thrombotic syndrome severity after DVT.",
+  },
 ];
