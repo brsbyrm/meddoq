@@ -257,4 +257,13 @@ export const calculators = [
     icon:"🧬",
     description:"Assess liver function using albumin and bilirubin.",
   },
+
+  {
+    id:"nafld-fibrosis-score",
+    name:"NAFLD Fibrosis Score",
+    category:"General",
+    href:"/calculators/nafld-fibrosis-score",
+    icon:"🧬",
+    description:"Estimate advanced fibrosis in fatty liver disease.",
+  },
 ];
