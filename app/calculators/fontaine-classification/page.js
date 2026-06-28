@@ -101,14 +101,17 @@ export default function Page() {
           <strong>{result.title}</strong>
           <p><b>{result.label}</b></p>
           <p>{result.description}</p>
-          <p><b>Clinical meaning:</b></p>
-          <ul>
-            <li><b>Stage IIa:</b> Mild claudication; walking distance usually greater than 200 m.</li>
-            <li><b>Stage IIb:</b> Moderate to severe claudication; walking distance less than 200 m.</li>
-            <li><b>Stage III:</b> Ischemic rest pain; suggests advanced ischemia.</li>
-            <li><b>Stage IV:</b> Ulceration or gangrene; chronic limb-threatening ischemia.</li>
-          </ul>
-          <p><b>Next step:</b> Combine with ABI/toe pressure and arterial imaging before treatment planning.</p>
+          <div style={styles.interpretationBox}>
+            <h3>Clinical meaning</h3>
+            <ul>
+              <li><b>Stage I:</b> PAD is present or suspected, but the patient has no typical exertional limb symptoms.</li>
+              <li><b>Stage IIa — Mild claudication:</b> Walking distance is usually greater than 200 m; daily activity is relatively preserved.</li>
+              <li><b>Stage IIb — Moderate/severe claudication:</b> Walking distance is less than 200 m; daily activity is clearly limited.</li>
+              <li><b>Stage III — Rest pain:</b> Indicates advanced ischemia and possible chronic limb-threatening ischemia.</li>
+              <li><b>Stage IV — Ulcer/gangrene:</b> Tissue loss is present; limb salvage assessment is usually urgent.</li>
+            </ul>
+            <p><b>Next step:</b> Combine with ABI/toe pressure, duplex/CTA findings, wound status and revascularization feasibility.</p>
+          </div>
         </div>
       </section>
 
