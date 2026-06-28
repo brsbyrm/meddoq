@@ -1,3 +1,11 @@
+import { calculatorMetadata } from "../../lib/calculatorSeo";
+
+export const metadata = calculatorMetadata({
+  name: "Fontaine Classification",
+  category: "Vascular",
+  path: "/calculators/fontaine-classification",
+});
+
 "use client";
 
 import { useMemo, useState } from "react";

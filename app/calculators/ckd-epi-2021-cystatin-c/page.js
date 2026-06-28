@@ -1,3 +1,11 @@
+import { calculatorMetadata } from "../../lib/calculatorSeo";
+
+export const metadata = calculatorMetadata({
+  name: "CKD-EPI 2021 Cystatin C",
+  category: "Nephrology",
+  path: "/calculators/ckd-epi-2021-cystatin-c",
+});
+
 "use client";
 
 import { useMemo, useState } from "react";

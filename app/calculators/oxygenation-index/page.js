@@ -1,3 +1,11 @@
+import { calculatorMetadata } from "../../lib/calculatorSeo";
+
+export const metadata = calculatorMetadata({
+  name: "Oxygenation Index",
+  category: "Critical Care",
+  path: "/calculators/oxygenation-index",
+});
+
 "use client";
 
 import { useMemo, useState } from "react";

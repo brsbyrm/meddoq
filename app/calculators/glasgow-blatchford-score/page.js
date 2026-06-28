@@ -1,3 +1,11 @@
+import { calculatorMetadata } from "../../lib/calculatorSeo";
+
+export const metadata = calculatorMetadata({
+  name: "Glasgow-Blatchford Score",
+  category: "Gastroenterology",
+  path: "/calculators/glasgow-blatchford-score",
+});
+
 "use client";
 
 import { useMemo, useState } from "react";

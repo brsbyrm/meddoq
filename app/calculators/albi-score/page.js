@@ -1,3 +1,11 @@
+import { calculatorMetadata } from "../../lib/calculatorSeo";
+
+export const metadata = calculatorMetadata({
+  name: "ALBI Score",
+  category: "Hepatology",
+  path: "/calculators/albi-score",
+});
+
 "use client";
 
 import { useMemo, useState } from "react";

@@ -1,3 +1,11 @@
+import { calculatorMetadata } from "../../lib/calculatorSeo";
+
+export const metadata = calculatorMetadata({
+  name: "Padua Prediction Score",
+  category: "Internal Medicine",
+  path: "/calculators/padua-score",
+});
+
 "use client";
 
 import { useMemo, useState } from "react";

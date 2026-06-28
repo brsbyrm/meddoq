@@ -1,3 +1,11 @@
+import { calculatorMetadata } from "../../lib/calculatorSeo";
+
+export const metadata = calculatorMetadata({
+  name: "Base Excess",
+  category: "Acid–Base",
+  path: "/calculators/base-excess",
+});
+
 "use client";
 
 import { useMemo, useState } from "react";

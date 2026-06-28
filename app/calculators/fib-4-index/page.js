@@ -1,3 +1,11 @@
+import { calculatorMetadata } from "../../lib/calculatorSeo";
+
+export const metadata = calculatorMetadata({
+  name: "FIB-4 Index",
+  category: "Hepatology",
+  path: "/calculators/fib-4-index",
+});
+
 "use client";
 
 import { useMemo, useState } from "react";

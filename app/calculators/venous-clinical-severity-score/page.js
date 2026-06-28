@@ -1,3 +1,11 @@
+import { calculatorMetadata } from "../../lib/calculatorSeo";
+
+export const metadata = calculatorMetadata({
+  name: "Venous Clinical Severity Score",
+  category: "Vascular",
+  path: "/calculators/venous-clinical-severity-score",
+});
+
 "use client";
 
 import { useMemo, useState } from "react";

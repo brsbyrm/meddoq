@@ -1,3 +1,11 @@
+import { calculatorMetadata } from "../../lib/calculatorSeo";
+
+export const metadata = calculatorMetadata({
+  name: "Delta Ratio",
+  category: "Acid–Base",
+  path: "/calculators/delta-ratio",
+});
+
 "use client";
 
 import { useMemo, useState } from "react";

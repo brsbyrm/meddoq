@@ -1,3 +1,11 @@
+import { calculatorMetadata } from "../../lib/calculatorSeo";
+
+export const metadata = calculatorMetadata({
+  name: "Wells PE Score",
+  category: "Emergency / Vascular",
+  path: "/calculators/wells-pe",
+});
+
 "use client";
 
 import { useMemo, useState } from "react";

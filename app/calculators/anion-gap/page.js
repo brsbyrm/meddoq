@@ -1,3 +1,11 @@
+import { calculatorMetadata } from "../../lib/calculatorSeo";
+
+export const metadata = calculatorMetadata({
+  name: "Anion Gap",
+  category: "Acid–Base",
+  path: "/calculators/anion-gap",
+});
+
 "use client";
 
 import { useMemo, useState } from "react";
