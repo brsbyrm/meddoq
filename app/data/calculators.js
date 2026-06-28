@@ -221,4 +221,13 @@ export const calculators = [
     icon:"🧬",
     description:"Estimate liver disease severity using MELD.",
   },
+
+  {
+    id:"meld-na-score",
+    name:"MELD-Na Score",
+    category:"General",
+    href:"/calculators/meld-na-score",
+    icon:"🧬",
+    description:"Estimate liver disease severity using MELD-Na.",
+  },
 ];
