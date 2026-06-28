@@ -2,18 +2,14 @@
 
 import { useMemo, useState } from "react";
 
-function n(v) {
-  return parseFloat(String(v).replace(/,/g, ".")) || 0;
-}
-
-
-
 function n(value) {
-  if (value === null || value === undefined) return 0;
-  const normalized = String(value).replace(/,/g, ".");
-  const parsed = parseFloat(normalized);
+  const parsed = parseFloat(String(value ?? "").replace(/,/g, "."));
   return Number.isFinite(parsed) ? parsed : 0;
 }
+
+
+
+
 
 
 const calculators = {

@@ -12,14 +12,18 @@ function n(value) {
 
 
 function minOne(value) {
-  const n = n(value);
-  if (!n || n < 1) return 1;
-  return n;
+  const parsed = parseFloat(String(value ?? "").replace(/,/g, "."));
+  if (!Number.isFinite(parsed) || parsed < 1) return 1;
+  return parsed;
 }
 
+
 function clamp(value, low, high) {
-  return Math.max(low, Math.min(high, value));
+  const parsed = parseFloat(String(value ?? "").replace(/,/g, "."));
+  if (!Number.isFinite(parsed)) return low;
+  return Math.max(low, Math.min(high, parsed));
 }
+
 
 export default function Page() {
   const [bilirubin,setBilirubin]=useState("");

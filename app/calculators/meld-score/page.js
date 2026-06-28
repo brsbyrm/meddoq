@@ -12,9 +12,9 @@ function n(value) {
 
 
 function clampMin(value, min) {
-  const n = n(value);
-  if (!n || n < min) return min;
-  return n;
+  const parsed = n(value);
+  if (!parsed || parsed < min) return min;
+  return parsed;
 }
 
 export default function Page() {
