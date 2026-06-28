@@ -119,7 +119,7 @@ function Result({ title, value, unit }) {
   return (
     <div style={styles.result}>
       <span>{title}</span>
-      <strong>{value} {unit}</strong>
+      <strong>{value} <small style={{fontSize: 14, fontWeight: 800, color: "#64748b"}}>{unit}</small></strong>
     </div>
   );
 }
@@ -167,7 +167,7 @@ function EGFR() {
         <Input label="Creatinine (mg/dL)" value={creat} setValue={setCreat} placeholder="1.2" />
       </div>
       <label style={styles.check}><input type="checkbox" checked={female} onChange={(e) => setFemale(e.target.checked)} /> Female sex</label>
-      {egfr && <Result title="eGFR CKD-EPI 2021" value={egfr} unit="mL/min/1.73 m²" />}
+      {egfr && <Result title="eGFR" value={egfr} unit="mL/min/1.73 m²" />}
     </>
   );
 }
