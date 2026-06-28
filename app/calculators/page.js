@@ -1,145 +1,255 @@
-const calculators = [
-  ["Aortic Size Index", "Vascular", "/calculators/aortic-size-index", "Index aortic diameter to body surface area."],
-  ["Rutherford Classification", "Vascular", "/calculators/rutherford-classification", "Classify chronic limb ischemia severity."],
-  ["Fontaine Classification", "Vascular", "/calculators/fontaine-classification", "Classify PAD severity using Fontaine stages."],
-  ["WIfI Classification", "Vascular", "/calculators/wifi-classification", "Estimate limb threat using wound, ischemia and infection."],
-  ["CEAP Classification", "Vascular", "/calculators/ceap-classification", "Classify chronic venous disease."],
-  ["VCSS", "Vascular", "/calculators/venous-clinical-severity-score", "Quantify chronic venous disease severity."],
-  ["Villalta Score", "Vascular", "/calculators/villalta-score", "Assess post-thrombotic syndrome severity."],
-  ["Wells DVT", "Vascular", "/calculators/wells-dvt", "Estimate pretest probability of deep vein thrombosis."],
-  ["Wells PE", "Pulmonary Embolism", "/calculators/wells-pe", "Estimate pretest probability of pulmonary embolism."],
-  ["PESI Score", "Pulmonary Embolism", "/calculators/pesi-score", "Risk stratify acute pulmonary embolism."],
-  ["sPESI Score", "Pulmonary Embolism", "/calculators/spesi-score", "Simplified PE mortality risk stratification."],
-  ["IMPROVE VTE Score", "VTE Risk", "/calculators/improve-vte-risk-score", "Estimate VTE risk in hospitalized medical patients."],
-  ["IMPROVE Bleeding Risk", "Bleeding Risk", "/calculators/improve-bleeding-risk-score", "Estimate bleeding risk during thromboprophylaxis assessment."],
-  ["Khorana Score", "Oncology / VTE", "/calculators/khorana-score", "Estimate VTE risk in ambulatory cancer patients."],
-  ["Padua Score", "VTE Risk", "/calculators/padua-score", "Estimate VTE risk in hospitalized medical patients."],
-  ["Caprini Score", "VTE Risk", "/calculators/caprini-score", "Estimate perioperative VTE risk."],
-  ["SOFA Score", "Critical Care", "/calculators/sofa-score", "Assess organ dysfunction severity."],
-  ["qSOFA Score", "Critical Care", "/calculators/qsofa-score", "Screen for higher-risk suspected infection."],
-  ["NEWS2 Score", "Critical Care", "/calculators/news2-score", "Early warning score for clinical deterioration."],
-  ["MEWS Score", "Critical Care", "/calculators/mews-score", "Modified early warning score."],
-  ["eGFR", "Renal", "/calculators/egfr", "Estimate glomerular filtration rate using CKD-EPI 2021."],
-  ["Creatinine Clearance", "Renal", "/calculators/creatinine-clearance", "Estimate creatinine clearance using Cockcroft-Gault."],
-  ["CKD-EPI 2021 Cystatin C", "Renal", "/calculators/ckd-epi-2021-cystatin-c", "Estimate GFR using cystatin C."],
-  ["MELD Score", "Hepatology", "/calculators/meld-score", "Estimate mortality risk in advanced liver disease."],
-  ["MELD-Na Score", "Hepatology", "/calculators/meld-na-score", "Estimate cirrhosis risk using MELD plus sodium."],
-  ["Child-Pugh Score", "Hepatology", "/calculators/child-pugh-score", "Classify cirrhosis severity."],
-  ["ALBI Score", "Hepatology", "/calculators/albi-score", "Assess liver functional reserve."],
-  ["APRI Score", "Hepatology", "/calculators/apri-score", "Estimate liver fibrosis risk."],
-  ["FIB-4 Index", "Hepatology", "/calculators/fib-4-index", "Estimate advanced liver fibrosis risk."],
-  ["NAFLD Fibrosis Score", "Hepatology", "/calculators/nafld-fibrosis-score", "Estimate advanced fibrosis risk in NAFLD."],
-  ["CHA₂DS₂-VASc", "Cardiovascular", "/calculators/cha2ds2-vasc", "Estimate thromboembolic risk in atrial fibrillation."],
-  ["HAS-BLED", "Cardiovascular", "/calculators/has-bled", "Assess bleeding risk in atrial fibrillation."],
-  ["RCRI", "Perioperative", "/calculators/revised-cardiac-risk-index", "Estimate perioperative cardiac risk."],
-  ["Gupta MICA", "Perioperative", "/calculators/gupta-mica", "Estimate perioperative MI or cardiac arrest risk."],
-  ["Apfel Score", "Perioperative", "/calculators/apfel-score", "Estimate postoperative nausea and vomiting risk."],
-  ["Duke Activity Status Index", "Perioperative", "/calculators/duke-activity-status-index", "Estimate functional capacity."],
-  ["Glasgow-Blatchford Score", "Gastroenterology", "/calculators/glasgow-blatchford-score", "Risk stratify upper GI bleeding."],
-  ["Rockall Score", "Gastroenterology", "/calculators/rockall-score", "Estimate risk after upper GI bleeding."],
-  ["Anion Gap", "Acid–Base", "/calculators/anion-gap", "Calculate serum anion gap."],
-  ["Delta Ratio", "Acid–Base", "/calculators/delta-ratio", "Assess mixed metabolic acid-base disorders."],
-  ["Base Excess", "Acid–Base", "/calculators/base-excess", "Assess metabolic acid-base component."],
-  ["Winter's Formula", "Acid–Base", "/calculators/winters-formula", "Estimate respiratory compensation in metabolic acidosis."],
-  ["Corrected Sodium", "Electrolytes", "/calculators/corrected-sodium", "Correct sodium for hyperglycemia."],
-  ["Serum Osmolality", "Electrolytes", "/calculators/serum-osmolality", "Estimate calculated serum osmolality."],
-  ["Oxygenation Index", "Critical Care", "/calculators/oxygenation-index", "Assess oxygenation impairment."],
-  ["Body Surface Area", "General", "/calculators/body-surface-area", "Calculate body surface area using Mosteller formula."],
-  ["Body Mass Index", "General", "/calculators/body-mass-index", "Calculate BMI and standard weight category."],
-  ["HEART Score", "Cardiology", "/calculators/heart-score", "Chest pain and suspected ACS risk stratification."],
-  ["TIMI NSTEMI/UA Score", "Cardiology", "/calculators/timi-nstemi-ua-score", "Unstable angina and NSTEMI short-term ischemic risk."],
-  ["CURB-65 Score", "Pulmonology", "/calculators/curb-65-score", "Community-acquired pneumonia severity and mortality risk."],
-];
+"use client";
 
-export const metadata = {
-  title: "Clinical Calculator Library | Meddoq",
-  description:
-    "Free clinical calculator library for healthcare professionals, including vascular, cardiovascular, renal and general medical calculators.",
-  alternates: {
-    canonical: "https://meddoq.com/calculators",
-  },
-};
+import { useMemo, useState } from "react";
+import { calculators } from "../data/calculators";
 
-export default function Page() {
+export default function CalculatorLibraryPage() {
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState("All");
+
+  const categories = useMemo(() => {
+    return ["All", ...Array.from(new Set(calculators.map((item) => item.category))).sort()];
+  }, []);
+
+  const filteredCalculators = useMemo(() => {
+    const q = query.trim().toLowerCase();
+
+    return calculators
+      .filter((item) => category === "All" || item.category === category)
+      .filter((item) => {
+        if (!q) return true;
+        return [item.name, item.category, item.description, item.id]
+          .join(" ")
+          .toLowerCase()
+          .includes(q);
+      })
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }, [query, category]);
+
   return (
-    <main style={styles.main}>
-      <a href="/" style={styles.back}>← Back to Meddoq</a>
-
+    <main style={styles.page}>
       <section style={styles.hero}>
         <p style={styles.kicker}>Calculator Library</p>
-        <h1>Clinical Calculator Library</h1>
-        <p>
-          Browse Meddoq clinical calculators for vascular, cardiovascular,
-          renal and general medical workflows.
+        <h1 style={styles.title}>Clinical Calculator Library</h1>
+        <p style={styles.text}>
+          Search Meddoq clinical calculators by name, specialty, score, formula or clinical topic.
         </p>
+
+        <div style={styles.searchBox}>
+          <span style={styles.searchIcon}>⌕</span>
+          <input
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search eGFR, HEART, CURB-65, SOFA, DVT..."
+            style={styles.searchInput}
+          />
+        </div>
+
+        <div style={styles.filters}>
+          {categories.map((item) => (
+            <button
+              key={item}
+              type="button"
+              onClick={() => setCategory(item)}
+              style={{
+                ...styles.filterButton,
+                ...(category === item ? styles.filterButtonActive : {}),
+              }}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <section style={styles.summary}>
+        <strong>{filteredCalculators.length}</strong>
+        <span>
+          {filteredCalculators.length === 1 ? "calculator" : "calculators"} shown
+          {category !== "All" ? ` in ${category}` : ""}
+        </span>
       </section>
 
       <section style={styles.grid}>
-        {calculators.map(([name, category, href, description]) => (
-          <a key={href} href={href} style={styles.card}>
-            <span style={styles.badge}>{category}</span>
-            <h2>{name}</h2>
-            <p>{description}</p>
-            <strong>Open calculator →</strong>
+        {filteredCalculators.map((item) => (
+          <a key={item.id} href={item.href} style={styles.card}>
+            <div style={styles.cardTop}>
+              <div style={styles.iconBubble}>{item.icon}</div>
+              <span style={styles.categoryBadge}>{item.category}</span>
+            </div>
+            <h2 style={styles.cardTitle}>{item.name}</h2>
+            <p style={styles.cardText}>{item.description}</p>
+            <div style={styles.cardAction}>Open calculator →</div>
           </a>
         ))}
       </section>
+
+      {filteredCalculators.length === 0 && (
+        <section style={styles.empty}>
+          No calculator found. Try a broader search term.
+        </section>
+      )}
     </main>
   );
 }
 
 const styles = {
-  main: {
-    maxWidth: 1100,
-    margin: "0 auto",
-    padding: "24px",
+  page: {
+    minHeight: "100vh",
+    padding: "44px 24px 64px",
+    background: "linear-gradient(135deg, #f8fafc 0%, #eef6ff 100%)",
+    color: "#0f172a",
     fontFamily:
       'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-    color: "#0f172a",
-  },
-  back: {
-    color: "#2563eb",
-    fontWeight: 800,
-    textDecoration: "none",
   },
   hero: {
-    marginTop: 32,
-    background: "linear-gradient(135deg, #ffffff, #eff6ff)",
-    border: "1px solid #dbeafe",
-    borderRadius: 28,
-    padding: "clamp(26px, 5vw, 46px)",
-    boxShadow: "0 24px 70px rgba(15,23,42,0.08)",
+    maxWidth: 1120,
+    margin: "0 auto 28px",
   },
   kicker: {
+    margin: 0,
     color: "#2563eb",
     fontWeight: 900,
     textTransform: "uppercase",
-    letterSpacing: "0.12em",
+    letterSpacing: "0.08em",
     fontSize: 12,
   },
+  title: {
+    margin: "8px 0",
+    fontSize: 44,
+    lineHeight: 1.05,
+    letterSpacing: "-0.045em",
+  },
+  text: {
+    margin: "0 0 22px",
+    color: "#475569",
+    maxWidth: 760,
+    fontSize: 17,
+    lineHeight: 1.65,
+  },
+  searchBox: {
+    display: "flex",
+    alignItems: "center",
+    gap: 12,
+    maxWidth: 760,
+    background: "#ffffff",
+    border: "1px solid #dbeafe",
+    borderRadius: 20,
+    padding: "0 16px",
+    boxShadow: "0 18px 44px rgba(37, 99, 235, 0.08)",
+  },
+  searchIcon: {
+    color: "#2563eb",
+    fontSize: 24,
+    fontWeight: 900,
+  },
+  searchInput: {
+    width: "100%",
+    border: 0,
+    outline: 0,
+    padding: "18px 0",
+    fontSize: 16,
+    background: "transparent",
+    color: "#0f172a",
+  },
+  filters: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: 10,
+    marginTop: 18,
+  },
+  filterButton: {
+    border: "1px solid #cbd5e1",
+    background: "#ffffff",
+    color: "#334155",
+    borderRadius: 999,
+    padding: "10px 14px",
+    fontWeight: 850,
+    cursor: "pointer",
+  },
+  filterButtonActive: {
+    background: "#2563eb",
+    borderColor: "#2563eb",
+    color: "#ffffff",
+  },
+  summary: {
+    maxWidth: 1120,
+    margin: "0 auto 18px",
+    display: "flex",
+    gap: 8,
+    alignItems: "baseline",
+    color: "#475569",
+  },
   grid: {
-    marginTop: 28,
+    maxWidth: 1120,
+    margin: "0 auto",
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 250px), 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
     gap: 18,
   },
   card: {
+    display: "flex",
+    flexDirection: "column",
+    minHeight: 210,
+    textDecoration: "none",
+    color: "#0f172a",
     background: "#ffffff",
     border: "1px solid #e2e8f0",
-    borderRadius: 22,
+    borderRadius: 24,
     padding: 22,
-    color: "#0f172a",
-    textDecoration: "none",
-    boxShadow: "0 14px 36px rgba(15,23,42,0.06)",
+    boxShadow: "0 18px 44px rgba(15, 23, 42, 0.07)",
+    transition: "transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease",
   },
-  badge: {
-    display: "inline-flex",
-    color: "#2563eb",
+  cardTop: {
+    display: "flex",
+    justifyContent: "space-between",
+    gap: 12,
+    alignItems: "center",
+    marginBottom: 18,
+  },
+  iconBubble: {
+    width: 46,
+    height: 46,
+    borderRadius: 16,
+    display: "grid",
+    placeItems: "center",
     background: "#eff6ff",
+    fontSize: 24,
+  },
+  categoryBadge: {
     border: "1px solid #bfdbfe",
+    background: "#eff6ff",
+    color: "#2563eb",
     borderRadius: 999,
-    padding: "5px 9px",
-    fontSize: 11,
+    padding: "7px 10px",
+    fontSize: 12,
     fontWeight: 900,
+  },
+  cardTitle: {
+    margin: 0,
+    fontSize: 20,
+    lineHeight: 1.2,
+    letterSpacing: "-0.025em",
+  },
+  cardText: {
+    margin: "10px 0 18px",
+    color: "#475569",
+    lineHeight: 1.55,
+    fontSize: 14,
+    flex: 1,
+  },
+  cardAction: {
+    color: "#2563eb",
+    fontWeight: 900,
+  },
+  empty: {
+    maxWidth: 1120,
+    margin: "24px auto 0",
+    padding: 20,
+    borderRadius: 20,
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    color: "#64748b",
+    fontWeight: 800,
   },
 };
