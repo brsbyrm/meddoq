@@ -302,4 +302,13 @@ export const calculators = [
     icon:"🧪",
     description:"Correct serum sodium for hyperglycemia.",
   },
+
+  {
+    id:"winters-formula",
+    name:"Winter's Formula",
+    category:"Renal",
+    href:"/calculators/winters-formula",
+    icon:"🧪",
+    description:"Estimate expected PaCO₂ compensation in metabolic acidosis.",
+  },
 ];

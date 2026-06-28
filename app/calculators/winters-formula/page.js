@@ -1,0 +1,83 @@
+"use client";
+
+import { useMemo, useState } from "react";
+
+export default function Page() {
+  const [hco3, setHco3] = useState("");
+  const [pco2, setPco2] = useState("");
+
+  const result = useMemo(() => {
+    const bicarb = Number(hco3);
+    const measured = Number(pco2);
+
+    if (!bicarb) return null;
+
+    const expected = 1.5 * bicarb + 8;
+    const low = expected - 2;
+    const high = expected + 2;
+
+    let interpretation = "Enter measured PaCO₂ to assess compensation.";
+    if (measured) {
+      if (measured < low) interpretation = "Measured PaCO₂ is lower than expected: additional respiratory alkalosis may be present.";
+      else if (measured > high) interpretation = "Measured PaCO₂ is higher than expected: additional respiratory acidosis may be present.";
+      else interpretation = "Measured PaCO₂ is within expected compensation range.";
+    }
+
+    return { expected, low, high, interpretation };
+  }, [hco3, pco2]);
+
+  return (
+    <main style={styles.main}>
+      <a href="/" style={styles.back}>← Back to Meddoq</a>
+
+      <section style={styles.hero}>
+        <p style={styles.kicker}>Acid-Base Calculator</p>
+        <h1>Winter&apos;s Formula Calculator</h1>
+        <p>Estimate expected respiratory compensation in metabolic acidosis.</p>
+      </section>
+
+      <section style={styles.card}>
+        <div style={styles.grid}>
+          <label style={styles.label}>Bicarbonate HCO₃⁻ (mEq/L)
+            <input style={styles.input} value={hco3} onChange={(e) => setHco3(e.target.value)} inputMode="decimal" placeholder="12" />
+          </label>
+
+          <label style={styles.label}>Measured PaCO₂ (mmHg) optional
+            <input style={styles.input} value={pco2} onChange={(e) => setPco2(e.target.value)} inputMode="decimal" placeholder="26" />
+          </label>
+        </div>
+
+        <div style={styles.result}>
+          <span>Expected PaCO₂</span>
+          <strong>{result ? `${result.expected.toFixed(1)} mmHg` : "—"}</strong>
+          {result && <p>Expected range: <b>{result.low.toFixed(1)}–{result.high.toFixed(1)} mmHg</b></p>}
+          {result && <p><b>{result.interpretation}</b></p>}
+        </div>
+      </section>
+
+      <section style={styles.content}>
+        <h2>Formula</h2>
+        <p><strong>Expected PaCO₂ = 1.5 × HCO₃⁻ + 8 ± 2</strong></p>
+
+        <h2>Clinical use</h2>
+        <p>Winter&apos;s formula helps evaluate whether respiratory compensation is appropriate in metabolic acidosis.</p>
+
+        <h2>References</h2>
+        <p>Albert MS et al. Ann Intern Med. 1967.</p>
+      </section>
+    </main>
+  );
+}
+
+const styles = {
+  main: { maxWidth: 980, margin: "0 auto", padding: 24, fontFamily: "Inter,system-ui,sans-serif", color: "#0f172a" },
+  back: { color: "#2563eb", fontWeight: 800, textDecoration: "none" },
+  hero: { marginTop: 32, background: "linear-gradient(135deg,#fff,#eff6ff)", border: "1px solid #dbeafe", borderRadius: 28, padding: 40 },
+  kicker: { color: "#2563eb", fontWeight: 900, fontSize: 12, textTransform: "uppercase" },
+  card: { marginTop: 24, background: "#fff", border: "1px solid #e2e8f0", borderRadius: 24, padding: 24 },
+  grid: { display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,220px),1fr))", gap: 16 },
+  label: { display: "grid", gap: 8, fontWeight: 700 },
+  input: { padding: 14, borderRadius: 12, border: "1px solid #cbd5e1" },
+  result: { marginTop: 24, background: "#eff6ff", padding: 20, borderRadius: 18, border: "1px solid #bfdbfe" },
+  content: { marginTop: 32, lineHeight: 1.7, fontSize: 17 },
+};
