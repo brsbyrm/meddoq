@@ -59,6 +59,17 @@ export default function Page() {
         </div>
       </section>
 
+
+      <section style={styles.related}>
+        <h2>Related calculators</h2>
+        <div style={styles.relatedGrid}>
+          <a href="/calculators/egfr" style={styles.relatedLink}>eGFR</a>
+          <a href="/calculators/creatinine-clearance" style={styles.relatedLink}>Creatinine Clearance</a>
+          <a href="/calculators/body-surface-area" style={styles.relatedLink}>Body Surface Area</a>
+          <a href="/calculators/body-mass-index" style={styles.relatedLink}>BMI</a>
+        </div>
+      </section>
+
       <section style={styles.content}>
         <h2>Formula</h2>
         <p><strong>BE = 0.93 × [HCO₃⁻ − 24.4 + 14.83 × (pH − 7.4)]</strong></p>
