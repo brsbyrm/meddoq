@@ -36,6 +36,28 @@ export default function Page() {
   }, [hco3, pco2]);
 
   return (
+    <>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "MedicalWebPage",
+            "name": "Meddoq clinical calculator",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Meddoq",
+              "url": "https://meddoq.com"
+            },
+            "medicalAudience": {
+              "@type": "MedicalAudience",
+              "audienceType": "Healthcare professionals"
+            }
+          })
+        }}
+      />
+
     <main style={styles.main}>
       <a href="/" style={styles.back}>← Back to Meddoq</a>
 
@@ -126,6 +148,7 @@ export default function Page() {
         <p>Albert MS et al. Ann Intern Med. 1967.</p>
       </section>
     </main>
+    </>
   );
 }
 

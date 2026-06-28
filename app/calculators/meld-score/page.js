@@ -35,6 +35,28 @@ export default function Page() {
   const risk = score < 10 ? "Lower severity" : score < 20 ? "Moderate severity" : score < 30 ? "High severity" : "Very high severity";
 
   return (
+    <>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "MedicalWebPage",
+            "name": "Meddoq clinical calculator",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Meddoq",
+              "url": "https://meddoq.com"
+            },
+            "medicalAudience": {
+              "@type": "MedicalAudience",
+              "audienceType": "Healthcare professionals"
+            }
+          })
+        }}
+      />
+
     <main style={styles.main}>
       <a href="/" style={styles.back}>← Back to Meddoq</a>
 
@@ -134,6 +156,7 @@ export default function Page() {
         <p>Malinchoc M et al. Hepatology. 2000. Kamath PS et al. Hepatology. 2001.</p>
       </section>
     </main>
+    </>
   );
 }
 

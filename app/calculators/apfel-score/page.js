@@ -26,6 +26,28 @@ export default function Page() {
   );
 
   return (
+    <>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "MedicalWebPage",
+            "name": "Meddoq clinical calculator",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Meddoq",
+              "url": "https://meddoq.com"
+            },
+            "medicalAudience": {
+              "@type": "MedicalAudience",
+              "audienceType": "Healthcare professionals"
+            }
+          })
+        }}
+      />
+
     <main style={styles.main}>
       <a href="/" style={styles.back}>← Back to Meddoq</a>
 
@@ -126,6 +148,7 @@ export default function Page() {
         <p>Apfel CC et al. Anesthesiology. 1999.</p>
       </section>
     </main>
+    </>
   );
 }
 

@@ -48,6 +48,28 @@ export default function Page() {
   }, [values]);
 
   return (
+    <>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "MedicalWebPage",
+            "name": "Meddoq clinical calculator",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Meddoq",
+              "url": "https://meddoq.com"
+            },
+            "medicalAudience": {
+              "@type": "MedicalAudience",
+              "audienceType": "Healthcare professionals"
+            }
+          })
+        }}
+      />
+
     <main style={styles.main}>
       <a href="/" style={styles.back}>← Back to Meddoq</a>
 
@@ -192,6 +214,7 @@ export default function Page() {
         <p>Villalta S et al. Haemostasis. 1994. Kahn SR et al. J Thromb Haemost. 2009.</p>
       </section>
     </main>
+    </>
   );
 }
 

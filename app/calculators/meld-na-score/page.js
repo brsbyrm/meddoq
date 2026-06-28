@@ -48,6 +48,28 @@ export default function Page() {
   const risk = result.meldNa < 10 ? "Lower severity" : result.meldNa < 20 ? "Moderate severity" : result.meldNa < 30 ? "High severity" : "Very high severity";
 
   return (
+    <>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "MedicalWebPage",
+            "name": "Meddoq clinical calculator",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Meddoq",
+              "url": "https://meddoq.com"
+            },
+            "medicalAudience": {
+              "@type": "MedicalAudience",
+              "audienceType": "Healthcare professionals"
+            }
+          })
+        }}
+      />
+
     <main style={styles.main}>
       <a href="/" style={styles.back}>← Back to Meddoq</a>
 
@@ -152,6 +174,7 @@ export default function Page() {
         <p>Kim WR et al. N Engl J Med. 2008. Kamath PS et al. Hepatology. 2001.</p>
       </section>
     </main>
+    </>
   );
 }
 

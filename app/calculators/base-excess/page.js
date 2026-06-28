@@ -31,6 +31,28 @@ export default function Page() {
   }, [ph, hco3]);
 
   return (
+    <>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "MedicalWebPage",
+            "name": "Meddoq clinical calculator",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Meddoq",
+              "url": "https://meddoq.com"
+            },
+            "medicalAudience": {
+              "@type": "MedicalAudience",
+              "audienceType": "Healthcare professionals"
+            }
+          })
+        }}
+      />
+
     <main style={styles.main}>
       <a href="/" style={styles.back}>← Back to Meddoq</a>
 
@@ -121,6 +143,7 @@ export default function Page() {
         <p>Interpret with pH, PaCO₂, lactate, electrolytes, albumin, renal function and clinical context.</p>
       </section>
     </main>
+    </>
   );
 }
 

@@ -57,6 +57,28 @@ export default function Page() {
   const risk = score <= 1 ? "Low estimated risk" : score <= 3 ? "Intermediate estimated risk" : "High estimated risk";
 
   return (
+    <>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "MedicalWebPage",
+            "name": "Meddoq clinical calculator",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Meddoq",
+              "url": "https://meddoq.com"
+            },
+            "medicalAudience": {
+              "@type": "MedicalAudience",
+              "audienceType": "Healthcare professionals"
+            }
+          })
+        }}
+      />
+
     <main style={styles.main}>
       <a href="/" style={styles.back}>← Back to Meddoq</a>
 
@@ -171,6 +193,7 @@ export default function Page() {
         <p>Gupta PK et al. Circulation. 2011.</p>
       </section>
     </main>
+    </>
   );
 }
 
