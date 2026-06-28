@@ -27,6 +27,17 @@ export default function CalculatorShell({
 }
 
 const styles = {
+  brandMark: {
+    display: "inline-flex",
+    alignItems: "center",
+    marginBottom: 18,
+    textDecoration: "none",
+  },
+  brandLogo: {
+    height: 46,
+    width: "auto",
+    display: "block",
+  },
   main: {
     maxWidth: 980,
     margin: "0 auto",
