@@ -194,4 +194,13 @@ export const calculators = [
     icon:"🩸",
     description:"Risk stratification for upper gastrointestinal bleeding.",
   },
+
+  {
+    id:"rockall-score",
+    name:"Rockall Score",
+    category:"General",
+    href:"/calculators/rockall-score",
+    icon:"🩸",
+    description:"Risk stratification after upper gastrointestinal bleeding.",
+  },
 ];
