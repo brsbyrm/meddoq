@@ -81,7 +81,7 @@ function SingleChoiceCalculator({ config }) {
 function SelectScoreCalculator({ config }) {
   const [values, setValues] = useState(config.defaultValues || {});
 
-  const result = useMemo(() => config.calculate(values), [config, values]);
+  const result = useMemo(() => calculateSelectScoreResult(config, values), [config, values]);
   const referenceContent = toReferenceContent(config);
 
   function updateValue(key, value) {
@@ -130,6 +130,90 @@ function SelectScoreCalculator({ config }) {
       <CalculatorReferencePage content={referenceContent} />
     </CalculatorShell>
   );
+}
+
+
+function calculateSelectScoreResult(config, values) {
+  if (config.resultMode === "wifi-stage") {
+    const score =
+      Number(values.wound || 0) +
+      Number(values.ischemia || 0) +
+      Number(values.infection || 0);
+
+    if (score <= 2) {
+      return scoreStage(
+        score,
+        "Stage 1",
+        "Very low limb threat",
+        "Low expected limb threat if clinically stable.",
+        "Optimize wound care, risk factors, infection control, perfusion surveillance, and clinical follow-up.",
+        "green"
+      );
+    }
+
+    if (score <= 4) {
+      return scoreStage(
+        score,
+        "Stage 2",
+        "Low limb threat",
+        "Limb threat is present but not usually limb-immediate.",
+        "Assess perfusion, wound trajectory, and infection. Consider revascularization when ischemia or wound healing concern is present.",
+        "blue"
+      );
+    }
+
+    if (score <= 6) {
+      return scoreStage(
+        score,
+        "Stage 3",
+        "Moderate limb threat",
+        "Clinically meaningful risk of limb loss or delayed wound healing.",
+        "Consider vascular imaging and revascularization planning, especially with ischemia grade 2–3 or progressive tissue loss.",
+        "amber"
+      );
+    }
+
+    if (score <= 8) {
+      return scoreStage(
+        score,
+        "Stage 4",
+        "High limb threat",
+        "High risk of amputation without effective infection control, wound care, and perfusion optimization.",
+        "Urgent multidisciplinary limb-salvage assessment is appropriate. Revascularization benefit may be substantial if technically feasible.",
+        "red"
+      );
+    }
+
+    return scoreStage(
+      score,
+      "Stage 5",
+      "Very high limb threat",
+      "Very severe combined wound, ischemia, and infection burden.",
+      "Urgent limb-salvage pathway, infection source control, and revascularization feasibility assessment are needed.",
+      "red"
+    );
+  }
+
+  return scoreStage(
+    0,
+    "Result",
+    "score",
+    "Interpret the result together with the clinical context.",
+    "Confirm inputs and follow current standards of care.",
+    "blue"
+  );
+}
+
+function scoreStage(score, title, label, interpretation, recommendation, tone) {
+  return {
+    title,
+    value: String(score),
+    label,
+    unit: "total score",
+    interpretation,
+    recommendation,
+    tone,
+  };
 }
 
 function toReferenceContent(config) {

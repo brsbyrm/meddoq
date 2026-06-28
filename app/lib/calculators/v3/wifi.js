@@ -42,30 +42,7 @@ export const wifiConfig = {
       ],
     },
   ],
-  calculate(values) {
-    const score =
-      Number(values.wound || 0) +
-      Number(values.ischemia || 0) +
-      Number(values.infection || 0);
-
-    if (score <= 2) {
-      return stage(score, "Stage 1", "Very low limb threat", "Low expected limb threat if clinically stable.", "Optimize wound care, risk factors, infection control, perfusion surveillance, and clinical follow-up.", "green");
-    }
-
-    if (score <= 4) {
-      return stage(score, "Stage 2", "Low limb threat", "Limb threat is present but not usually limb-immediate.", "Assess perfusion, wound trajectory, and infection. Consider revascularization when ischemia or wound healing concern is present.", "blue");
-    }
-
-    if (score <= 6) {
-      return stage(score, "Stage 3", "Moderate limb threat", "Clinically meaningful risk of limb loss or delayed wound healing.", "Consider vascular imaging and revascularization planning, especially with ischemia grade 2–3 or progressive tissue loss.", "amber");
-    }
-
-    if (score <= 8) {
-      return stage(score, "Stage 4", "High limb threat", "High risk of amputation without effective infection control, wound care, and perfusion optimization.", "Urgent multidisciplinary limb-salvage assessment is appropriate. Revascularization benefit may be substantial if technically feasible.", "red");
-    }
-
-    return stage(score, "Stage 5", "Very high limb threat", "Very severe combined wound, ischemia, and infection burden.", "Urgent limb-salvage pathway, infection source control, and revascularization feasibility assessment are needed.", "red");
-  },
+  resultMode: "wifi-stage",
   reference: {
     clinicalMeaning:
       "The WIfI system grades wound extent, ischemia severity, and foot infection to estimate amputation risk and potential benefit from revascularization in chronic limb-threatening ischemia.",
@@ -99,15 +76,3 @@ export const wifiConfig = {
     related: ["Rutherford Classification", "Fontaine Classification", "CEAP Classification", "VCSS"],
   },
 };
-
-function stage(score, title, label, interpretation, recommendation, tone) {
-  return {
-    title,
-    value: String(score),
-    label,
-    unit: "total WIfI score",
-    interpretation,
-    recommendation,
-    tone,
-  };
-}
