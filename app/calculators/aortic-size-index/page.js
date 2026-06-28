@@ -36,6 +36,26 @@ export default function Page() {
         </div>
       </section>
 
+
+      <section style={styles.faq}>
+        <h2>Frequently asked questions</h2>
+
+        <details style={styles.faqItem}>
+          <summary>Can this calculator replace clinical judgment?</summary>
+          <p>No. The result should be interpreted with patient-specific findings, current guidelines and local protocols.</p>
+        </details>
+
+        <details style={styles.faqItem}>
+          <summary>When should the result be used cautiously?</summary>
+          <p>Use caution in unstable patients, acute illness, unusual physiology, missing data or when the score was not validated for the clinical setting.</p>
+        </details>
+
+        <details style={styles.faqItem}>
+          <summary>What should be checked after calculating the score?</summary>
+          <p>Review the clinical context, contraindications, trend over time, relevant imaging or laboratory data and whether specialist input is needed.</p>
+        </details>
+      </section>
+
       <section style={styles.content}>
         <h2>What is Aortic Size Index?</h2>
         <p>
