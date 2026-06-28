@@ -2,8 +2,17 @@
 
 import { useMemo, useState } from "react";
 
+
+function n(value) {
+  if (value === null || value === undefined) return 0;
+  const normalized = String(value).replace(/,/g, ".");
+  const parsed = parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+
 function clampMin(value, min) {
-  const n = Number(value);
+  const n = n(value);
   if (!n || n < min) return min;
   return n;
 }
@@ -38,15 +47,15 @@ export default function Page() {
       <section style={styles.card}>
         <div style={styles.grid}>
           <label style={styles.label}>Bilirubin (mg/dL)
-            <input style={styles.input} value={bilirubin} onChange={e=>setBilirubin(e.target.value)} inputMode="decimal" placeholder="2.0"/>
+            <input type="text" style={styles.input} value={bilirubin} onChange={e=>setBilirubin(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="2.0"/>
           </label>
 
           <label style={styles.label}>INR
-            <input style={styles.input} value={inr} onChange={e=>setInr(e.target.value)} inputMode="decimal" placeholder="1.5"/>
+            <input type="text" style={styles.input} value={inr} onChange={e=>setInr(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="1.5"/>
           </label>
 
           <label style={styles.label}>Creatinine (mg/dL)
-            <input style={styles.input} value={creatinine} onChange={e=>setCreatinine(e.target.value)} inputMode="decimal" placeholder="1.2"/>
+            <input type="text" style={styles.input} value={creatinine} onChange={e=>setCreatinine(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="1.2"/>
           </label>
         </div>
 

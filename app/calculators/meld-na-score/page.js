@@ -2,8 +2,17 @@
 
 import { useMemo, useState } from "react";
 
+
+function n(value) {
+  if (value === null || value === undefined) return 0;
+  const normalized = String(value).replace(/,/g, ".");
+  const parsed = parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+
 function minOne(value) {
-  const n = Number(value);
+  const n = n(value);
   if (!n || n < 1) return 1;
   return n;
 }
@@ -23,7 +32,7 @@ export default function Page() {
     const bili = minOne(bilirubin);
     const inrValue = minOne(inr);
     const cr = dialysis ? 4 : Math.min(minOne(creatinine),4);
-    const na = clamp(Number(sodium || 137),125,137);
+    const na = clamp(n(sodium || 137),125,137);
 
     const meld = 3.78*Math.log(bili) + 11.2*Math.log(inrValue) + 9.57*Math.log(cr) + 6.43;
     const meldRounded = Math.round(meld);
@@ -47,19 +56,19 @@ export default function Page() {
       <section style={styles.card}>
         <div style={styles.grid}>
           <label style={styles.label}>Bilirubin (mg/dL)
-            <input style={styles.input} value={bilirubin} onChange={e=>setBilirubin(e.target.value)} inputMode="decimal" placeholder="2.0"/>
+            <input type="text" style={styles.input} value={bilirubin} onChange={e=>setBilirubin(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="2.0"/>
           </label>
 
           <label style={styles.label}>INR
-            <input style={styles.input} value={inr} onChange={e=>setInr(e.target.value)} inputMode="decimal" placeholder="1.5"/>
+            <input type="text" style={styles.input} value={inr} onChange={e=>setInr(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="1.5"/>
           </label>
 
           <label style={styles.label}>Creatinine (mg/dL)
-            <input style={styles.input} value={creatinine} onChange={e=>setCreatinine(e.target.value)} inputMode="decimal" placeholder="1.2"/>
+            <input type="text" style={styles.input} value={creatinine} onChange={e=>setCreatinine(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="1.2"/>
           </label>
 
           <label style={styles.label}>Sodium (mEq/L)
-            <input style={styles.input} value={sodium} onChange={e=>setSodium(e.target.value)} inputMode="decimal" placeholder="135"/>
+            <input type="text" style={styles.input} value={sodium} onChange={e=>setSodium(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="135"/>
           </label>
         </div>
 

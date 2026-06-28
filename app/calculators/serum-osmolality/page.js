@@ -2,6 +2,15 @@
 
 import { useMemo, useState } from "react";
 
+
+function n(value) {
+  if (value === null || value === undefined) return 0;
+  const normalized = String(value).replace(/,/g, ".");
+  const parsed = parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+
 export default function Page() {
   const [na, setNa] = useState("");
   const [glucose, setGlucose] = useState("");
@@ -10,11 +19,11 @@ export default function Page() {
   const [measured, setMeasured] = useState("");
 
   const result = useMemo(() => {
-    const sodium = Number(na);
-    const glu = Number(glucose);
-    const b = Number(bun);
-    const eth = Number(ethanol || 0);
-    const meas = Number(measured || 0);
+    const sodium = n(na);
+    const glu = n(glucose);
+    const b = n(bun);
+    const eth = n(ethanol || 0);
+    const meas = n(measured || 0);
 
     if (!sodium || !glu || !b) return null;
 
@@ -44,23 +53,23 @@ export default function Page() {
       <section style={styles.card}>
         <div style={styles.grid}>
           <label style={styles.label}>Sodium Na⁺ (mEq/L)
-            <input style={styles.input} value={na} onChange={(e) => setNa(e.target.value)} inputMode="decimal" placeholder="140" />
+            <input type="text" style={styles.input} value={na} onChange={(e) => setNa(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="140" />
           </label>
 
           <label style={styles.label}>Glucose (mg/dL)
-            <input style={styles.input} value={glucose} onChange={(e) => setGlucose(e.target.value)} inputMode="decimal" placeholder="100" />
+            <input type="text" style={styles.input} value={glucose} onChange={(e) => setGlucose(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="100" />
           </label>
 
           <label style={styles.label}>BUN (mg/dL)
-            <input style={styles.input} value={bun} onChange={(e) => setBun(e.target.value)} inputMode="decimal" placeholder="14" />
+            <input type="text" style={styles.input} value={bun} onChange={(e) => setBun(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="14" />
           </label>
 
           <label style={styles.label}>Ethanol (mg/dL) optional
-            <input style={styles.input} value={ethanol} onChange={(e) => setEthanol(e.target.value)} inputMode="decimal" placeholder="0" />
+            <input type="text" style={styles.input} value={ethanol} onChange={(e) => setEthanol(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="0" />
           </label>
 
           <label style={styles.label}>Measured osmolality optional
-            <input style={styles.input} value={measured} onChange={(e) => setMeasured(e.target.value)} inputMode="decimal" placeholder="290" />
+            <input type="text" style={styles.input} value={measured} onChange={(e) => setMeasured(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="290" />
           </label>
         </div>
 

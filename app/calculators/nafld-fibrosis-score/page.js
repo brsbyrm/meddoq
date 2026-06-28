@@ -2,6 +2,15 @@
 
 import { useMemo, useState } from "react";
 
+
+function n(value) {
+  if (value === null || value === undefined) return 0;
+  const normalized = String(value).replace(/,/g, ".");
+  const parsed = parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+
 export default function Page() {
   const [age,setAge]=useState("");
   const [bmi,setBmi]=useState("");
@@ -12,7 +21,7 @@ export default function Page() {
   const [albumin,setAlbumin]=useState("");
 
   const result = useMemo(()=>{
-    const a=Number(age),b=Number(bmi),as=Number(ast),al=Number(alt),p=Number(platelets),alb=Number(albumin);
+    const a=n(age),b=n(bmi),as=n(ast),al=n(alt),p=n(platelets),alb=n(albumin);
 
     if(!a||!b||!as||!al||!p||!alb) return null;
 
@@ -48,27 +57,27 @@ export default function Page() {
         <div style={styles.grid}>
 
           <label style={styles.label}>Age
-            <input style={styles.input} value={age} onChange={e=>setAge(e.target.value)} inputMode="decimal"/>
+            <input type="text" style={styles.input} value={age} onChange={e=>setAge(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*"/>
           </label>
 
           <label style={styles.label}>BMI (kg/m²)
-            <input style={styles.input} value={bmi} onChange={e=>setBmi(e.target.value)} inputMode="decimal"/>
+            <input type="text" style={styles.input} value={bmi} onChange={e=>setBmi(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*"/>
           </label>
 
           <label style={styles.label}>AST (U/L)
-            <input style={styles.input} value={ast} onChange={e=>setAst(e.target.value)} inputMode="decimal"/>
+            <input type="text" style={styles.input} value={ast} onChange={e=>setAst(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*"/>
           </label>
 
           <label style={styles.label}>ALT (U/L)
-            <input style={styles.input} value={alt} onChange={e=>setAlt(e.target.value)} inputMode="decimal"/>
+            <input type="text" style={styles.input} value={alt} onChange={e=>setAlt(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*"/>
           </label>
 
           <label style={styles.label}>Platelets (10⁹/L)
-            <input style={styles.input} value={platelets} onChange={e=>setPlatelets(e.target.value)} inputMode="decimal"/>
+            <input type="text" style={styles.input} value={platelets} onChange={e=>setPlatelets(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*"/>
           </label>
 
           <label style={styles.label}>Albumin (g/dL)
-            <input style={styles.input} value={albumin} onChange={e=>setAlbumin(e.target.value)} inputMode="decimal"/>
+            <input type="text" style={styles.input} value={albumin} onChange={e=>setAlbumin(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*"/>
           </label>
 
         </div>

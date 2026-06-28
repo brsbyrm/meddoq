@@ -2,6 +2,15 @@
 
 import { useMemo, useState } from "react";
 
+
+function n(value) {
+  if (value === null || value === undefined) return 0;
+  const normalized = String(value).replace(/,/g, ".");
+  const parsed = parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+
 export default function Page() {
   const [bun,setBun]=useState("");
   const [hb,setHb]=useState("");
@@ -14,7 +23,7 @@ export default function Page() {
   const [failure,setFailure]=useState(false);
 
   const score=useMemo(()=>{
-    let s=0,b=Number(bun),h=Number(hb),p=Number(pulse),bp=Number(sbp);
+    let s=0,b=n(bun),h=n(hb),p=n(pulse),bp=n(sbp);
 
     if(b>=18.2&&b<22.4)s+=2; else if(b>=22.4&&b<28)s+=3; else if(b>=28&&b<70)s+=4; else if(b>=70)s+=6;
 
@@ -45,19 +54,19 @@ export default function Page() {
       <section style={styles.card}>
         <div style={styles.grid}>
           <label style={styles.label}>Blood urea nitrogen / Urea (mg/dL)
-            <input style={styles.input} value={bun} onChange={e=>setBun(e.target.value)} inputMode="decimal" placeholder="30"/>
+            <input type="text" style={styles.input} value={bun} onChange={e=>setBun(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="30"/>
           </label>
 
           <label style={styles.label}>Hemoglobin (g/dL)
-            <input style={styles.input} value={hb} onChange={e=>setHb(e.target.value)} inputMode="decimal" placeholder="11.5"/>
+            <input type="text" style={styles.input} value={hb} onChange={e=>setHb(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="11.5"/>
           </label>
 
           <label style={styles.label}>Systolic blood pressure (mmHg)
-            <input style={styles.input} value={sbp} onChange={e=>setSbp(e.target.value)} inputMode="decimal" placeholder="110"/>
+            <input type="text" style={styles.input} value={sbp} onChange={e=>setSbp(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="110"/>
           </label>
 
           <label style={styles.label}>Pulse (bpm)
-            <input style={styles.input} value={pulse} onChange={e=>setPulse(e.target.value)} inputMode="decimal" placeholder="105"/>
+            <input type="text" style={styles.input} value={pulse} onChange={e=>setPulse(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="105"/>
           </label>
         </div>
 

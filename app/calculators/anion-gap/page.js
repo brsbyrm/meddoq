@@ -2,6 +2,15 @@
 
 import { useMemo, useState } from "react";
 
+
+function n(value) {
+  if (value === null || value === undefined) return 0;
+  const normalized = String(value).replace(/,/g, ".");
+  const parsed = parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+
 export default function Page() {
   const [na,setNa]=useState("");
   const [cl,setCl]=useState("");
@@ -9,7 +18,7 @@ export default function Page() {
   const [albumin,setAlbumin]=useState("");
 
   const result = useMemo(()=>{
-    const sodium=Number(na), chloride=Number(cl), bicarbonate=Number(hco3), alb=Number(albumin);
+    const sodium=n(na), chloride=n(cl), bicarbonate=n(hco3), alb=n(albumin);
     if(!sodium||!chloride||!bicarbonate) return null;
 
     const ag = sodium - (chloride + bicarbonate);
@@ -36,19 +45,19 @@ export default function Page() {
       <section style={styles.card}>
         <div style={styles.grid}>
           <label style={styles.label}>Sodium Na⁺ (mEq/L)
-            <input style={styles.input} value={na} onChange={e=>setNa(e.target.value)} inputMode="decimal" placeholder="140"/>
+            <input type="text" style={styles.input} value={na} onChange={e=>setNa(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="140"/>
           </label>
 
           <label style={styles.label}>Chloride Cl⁻ (mEq/L)
-            <input style={styles.input} value={cl} onChange={e=>setCl(e.target.value)} inputMode="decimal" placeholder="104"/>
+            <input type="text" style={styles.input} value={cl} onChange={e=>setCl(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="104"/>
           </label>
 
           <label style={styles.label}>Bicarbonate HCO₃⁻ (mEq/L)
-            <input style={styles.input} value={hco3} onChange={e=>setHco3(e.target.value)} inputMode="decimal" placeholder="24"/>
+            <input type="text" style={styles.input} value={hco3} onChange={e=>setHco3(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="24"/>
           </label>
 
           <label style={styles.label}>Albumin (g/dL) optional
-            <input style={styles.input} value={albumin} onChange={e=>setAlbumin(e.target.value)} inputMode="decimal" placeholder="4.0"/>
+            <input type="text" style={styles.input} value={albumin} onChange={e=>setAlbumin(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="4.0"/>
           </label>
         </div>
 

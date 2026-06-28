@@ -2,6 +2,15 @@
 
 import { useMemo, useState } from "react";
 
+
+function n(value) {
+  if (value === null || value === undefined) return 0;
+  const normalized = String(value).replace(/,/g, ".");
+  const parsed = parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+
 const functionalOptions = [
   { value: 0, label: "Independent" },
   { value: 1, label: "Partially dependent" },
@@ -31,16 +40,16 @@ export default function Page() {
   const [procedure, setProcedure] = useState("0");
 
   const score = useMemo(() => {
-    const ageValue = Number(age || 0);
-    const creatValue = Number(creatinine || 0);
+    const ageValue = n(age || 0);
+    const creatValue = n(creatinine || 0);
 
     let value = 0;
     if (ageValue >= 65) value += 1;
     if (ageValue >= 75) value += 1;
     if (creatValue > 1.5) value += 1;
-    value += Number(functional);
-    value += Math.max(0, Number(asa) - 2);
-    value += Number(procedure);
+    value += n(functional);
+    value += Math.max(0, n(asa) - 2);
+    value += n(procedure);
 
     return value;
   }, [age, creatinine, functional, asa, procedure]);
@@ -60,27 +69,27 @@ export default function Page() {
       <section style={styles.card}>
         <div style={styles.grid}>
           <label style={styles.label}>Age
-            <input style={styles.input} value={age} onChange={(e) => setAge(e.target.value)} inputMode="decimal" placeholder="70" />
+            <input type="text" style={styles.input} value={age} onChange={(e) => setAge(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="70" />
           </label>
 
           <label style={styles.label}>Creatinine (mg/dL)
-            <input style={styles.input} value={creatinine} onChange={(e) => setCreatinine(e.target.value)} inputMode="decimal" placeholder="1.2" />
+            <input type="text" style={styles.input} value={creatinine} onChange={(e) => setCreatinine(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="1.2" />
           </label>
 
           <label style={styles.label}>Functional status
-            <select style={styles.input} value={functional} onChange={(e) => setFunctional(e.target.value)}>
+            <select style={styles.input} value={functional} onChange={(e) => setFunctional(e.target.value.replace(/,/g, "."))}>
               {functionalOptions.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
             </select>
           </label>
 
           <label style={styles.label}>ASA class
-            <select style={styles.input} value={asa} onChange={(e) => setAsa(e.target.value)}>
+            <select style={styles.input} value={asa} onChange={(e) => setAsa(e.target.value.replace(/,/g, "."))}>
               {asaOptions.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
             </select>
           </label>
 
           <label style={styles.label}>Procedure risk
-            <select style={styles.input} value={procedure} onChange={(e) => setProcedure(e.target.value)}>
+            <select style={styles.input} value={procedure} onChange={(e) => setProcedure(e.target.value.replace(/,/g, "."))}>
               {procedureOptions.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
             </select>
           </label>

@@ -2,6 +2,15 @@
 
 import { useMemo, useState } from "react";
 
+
+function n(value) {
+  if (value === null || value === undefined) return 0;
+  const normalized = String(value).replace(/,/g, ".");
+  const parsed = parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+
 const domains = [
   {
     id: "pain",
@@ -105,7 +114,7 @@ export default function Page() {
 
   const score = useMemo(() => {
     return domains.reduce((sum, d) => {
-      const value = Number(values[d.id] || 0);
+      const value = n(values[d.id] || 0);
       return sum + (d.reverse ? 3 - value : value);
     }, 0);
   }, [values]);
@@ -154,6 +163,8 @@ export default function Page() {
             scoring can help document clinical change after compression, intervention
             or wound treatment.
           </p>
+          <p><b>Clinical meaning:</b> Mild scores usually reflect limited symptoms/signs; moderate or severe scores suggest clinically significant venous disease or ulcer burden.</p>
+          <p><b>Next step:</b> Correlate with CEAP class, duplex reflux/obstruction findings, compression use and wound trajectory.</p>
         </div>
       </section>
 

@@ -2,6 +2,15 @@
 
 import { useMemo, useState } from "react";
 
+
+function n(value) {
+  if (value === null || value === undefined) return 0;
+  const normalized = String(value).replace(/,/g, ".");
+  const parsed = parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+
 const symptoms = [
   { id: "pain", label: "Pain" },
   { id: "cramps", label: "Cramps" },
@@ -33,7 +42,7 @@ export default function Page() {
 
   const score = useMemo(() => {
     return [...symptoms, ...signs].reduce(
-      (sum, item) => sum + Number(values[item.id] || 0),
+      (sum, item) => sum + n(values[item.id] || 0),
       0
     );
   }, [values]);
@@ -107,6 +116,8 @@ export default function Page() {
           <p>
             Score ≥5 indicates post-thrombotic syndrome. Venous ulcer indicates severe disease.
           </p>
+          <p><b>Clinical meaning:</b> Mild PTS usually reflects symptoms with limited signs; moderate/severe PTS suggests clinically important chronic venous morbidity.</p>
+          <p><b>Next step:</b> Assess compression adherence, venous obstruction/reflux, ulcer care needs and follow-up trend over time.</p>
         </div>
       </section>
 

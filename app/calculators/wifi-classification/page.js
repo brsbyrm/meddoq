@@ -2,6 +2,15 @@
 
 import { useMemo, useState } from "react";
 
+
+function n(value) {
+  if (value === null || value === undefined) return 0;
+  const normalized = String(value).replace(/,/g, ".");
+  const parsed = parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+
 const wound = [
   "0 - No ulcer",
   "1 - Small shallow ulcer",
@@ -28,14 +37,42 @@ export default function Page() {
   const [i,setI]=useState(0);
   const [f,setF]=useState(0);
 
-  const score = useMemo(()=>Number(w)+Number(i)+Number(f),[w,i,f]);
+  const score = useMemo(()=>n(w)+n(i)+n(f),[w,i,f]);
 
-  const stage = useMemo(()=>{
-    if(score<=2) return "Stage 1 — Very low amputation risk";
-    if(score<=4) return "Stage 2 — Low risk";
-    if(score<=6) return "Stage 3 — Moderate risk";
-    if(score<=8) return "Stage 4 — High risk";
-    return "Stage 5 — Very high risk";
+  const stage = useMemo(()=> {
+    if (score <= 2) {
+      return {
+        title: "Stage 1 — Very low limb threat",
+        meaning: "Low expected 1-year amputation risk if the patient is clinically stable.",
+        action: "Optimize wound care, risk factors, infection control and surveillance. Revascularization benefit may be limited unless ischemia is clinically important.",
+      };
+    }
+    if (score <= 4) {
+      return {
+        title: "Stage 2 — Low limb threat",
+        meaning: "Mild to low limb threat. Risk is present but not usually limb-immediate.",
+        action: "Assess perfusion, wound trajectory and infection. Revascularization may be considered when ischemia or wound healing concern is present.",
+      };
+    }
+    if (score <= 6) {
+      return {
+        title: "Stage 3 — Moderate limb threat",
+        meaning: "Clinically meaningful risk of limb loss or delayed wound healing.",
+        action: "Vascular imaging and revascularization planning should be considered, especially with ischemia grade 2–3 or progressive tissue loss.",
+      };
+    }
+    if (score <= 8) {
+      return {
+        title: "Stage 4 — High limb threat",
+        meaning: "High risk of amputation without effective infection control, wound care and perfusion optimization.",
+        action: "Urgent multidisciplinary limb salvage assessment is appropriate. Revascularization benefit is often substantial if technically feasible.",
+      };
+    }
+    return {
+      title: "Stage 5 — Very high limb threat",
+      meaning: "Very severe combined wound, ischemia and infection burden.",
+      action: "Urgent limb salvage pathway, infection source control and revascularization feasibility assessment are needed. Consider overall patient fitness and goals of care.",
+    };
   },[score]);
 
   return(
@@ -52,21 +89,21 @@ export default function Page() {
 
         <label style={styles.label}>
           Wound
-          <select style={styles.input} value={w} onChange={e=>setW(e.target.value)}>
+          <select style={styles.input} value={w} onChange={e=>setW(e.target.value.replace(/,/g, "."))}>
             {wound.map((x,n)=><option key={n} value={n}>{x}</option>)}
           </select>
         </label>
 
         <label style={styles.label}>
           Ischemia
-          <select style={styles.input} value={i} onChange={e=>setI(e.target.value)}>
+          <select style={styles.input} value={i} onChange={e=>setI(e.target.value.replace(/,/g, "."))}>
             {ischemia.map((x,n)=><option key={n} value={n}>{x}</option>)}
           </select>
         </label>
 
         <label style={styles.label}>
           Foot infection
-          <select style={styles.input} value={f} onChange={e=>setF(e.target.value)}>
+          <select style={styles.input} value={f} onChange={e=>setF(e.target.value.replace(/,/g, "."))}>
             {infection.map((x,n)=><option key={n} value={n}>{x}</option>)}
           </select>
         </label>
@@ -74,10 +111,12 @@ export default function Page() {
         <div style={styles.result}>
           <span>Total WIfI Score</span>
           <strong>{score}</strong>
-          <p><b>{stage}</b></p>
+          <p><b>{stage.title}</b></p>
+          <p>{stage.meaning}</p>
+          <p><b>Clinical next step:</b> {stage.action}</p>
           <p>
             WIfI should be interpreted together with arterial anatomy,
-            patient comorbidity and feasibility of revascularization.
+            patient comorbidity, wound trajectory, infection severity and feasibility of revascularization.
           </p>
         </div>
 

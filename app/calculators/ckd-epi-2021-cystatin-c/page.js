@@ -2,13 +2,22 @@
 
 import { useMemo, useState } from "react";
 
+
+function n(value) {
+  if (value === null || value === undefined) return 0;
+  const normalized = String(value).replace(/,/g, ".");
+  const parsed = parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+
 export default function Page() {
   const [age,setAge]=useState("");
   const [cys,setCys]=useState("");
   const [female,setFemale]=useState(false);
 
   const egfr = useMemo(()=>{
-    const a=Number(age), c=Number(cys);
+    const a=n(age), c=n(cys);
     if(!a||!c) return null;
 
     const k = 0.8;
@@ -45,11 +54,11 @@ export default function Page() {
       <section style={styles.card}>
         <div style={styles.grid}>
           <label style={styles.label}>Age
-            <input style={styles.input} value={age} onChange={e=>setAge(e.target.value)} inputMode="decimal" placeholder="65"/>
+            <input type="text" style={styles.input} value={age} onChange={e=>setAge(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="65"/>
           </label>
 
           <label style={styles.label}>Cystatin C (mg/L)
-            <input style={styles.input} value={cys} onChange={e=>setCys(e.target.value)} inputMode="decimal" placeholder="1.1"/>
+            <input type="text" style={styles.input} value={cys} onChange={e=>setCys(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="1.1"/>
           </label>
         </div>
 

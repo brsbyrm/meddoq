@@ -64,7 +64,7 @@ export default function Page() {
                 name="fontaine"
                 value={item.value}
                 checked={selected === item.value}
-                onChange={(e) => setSelected(e.target.value)}
+                onChange={(e) => setSelected(e.target.value.replace(/,/g, "."))}
               />
               <div>
                 <strong>{item.title} — {item.label}</strong>
@@ -79,6 +79,8 @@ export default function Page() {
           <strong>{result.title}</strong>
           <p><b>{result.label}</b></p>
           <p>{result.description}</p>
+          <p><b>Clinical meaning:</b> Stage II represents claudication; stage III rest pain; stage IV tissue loss.</p>
+          <p><b>Next step:</b> Combine with ABI/toe pressure and arterial imaging before treatment planning.</p>
         </div>
       </section>
 

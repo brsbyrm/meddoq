@@ -2,13 +2,22 @@
 
 import { useMemo, useState } from "react";
 
+
+function n(value) {
+  if (value === null || value === undefined) return 0;
+  const normalized = String(value).replace(/,/g, ".");
+  const parsed = parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+
 export default function Page() {
   const [ast,setAst]=useState("");
   const [uln,setUln]=useState("");
   const [platelets,setPlatelets]=useState("");
 
   const apri = useMemo(()=>{
-    const a=Number(ast), u=Number(uln), p=Number(platelets);
+    const a=n(ast), u=n(uln), p=n(platelets);
     if(!a||!u||!p) return null;
     return ((a/u)/p)*100;
   },[ast,uln,platelets]);
@@ -31,15 +40,15 @@ export default function Page() {
       <section style={styles.card}>
         <div style={styles.grid}>
           <label style={styles.label}>AST (U/L)
-            <input style={styles.input} value={ast} onChange={e=>setAst(e.target.value)} inputMode="decimal" placeholder="60"/>
+            <input type="text" style={styles.input} value={ast} onChange={e=>setAst(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="60"/>
           </label>
 
           <label style={styles.label}>AST upper limit of normal (U/L)
-            <input style={styles.input} value={uln} onChange={e=>setUln(e.target.value)} inputMode="decimal" placeholder="40"/>
+            <input type="text" style={styles.input} value={uln} onChange={e=>setUln(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="40"/>
           </label>
 
           <label style={styles.label}>Platelets (10⁹/L)
-            <input style={styles.input} value={platelets} onChange={e=>setPlatelets(e.target.value)} inputMode="decimal" placeholder="150"/>
+            <input type="text" style={styles.input} value={platelets} onChange={e=>setPlatelets(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="150"/>
           </label>
         </div>
 

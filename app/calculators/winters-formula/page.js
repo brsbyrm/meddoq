@@ -2,13 +2,22 @@
 
 import { useMemo, useState } from "react";
 
+
+function n(value) {
+  if (value === null || value === undefined) return 0;
+  const normalized = String(value).replace(/,/g, ".");
+  const parsed = parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+
 export default function Page() {
   const [hco3, setHco3] = useState("");
   const [pco2, setPco2] = useState("");
 
   const result = useMemo(() => {
-    const bicarb = Number(hco3);
-    const measured = Number(pco2);
+    const bicarb = n(hco3);
+    const measured = n(pco2);
 
     if (!bicarb) return null;
 
@@ -39,11 +48,11 @@ export default function Page() {
       <section style={styles.card}>
         <div style={styles.grid}>
           <label style={styles.label}>Bicarbonate HCO₃⁻ (mEq/L)
-            <input style={styles.input} value={hco3} onChange={(e) => setHco3(e.target.value)} inputMode="decimal" placeholder="12" />
+            <input type="text" style={styles.input} value={hco3} onChange={(e) => setHco3(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="12" />
           </label>
 
           <label style={styles.label}>Measured PaCO₂ (mmHg) optional
-            <input style={styles.input} value={pco2} onChange={(e) => setPco2(e.target.value)} inputMode="decimal" placeholder="26" />
+            <input type="text" style={styles.input} value={pco2} onChange={(e) => setPco2(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="26" />
           </label>
         </div>
 

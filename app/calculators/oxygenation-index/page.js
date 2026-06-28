@@ -2,15 +2,24 @@
 
 import { useMemo, useState } from "react";
 
+
+function n(value) {
+  if (value === null || value === undefined) return 0;
+  const normalized = String(value).replace(/,/g, ".");
+  const parsed = parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+
 export default function Page() {
   const [fio2, setFio2] = useState("");
   const [map, setMap] = useState("");
   const [pao2, setPao2] = useState("");
 
   const oi = useMemo(() => {
-    const f = Number(fio2);
-    const m = Number(map);
-    const p = Number(pao2);
+    const f = n(fio2);
+    const m = n(map);
+    const p = n(pao2);
 
     if (!f || !m || !p) return null;
 
@@ -38,15 +47,15 @@ export default function Page() {
       <section style={styles.card}>
         <div style={styles.grid}>
           <label style={styles.label}>FiO₂
-            <input style={styles.input} value={fio2} onChange={(e) => setFio2(e.target.value)} inputMode="decimal" placeholder="0.60 or 60" />
+            <input type="text" style={styles.input} value={fio2} onChange={(e) => setFio2(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="0.60 or 60" />
           </label>
 
           <label style={styles.label}>Mean airway pressure (cmH₂O)
-            <input style={styles.input} value={map} onChange={(e) => setMap(e.target.value)} inputMode="decimal" placeholder="18" />
+            <input type="text" style={styles.input} value={map} onChange={(e) => setMap(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="18" />
           </label>
 
           <label style={styles.label}>PaO₂ (mmHg)
-            <input style={styles.input} value={pao2} onChange={(e) => setPao2(e.target.value)} inputMode="decimal" placeholder="80" />
+            <input type="text" style={styles.input} value={pao2} onChange={(e) => setPao2(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="80" />
           </label>
         </div>
 

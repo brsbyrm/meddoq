@@ -2,13 +2,22 @@
 
 import { useMemo, useState } from "react";
 
+
+function n(value) {
+  if (value === null || value === undefined) return 0;
+  const normalized = String(value).replace(/,/g, ".");
+  const parsed = parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+
 export default function Page() {
   const [sodium, setSodium] = useState("");
   const [glucose, setGlucose] = useState("");
 
   const result = useMemo(() => {
-    const na = Number(sodium);
-    const glu = Number(glucose);
+    const na = n(sodium);
+    const glu = n(glucose);
     if (!na || !glu) return null;
 
     const corrected16 = na + 1.6 * ((glu - 100) / 100);
@@ -30,11 +39,11 @@ export default function Page() {
       <section style={styles.card}>
         <div style={styles.grid}>
           <label style={styles.label}>Measured sodium (mEq/L)
-            <input style={styles.input} value={sodium} onChange={(e) => setSodium(e.target.value)} inputMode="decimal" placeholder="130" />
+            <input type="text" style={styles.input} value={sodium} onChange={(e) => setSodium(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="130" />
           </label>
 
           <label style={styles.label}>Glucose (mg/dL)
-            <input style={styles.input} value={glucose} onChange={(e) => setGlucose(e.target.value)} inputMode="decimal" placeholder="400" />
+            <input type="text" style={styles.input} value={glucose} onChange={(e) => setGlucose(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="400" />
           </label>
         </div>
 

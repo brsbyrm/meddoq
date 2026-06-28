@@ -2,6 +2,15 @@
 
 import { useMemo, useState } from "react";
 
+
+function n(value) {
+  if (value === null || value === undefined) return 0;
+  const normalized = String(value).replace(/,/g, ".");
+  const parsed = parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+
 const bilirubinOptions = [
   { label: "<2 mg/dL", points: 1 },
   { label: "2–3 mg/dL", points: 2 },
@@ -46,7 +55,7 @@ export default function Page() {
   const [encephalopathy,setEncephalopathy]=useState(1);
 
   const score = useMemo(
-    () => Number(bilirubin)+Number(albumin)+Number(inr)+Number(ascites)+Number(encephalopathy),
+    () => n(bilirubin)+n(albumin)+n(inr)+n(ascites)+n(encephalopathy),
     [bilirubin,albumin,inr,ascites,encephalopathy]
   );
 
@@ -62,31 +71,31 @@ export default function Page() {
 
       <section style={styles.card}>
         <label style={styles.label}>Bilirubin
-          <select style={styles.input} value={bilirubin} onChange={e=>setBilirubin(e.target.value)}>
+          <select style={styles.input} value={bilirubin} onChange={e=>setBilirubin(e.target.value.replace(/,/g, "."))}>
             {bilirubinOptions.map(o=><option key={o.label} value={o.points}>{o.points} — {o.label}</option>)}
           </select>
         </label>
 
         <label style={styles.label}>Albumin
-          <select style={styles.input} value={albumin} onChange={e=>setAlbumin(e.target.value)}>
+          <select style={styles.input} value={albumin} onChange={e=>setAlbumin(e.target.value.replace(/,/g, "."))}>
             {albuminOptions.map(o=><option key={o.label} value={o.points}>{o.points} — {o.label}</option>)}
           </select>
         </label>
 
         <label style={styles.label}>INR
-          <select style={styles.input} value={inr} onChange={e=>setInr(e.target.value)}>
+          <select style={styles.input} value={inr} onChange={e=>setInr(e.target.value.replace(/,/g, "."))}>
             {inrOptions.map(o=><option key={o.label} value={o.points}>{o.points} — {o.label}</option>)}
           </select>
         </label>
 
         <label style={styles.label}>Ascites
-          <select style={styles.input} value={ascites} onChange={e=>setAscites(e.target.value)}>
+          <select style={styles.input} value={ascites} onChange={e=>setAscites(e.target.value.replace(/,/g, "."))}>
             {ascitesOptions.map(o=><option key={o.label} value={o.points}>{o.points} — {o.label}</option>)}
           </select>
         </label>
 
         <label style={styles.label}>Hepatic encephalopathy
-          <select style={styles.input} value={encephalopathy} onChange={e=>setEncephalopathy(e.target.value)}>
+          <select style={styles.input} value={encephalopathy} onChange={e=>setEncephalopathy(e.target.value.replace(/,/g, "."))}>
             {encephalopathyOptions.map(o=><option key={o.label} value={o.points}>{o.points} — {o.label}</option>)}
           </select>
         </label>

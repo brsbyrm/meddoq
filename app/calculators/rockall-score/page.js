@@ -2,6 +2,15 @@
 
 import { useMemo, useState } from "react";
 
+
+function n(value) {
+  if (value === null || value === undefined) return 0;
+  const normalized = String(value).replace(/,/g, ".");
+  const parsed = parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+
 const ageOptions = [
   { label: "<60 years", points: 0 },
   { label: "60–79 years", points: 1 },
@@ -45,7 +54,7 @@ export default function Page() {
   const [stigmata,setStigmata]=useState(0);
 
   const score = useMemo(
-    () => Number(age)+Number(shock)+Number(comorbidity)+Number(diagnosis)+Number(stigmata),
+    () => n(age)+n(shock)+n(comorbidity)+n(diagnosis)+n(stigmata),
     [age,shock,comorbidity,diagnosis,stigmata]
   );
 
@@ -61,31 +70,31 @@ export default function Page() {
 
       <section style={styles.card}>
         <label style={styles.label}>Age
-          <select style={styles.input} value={age} onChange={e=>setAge(e.target.value)}>
+          <select style={styles.input} value={age} onChange={e=>setAge(e.target.value.replace(/,/g, "."))}>
             {ageOptions.map(o=><option key={o.label} value={o.points}>{o.points} — {o.label}</option>)}
           </select>
         </label>
 
         <label style={styles.label}>Shock
-          <select style={styles.input} value={shock} onChange={e=>setShock(e.target.value)}>
+          <select style={styles.input} value={shock} onChange={e=>setShock(e.target.value.replace(/,/g, "."))}>
             {shockOptions.map(o=><option key={o.label} value={o.points}>{o.points} — {o.label}</option>)}
           </select>
         </label>
 
         <label style={styles.label}>Comorbidity
-          <select style={styles.input} value={comorbidity} onChange={e=>setComorbidity(e.target.value)}>
+          <select style={styles.input} value={comorbidity} onChange={e=>setComorbidity(e.target.value.replace(/,/g, "."))}>
             {comorbidityOptions.map(o=><option key={o.label} value={o.points}>{o.points} — {o.label}</option>)}
           </select>
         </label>
 
         <label style={styles.label}>Diagnosis
-          <select style={styles.input} value={diagnosis} onChange={e=>setDiagnosis(e.target.value)}>
+          <select style={styles.input} value={diagnosis} onChange={e=>setDiagnosis(e.target.value.replace(/,/g, "."))}>
             {diagnosisOptions.map(o=><option key={o.label} value={o.points}>{o.points} — {o.label}</option>)}
           </select>
         </label>
 
         <label style={styles.label}>Major stigmata of recent hemorrhage
-          <select style={styles.input} value={stigmata} onChange={e=>setStigmata(e.target.value)}>
+          <select style={styles.input} value={stigmata} onChange={e=>setStigmata(e.target.value.replace(/,/g, "."))}>
             {stigmataOptions.map(o=><option key={o.label} value={o.points}>{o.points} — {o.label}</option>)}
           </select>
         </label>

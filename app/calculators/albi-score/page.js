@@ -2,12 +2,21 @@
 
 import { useMemo, useState } from "react";
 
+
+function n(value) {
+  if (value === null || value === undefined) return 0;
+  const normalized = String(value).replace(/,/g, ".");
+  const parsed = parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+
 export default function Page() {
   const [bilirubin,setBilirubin]=useState("");
   const [albumin,setAlbumin]=useState("");
 
   const result = useMemo(()=>{
-    const biliMg=Number(bilirubin), albG=Number(albumin);
+    const biliMg=n(bilirubin), albG=n(albumin);
     if(!biliMg||!albG) return null;
 
     const biliUmol = biliMg * 17.1;
@@ -34,11 +43,11 @@ export default function Page() {
       <section style={styles.card}>
         <div style={styles.grid}>
           <label style={styles.label}>Bilirubin (mg/dL)
-            <input style={styles.input} value={bilirubin} onChange={e=>setBilirubin(e.target.value)} inputMode="decimal" placeholder="1.2"/>
+            <input type="text" style={styles.input} value={bilirubin} onChange={e=>setBilirubin(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="1.2"/>
           </label>
 
           <label style={styles.label}>Albumin (g/dL)
-            <input style={styles.input} value={albumin} onChange={e=>setAlbumin(e.target.value)} inputMode="decimal" placeholder="3.5"/>
+            <input type="text" style={styles.input} value={albumin} onChange={e=>setAlbumin(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="3.5"/>
           </label>
         </div>
 

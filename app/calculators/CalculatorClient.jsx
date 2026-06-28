@@ -2,6 +2,20 @@
 
 import { useMemo, useState } from "react";
 
+function n(v) {
+  return parseFloat(String(v).replace(/,/g, ".")) || 0;
+}
+
+
+
+function n(value) {
+  if (value === null || value === undefined) return 0;
+  const normalized = String(value).replace(/,/g, ".");
+  const parsed = parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+
 const calculators = {
   "aortic-size-index": {
     title: "Aortic Size Index Calculator",
@@ -98,7 +112,7 @@ function Input({ label, value, setValue, placeholder }) {
   return (
     <label style={styles.label}>
       {label}
-      <input style={styles.input} value={value} onChange={(e) => setValue(e.target.value)} placeholder={placeholder || ""} inputMode="decimal" />
+      <input type="text" style={styles.input} value={value} onChange={(e) => setValue(e.target.value.replace(/,/g, "."))} placeholder={placeholder || ""} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" />
     </label>
   );
 }
@@ -117,8 +131,8 @@ function ASI() {
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
 
-  const bsa = useMemo(() => height && weight ? Math.sqrt((Number(height) * Number(weight)) / 3600).toFixed(2) : "", [height, weight]);
-  const asi = useMemo(() => diameter && bsa ? (Number(diameter) / Number(bsa)).toFixed(2) : "", [diameter, bsa]);
+  const bsa = useMemo(() => height && weight ? Math.sqrt((n(height) * n(weight)) / 3600).toFixed(2) : "", [height, weight]);
+  const asi = useMemo(() => diameter && bsa ? (n(diameter) / n(bsa)).toFixed(2) : "", [diameter, bsa]);
 
   return (
     <>
@@ -140,10 +154,10 @@ function EGFR() {
 
   const egfr = useMemo(() => {
     if (!age || !creat) return "";
-    const scr = Number(creat);
+    const scr = n(creat);
     const k = female ? 0.7 : 0.9;
     const alpha = female ? -0.241 : -0.302;
-    let value = 142 * Math.pow(Math.min(scr / k, 1), alpha) * Math.pow(Math.max(scr / k, 1), -1.2) * Math.pow(0.9938, Number(age));
+    let value = 142 * Math.pow(Math.min(scr / k, 1), alpha) * Math.pow(Math.max(scr / k, 1), -1.2) * Math.pow(0.9938, n(age));
     if (female) value *= 1.012;
     return value.toFixed(1);
   }, [age, creat, female]);
@@ -168,7 +182,7 @@ function CrCl() {
 
   const crcl = useMemo(() => {
     if (!age || !weight || !creat) return "";
-    let value = ((140 - Number(age)) * Number(weight)) / (72 * Number(creat));
+    let value = ((140 - n(age)) * n(weight)) / (72 * n(creat));
     if (female) value *= 0.85;
     return value.toFixed(1);
   }, [age, weight, creat, female]);
@@ -189,7 +203,7 @@ function CrCl() {
 function BSA() {
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
-  const bsa = useMemo(() => height && weight ? Math.sqrt((Number(height) * Number(weight)) / 3600).toFixed(2) : "", [height, weight]);
+  const bsa = useMemo(() => height && weight ? Math.sqrt((n(height) * n(weight)) / 3600).toFixed(2) : "", [height, weight]);
 
   return (
     <>
@@ -205,7 +219,7 @@ function BSA() {
 function BMI() {
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
-  const bmi = useMemo(() => height && weight ? (Number(weight) / Math.pow(Number(height) / 100, 2)).toFixed(1) : "", [height, weight]);
+  const bmi = useMemo(() => height && weight ? (n(weight) / Math.pow(n(height) / 100, 2)).toFixed(1) : "", [height, weight]);
 
   return (
     <>

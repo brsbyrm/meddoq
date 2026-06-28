@@ -1,5 +1,6 @@
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import DecimalNormalizer from "./components/DecimalNormalizer";
 
 export const metadata = {
   title: "Meddoq | Clinical Calculators and Decision Support for Physicians",
@@ -83,6 +84,7 @@ __html:JSON.stringify({
 }}
 />
 
+<DecimalNormalizer />
 {children}
 
 <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />

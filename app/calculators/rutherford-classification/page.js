@@ -76,7 +76,7 @@ export default function Page() {
                 name="rutherford"
                 value={item.value}
                 checked={selected === item.value}
-                onChange={(e) => setSelected(e.target.value)}
+                onChange={(e) => setSelected(e.target.value.replace(/,/g, "."))}
               />
               <div>
                 <strong>{item.title} — {item.label}</strong>
@@ -91,6 +91,8 @@ export default function Page() {
           <strong>{result.title}</strong>
           <p><b>{result.label}</b></p>
           <p>{result.description}</p>
+          <p><b>Clinical meaning:</b> Categories 1–3 indicate claudication severity; categories 4–6 indicate chronic limb-threatening ischemia.</p>
+          <p><b>Next step:</b> Interpret with ABI/toe pressure, duplex or CTA findings, wound status and revascularization feasibility.</p>
         </div>
       </section>
 

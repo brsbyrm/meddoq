@@ -2,6 +2,15 @@
 
 import { useMemo, useState } from "react";
 
+
+function n(value) {
+  if (value === null || value === undefined) return 0;
+  const normalized = String(value).replace(/,/g, ".");
+  const parsed = parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+
 export default function Page() {
   const [age,setAge]=useState("");
   const [ast,setAst]=useState("");
@@ -9,7 +18,7 @@ export default function Page() {
   const [platelets,setPlatelets]=useState("");
 
   const fib4 = useMemo(()=>{
-    const a=Number(age), as=Number(ast), al=Number(alt), p=Number(platelets);
+    const a=n(age), as=n(ast), al=n(alt), p=n(platelets);
     if(!a||!as||!al||!p) return null;
     return (a*as)/(p*Math.sqrt(al));
   },[age,ast,alt,platelets]);
@@ -32,19 +41,19 @@ export default function Page() {
       <section style={styles.card}>
         <div style={styles.grid}>
           <label style={styles.label}>Age
-            <input style={styles.input} value={age} onChange={e=>setAge(e.target.value)} inputMode="decimal" placeholder="55"/>
+            <input type="text" style={styles.input} value={age} onChange={e=>setAge(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="55"/>
           </label>
 
           <label style={styles.label}>AST (U/L)
-            <input style={styles.input} value={ast} onChange={e=>setAst(e.target.value)} inputMode="decimal" placeholder="45"/>
+            <input type="text" style={styles.input} value={ast} onChange={e=>setAst(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="45"/>
           </label>
 
           <label style={styles.label}>ALT (U/L)
-            <input style={styles.input} value={alt} onChange={e=>setAlt(e.target.value)} inputMode="decimal" placeholder="40"/>
+            <input type="text" style={styles.input} value={alt} onChange={e=>setAlt(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="40"/>
           </label>
 
           <label style={styles.label}>Platelets (10⁹/L)
-            <input style={styles.input} value={platelets} onChange={e=>setPlatelets(e.target.value)} inputMode="decimal" placeholder="180"/>
+            <input type="text" style={styles.input} value={platelets} onChange={e=>setPlatelets(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="180"/>
           </label>
         </div>
 

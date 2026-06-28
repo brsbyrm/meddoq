@@ -37,25 +37,25 @@ export default function Page() {
 
       <section style={styles.card}>
         <label style={styles.label}>Clinical class
-          <select style={styles.input} value={c} onChange={e=>setC(e.target.value)}>
+          <select style={styles.input} value={c} onChange={e=>setC(e.target.value.replace(/,/g, "."))}>
             {clinical.map(x=><option key={x}>{x}</option>)}
           </select>
         </label>
 
         <label style={styles.label}>Etiology
-          <select style={styles.input} value={e} onChange={e=>setE(e.target.value)}>
+          <select style={styles.input} value={e} onChange={e=>setE(e.target.value.replace(/,/g, "."))}>
             {etiology.map(x=><option key={x}>{x}</option>)}
           </select>
         </label>
 
         <label style={styles.label}>Anatomy
-          <select style={styles.input} value={a} onChange={e=>setA(e.target.value)}>
+          <select style={styles.input} value={a} onChange={e=>setA(e.target.value.replace(/,/g, "."))}>
             {anatomy.map(x=><option key={x}>{x}</option>)}
           </select>
         </label>
 
         <label style={styles.label}>Pathophysiology
-          <select style={styles.input} value={p} onChange={e=>setP(e.target.value)}>
+          <select style={styles.input} value={p} onChange={e=>setP(e.target.value.replace(/,/g, "."))}>
             {pathophysiology.map(x=><option key={x}>{x}</option>)}
           </select>
         </label>
@@ -65,6 +65,8 @@ export default function Page() {
           <strong>{summary}</strong>
           <p>{c}</p>
           <p>{e} • {a} • {p}</p>
+          <p><b>Clinical meaning:</b> CEAP is a descriptive classification, not a severity score. It standardizes phenotype, cause, anatomy and mechanism.</p>
+          <p><b>Next step:</b> Add duplex findings, symptoms, VCSS and treatment history for complete venous documentation.</p>
         </div>
       </section>
 

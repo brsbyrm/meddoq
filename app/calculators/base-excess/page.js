@@ -2,13 +2,22 @@
 
 import { useMemo, useState } from "react";
 
+
+function n(value) {
+  if (value === null || value === undefined) return 0;
+  const normalized = String(value).replace(/,/g, ".");
+  const parsed = parseFloat(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+
 export default function Page() {
   const [ph, setPh] = useState("");
   const [hco3, setHco3] = useState("");
 
   const result = useMemo(() => {
-    const pH = Number(ph);
-    const bicarbonate = Number(hco3);
+    const pH = n(ph);
+    const bicarbonate = n(hco3);
 
     if (!pH || !bicarbonate) return null;
 
@@ -34,11 +43,11 @@ export default function Page() {
       <section style={styles.card}>
         <div style={styles.grid}>
           <label style={styles.label}>pH
-            <input style={styles.input} value={ph} onChange={(e) => setPh(e.target.value)} inputMode="decimal" placeholder="7.32" />
+            <input type="text" style={styles.input} value={ph} onChange={(e) => setPh(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="7.32" />
           </label>
 
           <label style={styles.label}>Bicarbonate HCO₃⁻ (mEq/L)
-            <input style={styles.input} value={hco3} onChange={(e) => setHco3(e.target.value)} inputMode="decimal" placeholder="18" />
+            <input type="text" style={styles.input} value={hco3} onChange={(e) => setHco3(e.target.value.replace(/,/g, "."))} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" placeholder="18" />
           </label>
         </div>
 
