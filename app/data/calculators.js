@@ -159,4 +159,12 @@ export const calculators = [
     icon: "🦵",
     description: "Classify chronic lower-extremity PAD severity.",
   },
+  {
+    id: "fontaine-classification",
+    name: "Fontaine Classification",
+    category: "Vascular",
+    href: "/calculators/fontaine-classification",
+    icon: "🦵",
+    description: "Classify peripheral arterial disease severity using Fontaine stages.",
+  },
 ];
