@@ -135,4 +135,12 @@ export const calculators = [
     icon: "🤢",
     description: "Estimate postoperative nausea and vomiting risk.",
   },
+  {
+    id: "venous-clinical-severity-score",
+    name: "Venous Clinical Severity Score",
+    category: "Vascular",
+    href: "/calculators/venous-clinical-severity-score",
+    icon: "🦵",
+    description: "Calculate VCSS for chronic venous disease severity.",
+  },
 ];
