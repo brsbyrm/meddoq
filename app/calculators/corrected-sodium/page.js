@@ -96,6 +96,16 @@ export default function Page() {
         </p>
       </section>
 
+
+      <section style={styles.safetyNotice}>
+        <strong>Medical disclaimer</strong>
+        <p>
+          Meddoq calculators are intended for healthcare professionals. Results are educational
+          and decision-support aids only. They do not replace clinical judgment, patient-specific
+          assessment, emergency evaluation or institutional protocols.
+        </p>
+      </section>
+
       <section style={styles.content}>
         <h2>Formula</h2>
         <p><strong>Corrected Na = measured Na + correction factor × [(glucose − 100) / 100]</strong></p>

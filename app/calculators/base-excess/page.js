@@ -100,6 +100,16 @@ export default function Page() {
         </p>
       </section>
 
+
+      <section style={styles.safetyNotice}>
+        <strong>Medical disclaimer</strong>
+        <p>
+          Meddoq calculators are intended for healthcare professionals. Results are educational
+          and decision-support aids only. They do not replace clinical judgment, patient-specific
+          assessment, emergency evaluation or institutional protocols.
+        </p>
+      </section>
+
       <section style={styles.content}>
         <h2>Formula</h2>
         <p><strong>BE = 0.93 × [HCO₃⁻ − 24.4 + 14.83 × (pH − 7.4)]</strong></p>

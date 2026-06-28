@@ -105,6 +105,16 @@ export default function Page() {
         </p>
       </section>
 
+
+      <section style={styles.safetyNotice}>
+        <strong>Medical disclaimer</strong>
+        <p>
+          Meddoq calculators are intended for healthcare professionals. Results are educational
+          and decision-support aids only. They do not replace clinical judgment, patient-specific
+          assessment, emergency evaluation or institutional protocols.
+        </p>
+      </section>
+
       <section style={styles.content}>
         <h2>Formula</h2>
         <p><strong>Expected PaCO₂ = 1.5 × HCO₃⁻ + 8 ± 2</strong></p>

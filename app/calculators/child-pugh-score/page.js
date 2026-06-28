@@ -149,6 +149,16 @@ export default function Page() {
         </p>
       </section>
 
+
+      <section style={styles.safetyNotice}>
+        <strong>Medical disclaimer</strong>
+        <p>
+          Meddoq calculators are intended for healthcare professionals. Results are educational
+          and decision-support aids only. They do not replace clinical judgment, patient-specific
+          assessment, emergency evaluation or institutional protocols.
+        </p>
+      </section>
+
       <section style={styles.content}>
         <h2>Clinical use</h2>
         <p>Child-Pugh classification estimates severity of chronic liver disease and supports clinical risk stratification.</p>
