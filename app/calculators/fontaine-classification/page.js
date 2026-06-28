@@ -1,198 +1,34 @@
-"use client";
+import CalculatorV3 from "../../components/calculators/v3/CalculatorV3";
+import { getCalculatorConfig } from "../../lib/calculators/v3/registry";
 
-import { useMemo, useState } from "react";
-
-const stages = [
-  {
-    value: "I",
-    title: "Stage I",
-    label: "Asymptomatic",
-    description: "Peripheral arterial disease without typical limb symptoms.",
-  },
-  {
-    value: "IIa",
-    title: "Stage IIa",
-    label: "Mild claudication",
-    description: "Intermittent claudication with walking distance greater than 200 meters.",
-  },
-  {
-    value: "IIb",
-    title: "Stage IIb",
-    label: "Moderate to severe claudication",
-    description: "Intermittent claudication with walking distance less than 200 meters.",
-  },
-  {
-    value: "III",
-    title: "Stage III",
-    label: "Ischemic rest pain",
-    description: "Rest pain due to chronic limb ischemia.",
-  },
-  {
-    value: "IV",
-    title: "Stage IV",
-    label: "Ulceration or gangrene",
-    description: "Tissue loss, ulceration or gangrene related to severe ischemia.",
-  },
-];
-
-export default function Page() {
-  const [selected, setSelected] = useState("I");
-
-  const result = useMemo(
-    () => stages.find((item) => item.value === selected),
-    [selected]
-  );
+export default function FontaineClassificationPage() {
+  const config = getCalculatorConfig("fontaine-classification");
 
   return (
     <>
-
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "MedicalWebPage",
-            "name": "Meddoq clinical calculator",
-            "publisher": {
+            name: "Fontaine Classification Calculator",
+            description:
+              "Fontaine classification calculator for peripheral artery disease severity.",
+            publisher: {
               "@type": "Organization",
-              "name": "Meddoq",
-              "url": "https://meddoq.com"
+              name: "Meddoq",
+              url: "https://meddoq.com",
             },
-            "medicalAudience": {
+            medicalAudience: {
               "@type": "MedicalAudience",
-              "audienceType": "Healthcare professionals"
-            }
-          })
+              audienceType: "Healthcare professionals",
+            },
+          }),
         }}
       />
 
-    <main style={styles.main}>
-      <a href="/" style={styles.back}>← Back to Meddoq</a>
-
-      <section style={styles.hero}>
-        <p style={styles.kicker}>Vascular Classification</p>
-        <h1>Fontaine Classification Calculator</h1>
-        <p>
-          Classify peripheral arterial disease severity using Fontaine clinical stages.
-        </p>
-      </section>
-
-      <section style={styles.card}>
-        <div style={styles.grid}>
-          {stages.map((item) => (
-            <label key={item.value} style={styles.option}>
-              <input
-                type="radio"
-                name="fontaine"
-                value={item.value}
-                checked={selected === item.value}
-                onChange={(e) => setSelected(e.target.value.replace(/,/g, "."))}
-              />
-              <div>
-                <strong>{item.title} — {item.label}</strong>
-                <span>{item.description}</span>
-              </div>
-            </label>
-          ))}
-        </div>
-
-        <div style={styles.result}>
-          <span>Selected Fontaine Stage</span>
-          <strong>{result.title}</strong>
-          <p><b>{result.label}</b></p>
-          <p>{result.description}</p>
-          <div style={styles.interpretationBox}>
-            <h3>Clinical meaning</h3>
-            <ul>
-              <li><b>Stage I:</b> PAD is present or suspected, but the patient has no typical exertional limb symptoms.</li>
-              <li><b>Stage IIa — Mild claudication:</b> Walking distance is usually greater than 200 m; daily activity is relatively preserved.</li>
-              <li><b>Stage IIb — Moderate/severe claudication:</b> Walking distance is less than 200 m; daily activity is clearly limited.</li>
-              <li><b>Stage III — Rest pain:</b> Indicates advanced ischemia and possible chronic limb-threatening ischemia.</li>
-              <li><b>Stage IV — Ulcer/gangrene:</b> Tissue loss is present; limb salvage assessment is usually urgent.</li>
-            </ul>
-            <p><b>Next step:</b> Combine with ABI/toe pressure, duplex/CTA findings, wound status and revascularization feasibility.</p>
-          </div>
-        </div>
-      </section>
-
-
-      <section style={styles.related}>
-        <h2>Related calculators</h2>
-        <div style={styles.relatedGrid}>
-          <a href="/calculators/egfr" style={styles.relatedLink}>eGFR</a>
-          <a href="/calculators/creatinine-clearance" style={styles.relatedLink}>Creatinine Clearance</a>
-          <a href="/calculators/body-surface-area" style={styles.relatedLink}>Body Surface Area</a>
-          <a href="/calculators/body-mass-index" style={styles.relatedLink}>BMI</a>
-        </div>
-      </section>
-
-
-      <section style={styles.faq}>
-        <h2>Frequently asked questions</h2>
-
-        <details style={styles.faqItem}>
-          <summary>Can this calculator replace clinical judgment?</summary>
-          <p>No. The result should be interpreted with patient-specific findings, current guidelines and local protocols.</p>
-        </details>
-
-        <details style={styles.faqItem}>
-          <summary>When should the result be used cautiously?</summary>
-          <p>Use caution in unstable patients, acute illness, unusual physiology, missing data or when the score was not validated for the clinical setting.</p>
-        </details>
-
-        <details style={styles.faqItem}>
-          <summary>What should be checked after calculating the score?</summary>
-          <p>Review the clinical context, contraindications, trend over time, relevant imaging or laboratory data and whether specialist input is needed.</p>
-        </details>
-      </section>
-
-
-      <section style={styles.pearlBox}>
-        <h2>Clinical interpretation</h2>
-        <p>
-          Use the calculated result as a structured clinical aid. Confirm that the input values are accurate,
-          apply the result only to the intended patient population, and combine it with examination findings,
-          imaging, laboratory trends and guideline-based decision-making.
-        </p>
-      </section>
-
-
-      <section style={styles.safetyNotice}>
-        <strong>Medical disclaimer</strong>
-        <p>
-          Meddoq calculators are intended for healthcare professionals. Results are educational
-          and decision-support aids only. They do not replace clinical judgment, patient-specific
-          assessment, emergency evaluation or institutional protocols.
-        </p>
-      </section>
-
-      <section style={styles.content}>
-        <h2>Clinical use</h2>
-        <p>
-          Fontaine classification is used to describe the clinical severity of peripheral arterial disease.
-        </p>
-
-        <h2>Interpretation</h2>
-        <p>
-          Stage II indicates claudication, stage III indicates rest pain, and stage IV indicates tissue loss.
-        </p>
-
-        <h2>References</h2>
-        <p>Fontaine R et al. Classification of chronic arterial ischemia of the limbs.</p>
-      </section>
-    </main>
+      <CalculatorV3 config={config} />
     </>
   );
 }
-
-const styles = {
-  main: { maxWidth: 980, margin: "0 auto", padding: 24, fontFamily: "Inter, system-ui, sans-serif", color: "#0f172a" },
-  back: { color: "#2563eb", fontWeight: 800, textDecoration: "none" },
-  hero: { marginTop: 32, background: "linear-gradient(135deg,#ffffff,#eff6ff)", border: "1px solid #dbeafe", borderRadius: 28, padding: "clamp(26px,5vw,46px)", boxShadow: "0 24px 70px rgba(15,23,42,0.08)" },
-  kicker: { color: "#2563eb", fontWeight: 900, textTransform: "uppercase", letterSpacing: "0.12em", fontSize: 12 },
-  card: { marginTop: 24, background: "#ffffff", border: "1px solid #e2e8f0", borderRadius: 24, padding: 24, boxShadow: "0 20px 60px rgba(15,23,42,0.08)" },
-  grid: { display: "grid", gap: 12 },
-  option: { display: "grid", gridTemplateColumns: "24px 1fr", gap: 12, alignItems: "center", background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: 16, padding: 14, cursor: "pointer" },
-  result: { marginTop: 24, background: "linear-gradient(135deg,#eff6ff,#ffffff)", border: "1px solid #bfdbfe", borderRadius: 20, padding: 22 },
-  content: { marginTop: 32, lineHeight: 1.7, fontSize: 17 },
-};
