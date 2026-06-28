@@ -320,4 +320,13 @@ export const calculators = [
     icon:"🧪",
     description:"Evaluate mixed metabolic acid-base disorders.",
   },
+
+  {
+    id:"base-excess",
+    name:"Base Excess",
+    category:"Renal",
+    href:"/calculators/base-excess",
+    icon:"🧪",
+    description:"Estimate base excess from pH and bicarbonate.",
+  },
 ];
