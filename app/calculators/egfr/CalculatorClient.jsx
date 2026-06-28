@@ -129,71 +129,7 @@ function ASI() {
       </div>
       {bsa && <p style={styles.inline}>Calculated BSA: <strong>{bsa} m²</strong></p>}
       {asi && <Result title="Aortic Size Index" value={asi} unit="cm/m²" />}
-    <section style={styles.reference}>
-          <div style={styles.referenceHeader}>
-            <p style={styles.referenceKicker}>Clinical Reference</p>
-            <h2 style={styles.referenceTitle}>eGFR Clinical Reference</h2>
-            <p style={styles.referenceIntro}>
-              Estimated glomerular filtration rate supports chronic kidney disease staging, renal medication dosing decisions, and longitudinal kidney function monitoring.
-            </p>
-          </div>
-
-          <div style={styles.referenceGrid}>
-            <article style={styles.referenceCard}>
-              <h3>When to use</h3>
-              <p>
-                Use eGFR to estimate kidney function in adults when serum creatinine-based renal assessment is clinically appropriate.
-              </p>
-            </article>
-
-            <article style={styles.referenceCard}>
-              <h3>How to interpret</h3>
-              <p>
-                Lower eGFR values indicate reduced kidney filtration. CKD interpretation requires persistence over time and assessment of albuminuria or other kidney damage markers.
-              </p>
-            </article>
-
-            <article style={styles.referenceCard}>
-              <h3>Clinical limitations</h3>
-              <p>
-                Creatinine-based eGFR may be less reliable in extremes of muscle mass, amputation, pregnancy, acute kidney injury, malnutrition, edema, or rapidly changing renal function.
-              </p>
-            </article>
-
-            <article style={styles.referenceCard}>
-              <h3>Next clinical step</h3>
-              <p>
-                Interpret with creatinine trend, urine albumin-creatinine ratio, medications, volume status, imaging, comorbidities, and nephrology referral thresholds when appropriate.
-              </p>
-            </article>
-          </div>
-
-          <div style={styles.faqBox}>
-            <h3>FAQ</h3>
-            <details style={styles.detail}>
-              <summary>Does one low eGFR diagnose CKD?</summary>
-              <p>No. CKD generally requires decreased kidney function or kidney damage markers persisting for at least 3 months.</p>
-            </details>
-            <details style={styles.detail}>
-              <summary>Is eGFR accurate during acute kidney injury?</summary>
-              <p>No. eGFR equations assume relatively steady-state creatinine and can be misleading when creatinine is changing rapidly.</p>
-            </details>
-            <details style={styles.detail}>
-              <summary>Should albuminuria be assessed?</summary>
-              <p>Yes. Albuminuria improves risk stratification and is central to CKD staging and prognosis.</p>
-            </details>
-          </div>
-
-          <div style={styles.referencesBox}>
-            <h3>References</h3>
-            <ol>
-              <li>Inker LA et al. New creatinine- and cystatin C-based equations to estimate GFR without race. N Engl J Med. 2021.</li>
-              <li>KDIGO Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease.</li>
-              <li>Levey AS et al. A new equation to estimate glomerular filtration rate. Ann Intern Med. 2009.</li>
-            </ol>
-          </div>
-        </section>
-      </>
+    </>
   );
 }
 
@@ -292,69 +228,6 @@ function Score({ title }) {
 }
 
 const styles = {
-  reference: {
-    marginTop: 28,
-    display: "grid",
-    gap: 18,
-  },
-  referenceHeader: {
-    background: "#ffffff",
-    border: "1px solid #e2e8f0",
-    borderRadius: 24,
-    padding: 24,
-    boxShadow: "0 18px 44px rgba(15, 23, 42, 0.06)",
-  },
-  referenceKicker: {
-    margin: 0,
-    color: "#2563eb",
-    fontWeight: 900,
-    textTransform: "uppercase",
-    letterSpacing: "0.08em",
-    fontSize: 12,
-  },
-  referenceTitle: {
-    margin: "8px 0",
-    color: "#0f172a",
-    fontSize: 30,
-    letterSpacing: "-0.04em",
-  },
-  referenceIntro: {
-    margin: 0,
-    color: "#475569",
-    fontSize: 16,
-    lineHeight: 1.65,
-  },
-  referenceGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-    gap: 14,
-  },
-  referenceCard: {
-    background: "#ffffff",
-    border: "1px solid #e2e8f0",
-    borderRadius: 20,
-    padding: 18,
-    boxShadow: "0 14px 34px rgba(15, 23, 42, 0.05)",
-  },
-  faqBox: {
-    background: "#ffffff",
-    border: "1px solid #e2e8f0",
-    borderRadius: 22,
-    padding: 22,
-  },
-  referencesBox: {
-    background: "#ffffff",
-    border: "1px solid #e2e8f0",
-    borderRadius: 22,
-    padding: 22,
-    color: "#334155",
-    lineHeight: 1.65,
-  },
-  detail: {
-    borderTop: "1px solid #e2e8f0",
-    padding: "12px 0",
-    color: "#334155",
-  },
   main: {
     maxWidth: 980,
     margin: "0 auto",

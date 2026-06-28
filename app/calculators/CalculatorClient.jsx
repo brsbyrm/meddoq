@@ -79,25 +79,54 @@ export default function CalculatorClient({ slug }) {
         {slug === "wells-dvt" && <Score title="Wells DVT Score" />}
       </section>
 
-      <section style={styles.content}>
-        <h2>Clinical use</h2>
-        <p>
-          This calculator is intended for healthcare professionals and should be interpreted
-          together with clinical judgment, local protocols and current guideline recommendations.
-        </p>
+      {slug === "egfr" && (
+        <section style={styles.content}>
+          <h2>eGFR Clinical Reference</h2>
+          <p>
+            Estimated glomerular filtration rate supports chronic kidney disease staging,
+            renal medication dosing decisions, and longitudinal kidney function monitoring.
+          </p>
 
-        <h2>Limitations</h2>
-        <p>
-          Calculator results should not be used as standalone treatment decisions. Always consider
-          patient-specific factors, comorbidities, medication history and clinical context.
-        </p>
+          <h2>When to use</h2>
+          <p>
+            Use eGFR to estimate kidney function in adults when serum creatinine-based renal
+            assessment is clinically appropriate.
+          </p>
 
-        <h2>References</h2>
-        <p>
-          Relevant clinical score publications and guideline frameworks should be reviewed when
-          applying this result in practice.
-        </p>
-      </section>
+          <h2>How to interpret</h2>
+          <p>
+            Lower eGFR values indicate reduced kidney filtration. CKD interpretation requires
+            persistence over time and assessment of albuminuria or other kidney damage markers.
+          </p>
+
+          <h2>Clinical limitations</h2>
+          <p>
+            Creatinine-based eGFR may be less reliable in extremes of muscle mass, amputation,
+            pregnancy, acute kidney injury, malnutrition, edema, or rapidly changing renal function.
+          </p>
+
+          <h2>FAQ</h2>
+          <details style={styles.detail}>
+            <summary>Does one low eGFR diagnose CKD?</summary>
+            <p>No. CKD generally requires decreased kidney function or kidney damage markers persisting for at least 3 months.</p>
+          </details>
+          <details style={styles.detail}>
+            <summary>Is eGFR accurate during acute kidney injury?</summary>
+            <p>No. eGFR equations assume relatively steady-state creatinine and can be misleading when creatinine is changing rapidly.</p>
+          </details>
+          <details style={styles.detail}>
+            <summary>Should albuminuria be assessed?</summary>
+            <p>Yes. Albuminuria improves CKD risk stratification and prognosis.</p>
+          </details>
+
+          <h2>References</h2>
+          <ol>
+            <li>Inker LA et al. New creatinine- and cystatin C-based equations to estimate GFR without race. N Engl J Med. 2021.</li>
+            <li>KDIGO Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease.</li>
+            <li>Levey AS et al. A new equation to estimate glomerular filtration rate. Ann Intern Med. 2009.</li>
+          </ol>
+        </section>
+      )}
     </main>
   );
 }
@@ -244,6 +273,11 @@ function Score({ title }) {
 }
 
 const styles = {
+  detail: {
+    borderTop: "1px solid #e2e8f0",
+    padding: "12px 0",
+    color: "#334155",
+  },
   main: {
     maxWidth: 980,
     margin: "0 auto",
