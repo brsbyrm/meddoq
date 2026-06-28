@@ -91,6 +91,16 @@ export default function Page() {
         </details>
       </section>
 
+
+      <section style={styles.pearlBox}>
+        <h2>Clinical interpretation</h2>
+        <p>
+          Use the calculated result as a structured clinical aid. Confirm that the input values are accurate,
+          apply the result only to the intended patient population, and combine it with examination findings,
+          imaging, laboratory trends and guideline-based decision-making.
+        </p>
+      </section>
+
       <section style={styles.content}>
         <h2>Clinical use</h2>
         <p>APRI can support non-invasive assessment of liver fibrosis, especially in chronic viral hepatitis and chronic liver disease.</p>

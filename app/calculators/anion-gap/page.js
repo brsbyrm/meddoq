@@ -103,6 +103,16 @@ export default function Page() {
         </details>
       </section>
 
+
+      <section style={styles.pearlBox}>
+        <h2>Clinical interpretation</h2>
+        <p>
+          Use the calculated result as a structured clinical aid. Confirm that the input values are accurate,
+          apply the result only to the intended patient population, and combine it with examination findings,
+          imaging, laboratory trends and guideline-based decision-making.
+        </p>
+      </section>
+
       <section style={styles.content}>
         <h2>Formula</h2>
         <p><strong>Anion gap = Na⁺ − (Cl⁻ + HCO₃⁻)</strong></p>

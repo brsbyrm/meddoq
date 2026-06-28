@@ -82,6 +82,9 @@ export default function Page() {
 }
 
 const styles = {
+
+pearlBox:{marginTop:32,background:"linear-gradient(135deg,#f8fafc,#ffffff)",border:"1px solid #e2e8f0",borderRadius:24,padding:24,lineHeight:1.7},
+
   main: {
     maxWidth: 980,
     margin: "0 auto",
