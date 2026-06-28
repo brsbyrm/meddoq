@@ -275,4 +275,22 @@ export const calculators = [
     icon:"🧪",
     description:"Estimate eGFR using cystatin C.",
   },
+
+  {
+    id:"anion-gap",
+    name:"Anion Gap",
+    category:"Renal",
+    href:"/calculators/anion-gap",
+    icon:"🧪",
+    description:"Calculate serum and albumin-corrected anion gap.",
+  },
+
+  {
+    id:"serum-osmolality",
+    name:"Serum Osmolality",
+    category:"Renal",
+    href:"/calculators/serum-osmolality",
+    icon:"🧪",
+    description:"Calculate serum osmolality and osmolar gap.",
+  },
 ];
