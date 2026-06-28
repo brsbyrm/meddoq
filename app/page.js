@@ -423,7 +423,7 @@ const styles = {
   },
   miniIcon: {
     width: 46,
-    height: 46,
+    height: 90,
     borderRadius: 16,
     display: "grid",
     placeItems: "center",
@@ -515,7 +515,7 @@ const styles = {
   },
   iconBubble: {
     width: 46,
-    height: 46,
+    height: 90,
     borderRadius: 16,
     display: "grid",
     placeItems: "center",
