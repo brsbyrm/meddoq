@@ -103,7 +103,12 @@ export default function Page() {
           <span>Rockall Score</span>
           <strong>{score}</strong>
           <p><b>{risk(score)}</b></p>
-          <p>Higher scores indicate higher risk of rebleeding and mortality after upper GI bleeding.</p>
+          <p><b>Clinical meaning:</b></p>
+          <ul>
+            <li><b>Low risk:</b> Lower expected risk of rebleeding or death, but clinical stability is still required.</li>
+            <li><b>Intermediate risk:</b> Meaningful risk; endoscopic findings, comorbidity and hemodynamics should guide disposition.</li>
+            <li><b>High risk:</b> Increased risk of adverse outcome; urgent senior review and endoscopic management are usually needed.</li>
+          </ul>
         </div>
       </section>
 

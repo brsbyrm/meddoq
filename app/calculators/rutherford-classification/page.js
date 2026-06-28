@@ -91,7 +91,13 @@ export default function Page() {
           <strong>{result.title}</strong>
           <p><b>{result.label}</b></p>
           <p>{result.description}</p>
-          <p><b>Clinical meaning:</b> Categories 1–3 indicate claudication severity; categories 4–6 indicate chronic limb-threatening ischemia.</p>
+          <p><b>Clinical meaning:</b></p>
+          <ul>
+            <li><b>Mild claudication:</b> Symptoms occur with exertion but daily walking is largely preserved.</li>
+            <li><b>Moderate claudication:</b> Walking distance is clearly reduced and symptoms interfere with routine activity.</li>
+            <li><b>Severe claudication:</b> Marked lifestyle limitation; short-distance walking provokes symptoms.</li>
+            <li><b>Rest pain or tissue loss:</b> Chronic limb-threatening ischemia until proven otherwise.</li>
+          </ul>
           <p><b>Next step:</b> Interpret with ABI/toe pressure, duplex or CTA findings, wound status and revascularization feasibility.</p>
         </div>
       </section>

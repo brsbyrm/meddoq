@@ -163,7 +163,12 @@ export default function Page() {
             scoring can help document clinical change after compression, intervention
             or wound treatment.
           </p>
-          <p><b>Clinical meaning:</b> Mild scores usually reflect limited symptoms/signs; moderate or severe scores suggest clinically significant venous disease or ulcer burden.</p>
+          <p><b>Clinical meaning:</b></p>
+          <ul>
+            <li><b>Mild severity:</b> Limited symptoms or visible venous signs without major skin damage or ulcer burden.</li>
+            <li><b>Moderate severity:</b> Persistent symptoms, edema, pigmentation, inflammation or early ulcer-related burden.</li>
+            <li><b>Severe severity:</b> Extensive skin change, active ulcer burden or substantial functional impact.</li>
+          </ul>
           <p><b>Next step:</b> Correlate with CEAP class, duplex reflux/obstruction findings, compression use and wound trajectory.</p>
         </div>
       </section>

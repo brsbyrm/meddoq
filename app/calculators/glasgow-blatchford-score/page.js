@@ -85,6 +85,8 @@ export default function Page() {
               ? "Score 0 may identify very low-risk patients in appropriate clinical settings."
               : "Higher scores indicate increased likelihood of intervention, transfusion or adverse outcome."}
           </p>
+          <p><b>Clinical meaning:</b> Low scores suggest lower need for urgent intervention; higher scores suggest greater likelihood of transfusion, endoscopy, admission or adverse outcome.</p>
+          <p><b>Next step:</b> Interpret with hemodynamic status, ongoing bleeding, anticoagulant use and endoscopy availability.</p>
         </div>
       </section>
 

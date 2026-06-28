@@ -116,7 +116,12 @@ export default function Page() {
           <p>
             Score ≥5 indicates post-thrombotic syndrome. Venous ulcer indicates severe disease.
           </p>
-          <p><b>Clinical meaning:</b> Mild PTS usually reflects symptoms with limited signs; moderate/severe PTS suggests clinically important chronic venous morbidity.</p>
+          <p><b>Clinical meaning:</b></p>
+          <ul>
+            <li><b>Mild PTS:</b> Symptoms are present but signs are limited; daily function may be only mildly affected.</li>
+            <li><b>Moderate PTS:</b> Symptoms and signs are more persistent; chronic venous morbidity is clinically relevant.</li>
+            <li><b>Severe PTS:</b> High symptom/sign burden or venous ulcer; specialist venous evaluation is usually appropriate.</li>
+          </ul>
           <p><b>Next step:</b> Assess compression adherence, venous obstruction/reflux, ulcer care needs and follow-up trend over time.</p>
         </div>
       </section>

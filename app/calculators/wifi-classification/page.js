@@ -129,6 +129,19 @@ export default function Page() {
           benefit from revascularization in chronic limb-threatening ischemia.
         </p>
 
+        <h2>How to interpret mild, moderate and severe grades</h2>
+        <ul>
+          <li><b>Wound grade 1:</b> Small superficial ulcer; usually limited tissue loss.</li>
+          <li><b>Wound grade 2:</b> Deeper ulcer or exposed tendon/joint; limb threat is clinically significant.</li>
+          <li><b>Wound grade 3:</b> Extensive ulcer or gangrene; high limb threat.</li>
+          <li><b>Ischemia grade 1:</b> Mild perfusion deficit; healing may still occur depending on wound burden.</li>
+          <li><b>Ischemia grade 2:</b> Moderate ischemia; revascularization benefit becomes more likely.</li>
+          <li><b>Ischemia grade 3:</b> Severe ischemia; urgent vascular assessment is usually appropriate.</li>
+          <li><b>Infection grade 1:</b> Mild local infection.</li>
+          <li><b>Infection grade 2:</b> Deeper or more extensive infection without systemic toxicity.</li>
+          <li><b>Infection grade 3:</b> Severe infection or systemic inflammatory response; urgent source control is needed.</li>
+        </ul>
+
         <h2>Reference</h2>
         <p>Mills JL Jr. J Vasc Surg. 2014.</p>
       </section>
