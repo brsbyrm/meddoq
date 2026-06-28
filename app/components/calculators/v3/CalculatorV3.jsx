@@ -1,0 +1,208 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import CalculatorShell from "../CalculatorShell";
+import CalculatorPanel from "../CalculatorPanel";
+import CalculatorResult from "../CalculatorResult";
+import CalculatorReferencePage from "../CalculatorReferencePage";
+
+export default function CalculatorV3({ config }) {
+  if (!config) return null;
+
+  if (config.type === "single-choice") {
+    return <SingleChoiceCalculator config={config} />;
+  }
+
+  if (config.type === "select-score") {
+    return <SelectScoreCalculator config={config} />;
+  }
+
+  return null;
+}
+
+function SingleChoiceCalculator({ config }) {
+  const [selected, setSelected] = useState(config.defaultValue);
+
+  const result = useMemo(
+    () => config.options.find((item) => item.value === selected) || config.options[0],
+    [config.options, selected]
+  );
+
+  const referenceContent = toReferenceContent(config);
+
+  return (
+    <CalculatorShell
+      category={config.category}
+      title={config.title}
+      description={config.description}
+    >
+      <CalculatorPanel>
+        <div style={styles.grid}>
+          {config.options.map((item) => (
+            <label
+              key={item.value}
+              style={{
+                ...styles.option,
+                ...(selected === item.value ? styles.optionActive : {}),
+              }}
+            >
+              <input
+                type="radio"
+                name={config.inputName}
+                value={item.value}
+                checked={selected === item.value}
+                onChange={(event) => setSelected(event.target.value)}
+              />
+              <div>
+                <strong style={styles.optionTitle}>
+                  {item.title} — {item.label}
+                </strong>
+                <span style={styles.optionText}>{item.description}</span>
+              </div>
+            </label>
+          ))}
+        </div>
+
+        <CalculatorResult
+          title={`Selected ${config.title.replace(" Calculator", "")}`}
+          value={result.title}
+          unit={result.label}
+          interpretation={result.interpretation}
+          recommendation={result.recommendation}
+          tone={result.tone}
+        />
+      </CalculatorPanel>
+
+      <CalculatorReferencePage content={referenceContent} />
+    </CalculatorShell>
+  );
+}
+
+function SelectScoreCalculator({ config }) {
+  const [values, setValues] = useState(config.defaultValues || {});
+
+  const result = useMemo(() => config.calculate(values), [config, values]);
+  const referenceContent = toReferenceContent(config);
+
+  function updateValue(key, value) {
+    setValues((previous) => ({
+      ...previous,
+      [key]: Number(value),
+    }));
+  }
+
+  return (
+    <CalculatorShell
+      category={config.category}
+      title={config.title}
+      description={config.description}
+    >
+      <CalculatorPanel>
+        <div style={styles.inputGrid}>
+          {config.inputs.map((input) => (
+            <label key={input.key} style={styles.label}>
+              {input.label}
+              <select
+                style={styles.select}
+                value={values[input.key] ?? 0}
+                onChange={(event) => updateValue(input.key, event.target.value)}
+              >
+                {input.options.map((label, index) => (
+                  <option key={label} value={index}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+            </label>
+          ))}
+        </div>
+
+        <CalculatorResult
+          title={result.title}
+          value={result.value}
+          unit={result.unit}
+          interpretation={result.interpretation}
+          recommendation={result.recommendation}
+          tone={result.tone}
+        />
+      </CalculatorPanel>
+
+      <CalculatorReferencePage content={referenceContent} />
+    </CalculatorShell>
+  );
+}
+
+function toReferenceContent(config) {
+  return {
+    category: config.category,
+    title: config.title,
+    description: config.description,
+    interpretation: {
+      clinicalMeaning: config.reference.clinicalMeaning,
+      severity: config.reference.severity,
+      nextStep: config.reference.nextStep,
+    },
+    notes: {
+      pearls: config.reference.pearls,
+      pitfalls: config.reference.pitfalls,
+    },
+    faq: config.reference.faq,
+    references: config.reference.references,
+    related: config.reference.related,
+  };
+}
+
+const styles = {
+  grid: {
+    display: "grid",
+    gap: 12,
+  },
+  option: {
+    display: "grid",
+    gridTemplateColumns: "24px 1fr",
+    gap: 12,
+    alignItems: "center",
+    background: "#f8fafc",
+    border: "1px solid #e2e8f0",
+    borderRadius: 18,
+    padding: 15,
+    cursor: "pointer",
+  },
+  optionActive: {
+    background: "#eff6ff",
+    borderColor: "#93c5fd",
+    boxShadow: "0 12px 28px rgba(37,99,235,0.12)",
+  },
+  optionTitle: {
+    display: "block",
+    color: "#0f172a",
+    fontSize: 15,
+    marginBottom: 4,
+  },
+  optionText: {
+    display: "block",
+    color: "#475569",
+    fontSize: 14,
+    lineHeight: 1.55,
+  },
+  inputGrid: {
+    display: "grid",
+    gap: 16,
+  },
+  label: {
+    display: "grid",
+    gap: 8,
+    color: "#0f172a",
+    fontSize: 14,
+    fontWeight: 850,
+  },
+  select: {
+    width: "100%",
+    padding: 14,
+    borderRadius: 14,
+    border: "1px solid #cbd5e1",
+    background: "#ffffff",
+    color: "#0f172a",
+    fontSize: 15,
+  },
+};
