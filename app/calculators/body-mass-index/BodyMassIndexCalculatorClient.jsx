@@ -1,11 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import CalculatorShell from "../../components/calculators/CalculatorShell";
-import CalculatorPanel from "../../components/calculators/CalculatorPanel";
-import CalculatorResult from "../../components/calculators/CalculatorResult";
-import NumericInput from "../../components/NumericInput";
-import CalculatorReferencePage from "../../components/calculators/CalculatorReferencePage";
+import CalculatorShell from "../../../components/calculators/CalculatorShell";
+import CalculatorPanel from "../../../components/calculators/CalculatorPanel";
+import CalculatorResult from "../../../components/calculators/CalculatorResult";
+import NumericInput from "../../../components/calculators/NumericInput";
+import CalculatorReferencePage from "../../../components/calculators/CalculatorReferencePage";
 
 function classifyBMI(bmi) {
   if (bmi < 18.5) return { label: "Underweight", tone: "warning", detail: "BMI is below the normal adult reference range." };
@@ -20,30 +20,25 @@ export default function BodyMassIndexCalculatorClient() {
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
 
-  const result = useMemo(() => {
+  const bmiValue = useMemo(() => {
     const h = Number(height);
     const w = Number(weight);
 
     if (!h || !w || h <= 0 || w <= 0) return null;
 
     const heightM = h / 100;
-    const bmi = w / (heightM * heightM);
-    const rounded = Math.round(bmi * 10) / 10;
-    const interpretation = classifyBMI(rounded);
-
-    return {
-      value: rounded,
-      interpretation,
-    };
+    return Math.round((w / (heightM * heightM)) * 10) / 10;
   }, [height, weight]);
+
+  const bmiCategory = bmiValue !== null ? classifyBMI(bmiValue) : null;
 
   return (
     <CalculatorShell
       title="Body Mass Index Calculator"
       subtitle="Calculate adult BMI using height and weight."
       category="General Medicine"
-      heroMetric={result ? String(result.value) : "BMI"}
-      heroMetricLabel={result ? result.interpretation.label : "kg/m²"}
+      heroMetric={bmiValue !== null ? String(bmiValue) : "BMI"}
+      heroMetricLabel={bmiCategory ? bmiCategory.label : "kg/m²"}
     >
       <CalculatorPanel title="Patient parameters">
         <NumericInput
@@ -67,13 +62,13 @@ export default function BodyMassIndexCalculatorClient() {
 
       <CalculatorResult
         title="BMI result"
-        value={result ? result.value : "—"}
+        value={bmiValue !== null ? bmiValue : "—"}
         unit="kg/m²"
-        interpretation={result ? result.interpretation.label : "Enter height and weight to calculate BMI."}
-        tone={result ? result.interpretation.tone : "neutral"}
+        interpretation={bmiCategory ? bmiCategory.label : "Enter height and weight to calculate BMI."}
+        tone={bmiCategory ? bmiCategory.tone : "neutral"}
       >
-        {result ? (
-          <p>{result.interpretation.detail}</p>
+        {bmiCategory ? (
+          <p>{bmiCategory.detail}</p>
         ) : (
           <p>Body mass index is calculated as weight in kilograms divided by height in metres squared.</p>
         )}
