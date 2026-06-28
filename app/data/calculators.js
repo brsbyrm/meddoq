@@ -185,4 +185,13 @@ export const calculators = [
     icon:"🦵",
     description:"Classify chronic venous disease using CEAP.",
   },
+
+  {
+    id:"glasgow-blatchford-score",
+    name:"Glasgow-Blatchford Score",
+    category:"General",
+    href:"/calculators/glasgow-blatchford-score",
+    icon:"🩸",
+    description:"Risk stratification for upper gastrointestinal bleeding.",
+  },
 ];
