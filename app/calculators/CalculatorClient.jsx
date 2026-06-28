@@ -105,7 +105,12 @@ function Input({ label, value, setValue, placeholder }) {
   return (
     <label style={styles.label}>
       {label}
-      <input type="text" style={styles.input} value={value} onChange={(e) => setValue(e.target.value.replace(/,/g, "."))} placeholder={placeholder || ""} inputMode="decimal" pattern="[0-9]*[.,]?[0-9]*" />
+      <NumericInput
+        style={styles.input}
+        value={value}
+        onChange={setValue}
+        placeholder={placeholder || ""}
+      />
     </label>
   );
 }
@@ -150,7 +155,7 @@ function EGFR() {
     const scr = toNumber(creat);
     const k = female ? 0.7 : 0.9;
     const alpha = female ? -0.241 : -0.302;
-    let value = 142 * Math.pow(Math.mitoNumber(scr / k, 1), alpha) * Math.pow(Math.max(scr / k, 1), -1.2) * Math.pow(0.9938, toNumber(age));
+    let value = 142 * Math.pow(Math.min(scr / k, 1), alpha) * Math.pow(Math.max(scr / k, 1), -1.2) * Math.pow(0.9938, toNumber(age));
     if (female) value *= 1.012;
     return value.toFixed(1);
   }, [age, creat, female]);
