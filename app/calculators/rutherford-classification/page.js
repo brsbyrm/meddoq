@@ -113,14 +113,17 @@ export default function Page() {
           <strong>{result.title}</strong>
           <p><b>{result.label}</b></p>
           <p>{result.description}</p>
-          <p><b>Clinical meaning:</b></p>
-          <ul>
-            <li><b>Mild claudication:</b> Symptoms occur with exertion but daily walking is largely preserved.</li>
-            <li><b>Moderate claudication:</b> Walking distance is clearly reduced and symptoms interfere with routine activity.</li>
-            <li><b>Severe claudication:</b> Marked lifestyle limitation; short-distance walking provokes symptoms.</li>
-            <li><b>Rest pain or tissue loss:</b> Chronic limb-threatening ischemia until proven otherwise.</li>
-          </ul>
-          <p><b>Next step:</b> Interpret with ABI/toe pressure, duplex or CTA findings, wound status and revascularization feasibility.</p>
+          <div style={styles.interpretationBox}>
+            <h3>Clinical meaning</h3>
+            <ul>
+              <li><b>Category 1 — Mild claudication:</b> Symptoms occur with exertion, but usual daily walking is mostly preserved.</li>
+              <li><b>Category 2 — Moderate claudication:</b> Walking distance is clearly reduced; routine activity is affected.</li>
+              <li><b>Category 3 — Severe claudication:</b> Short-distance walking causes symptoms; lifestyle limitation is marked.</li>
+              <li><b>Category 4 — Rest pain:</b> Suggests chronic limb-threatening ischemia and requires vascular assessment.</li>
+              <li><b>Category 5–6 — Tissue loss:</b> Ulceration or gangrene; limb salvage planning is usually urgent.</li>
+            </ul>
+            <p><b>Next step:</b> Combine with ABI/toe pressure, duplex or CTA findings, wound status and revascularization feasibility.</p>
+          </div>
         </div>
       </section>
 
