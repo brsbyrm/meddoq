@@ -202,18 +202,22 @@ export default function Page() {
           benefit from revascularization in chronic limb-threatening ischemia.
         </p>
 
-        <h2>How to interpret mild, moderate and severe grades</h2>
-        <ul>
-          <li><b>Wound grade 1:</b> Small superficial ulcer; usually limited tissue loss.</li>
-          <li><b>Wound grade 2:</b> Deeper ulcer or exposed tendon/joint; limb threat is clinically significant.</li>
-          <li><b>Wound grade 3:</b> Extensive ulcer or gangrene; high limb threat.</li>
-          <li><b>Ischemia grade 1:</b> Mild perfusion deficit; healing may still occur depending on wound burden.</li>
-          <li><b>Ischemia grade 2:</b> Moderate ischemia; revascularization benefit becomes more likely.</li>
-          <li><b>Ischemia grade 3:</b> Severe ischemia; urgent vascular assessment is usually appropriate.</li>
-          <li><b>Infection grade 1:</b> Mild local infection.</li>
-          <li><b>Infection grade 2:</b> Deeper or more extensive infection without systemic toxicity.</li>
-          <li><b>Infection grade 3:</b> Severe infection or systemic inflammatory response; urgent source control is needed.</li>
-        </ul>
+        <div style={styles.interpretationBox}>
+          <h2>How to interpret WIfI grades</h2>
+          <ul>
+            <li><b>Wound 0:</b> No ulcer or gangrene.</li>
+            <li><b>Wound 1 — mild:</b> Small superficial ulcer; limited tissue loss.</li>
+            <li><b>Wound 2 — moderate:</b> Deeper ulcer, exposed tendon/joint, or more significant tissue loss.</li>
+            <li><b>Wound 3 — severe:</b> Extensive ulcer, forefoot/midfoot gangrene, or major tissue loss.</li>
+            <li><b>Ischemia 1 — mild:</b> Perfusion is reduced, but healing may still occur if wound burden is small.</li>
+            <li><b>Ischemia 2 — moderate:</b> Perfusion deficit is clinically important; revascularization benefit is more likely.</li>
+            <li><b>Ischemia 3 — severe:</b> Marked ischemia; urgent vascular assessment is usually appropriate.</li>
+            <li><b>Infection 1 — mild:</b> Local superficial infection without systemic toxicity.</li>
+            <li><b>Infection 2 — moderate:</b> Deeper or more extensive infection; limb threat increases.</li>
+            <li><b>Infection 3 — severe:</b> Systemic toxicity/severe infection; urgent source control is needed.</li>
+          </ul>
+          <p><b>Next step:</b> Use WIfI together with arterial anatomy, wound trajectory, sepsis status and technical feasibility of revascularization.</p>
+        </div>
 
         <h2>Reference</h2>
         <p>Mills JL Jr. J Vasc Surg. 2014.</p>
