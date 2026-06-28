@@ -176,4 +176,13 @@ export const calculators = [
     icon:"🦶",
     description:"Assess limb threat using Wound, Ischemia and foot Infection.",
   },
+
+  {
+    id:"ceap-classification",
+    name:"CEAP Classification",
+    category:"Vascular",
+    href:"/calculators/ceap-classification",
+    icon:"🦵",
+    description:"Classify chronic venous disease using CEAP.",
+  },
 ];
