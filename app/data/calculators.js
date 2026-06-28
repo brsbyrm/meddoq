@@ -239,4 +239,13 @@ export const calculators = [
     icon:"🧬",
     description:"Estimate risk of advanced liver fibrosis.",
   },
+
+  {
+    id:"apri-score",
+    name:"APRI Score",
+    category:"General",
+    href:"/calculators/apri-score",
+    icon:"🧬",
+    description:"Estimate liver fibrosis risk using AST and platelets.",
+  },
 ];
