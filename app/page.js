@@ -345,9 +345,9 @@ const styles = {
   },
   heroText: {
     margin: "22px 0 0",
-    maxWidth: 680,
-    color: "#475569",
-    fontSize: 18,
+    maxWidth: 760,
+    color: "#334155",
+    fontSize: 22,
     lineHeight: 1.65,
   },
   heroActions: {
@@ -536,7 +536,7 @@ const styles = {
   },
   cardText: {
     margin: "10px 0 18px",
-    color: "#475569",
+    color: "#334155",
     lineHeight: 1.55,
     fontSize: 14,
     flex: 1,
@@ -597,7 +597,7 @@ const styles = {
     maxWidth: 1180,
     margin: "0 auto",
     padding: "34px 24px 48px",
-    color: "#475569",
+    color: "#334155",
     display: "flex",
     justifyContent: "space-between",
     gap: 20,
