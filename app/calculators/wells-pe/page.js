@@ -156,6 +156,69 @@ export default function Page() {
 }
 
 const styles = {
+  reference: {
+    marginTop: 28,
+    display: "grid",
+    gap: 18,
+  },
+  referenceHeader: {
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: 24,
+    padding: 24,
+    boxShadow: "0 18px 44px rgba(15, 23, 42, 0.06)",
+  },
+  referenceKicker: {
+    margin: 0,
+    color: "#2563eb",
+    fontWeight: 900,
+    textTransform: "uppercase",
+    letterSpacing: "0.08em",
+    fontSize: 12,
+  },
+  referenceTitle: {
+    margin: "8px 0",
+    color: "#0f172a",
+    fontSize: 30,
+    letterSpacing: "-0.04em",
+  },
+  referenceIntro: {
+    margin: 0,
+    color: "#475569",
+    fontSize: 16,
+    lineHeight: 1.65,
+  },
+  referenceGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+    gap: 14,
+  },
+  referenceCard: {
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: 20,
+    padding: 18,
+    boxShadow: "0 14px 34px rgba(15, 23, 42, 0.05)",
+  },
+  faqBox: {
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: 22,
+    padding: 22,
+  },
+  referencesBox: {
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: 22,
+    padding: 22,
+    color: "#334155",
+    lineHeight: 1.65,
+  },
+  detail: {
+    borderTop: "1px solid #e2e8f0",
+    padding: "12px 0",
+    color: "#334155",
+  },
   main: { maxWidth: 980, margin: "0 auto", padding: 24, fontFamily: "Inter, system-ui, sans-serif", color: "#0f172a" },
   back: { color: "#2563eb", fontWeight: 800, textDecoration: "none" },
   hero: { marginTop: 32, background: "linear-gradient(135deg,#ffffff,#eff6ff)", border: "1px solid #dbeafe", borderRadius: 28, padding: "clamp(26px,5vw,46px)", boxShadow: "0 24px 70px rgba(15,23,42,0.08)" },
