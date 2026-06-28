@@ -82,6 +82,6 @@ card:{marginTop:24,background:"#fff",border:"1px solid #e2e8f0",borderRadius:24,
 grid:{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(min(100%,220px),1fr))",gap:16},
 label:{display:"grid",gap:8,fontWeight:700},
 input:{padding:14,borderRadius:12,border:"1px solid #cbd5e1"},
-result:{marginTop:24,background:"#eff6ff",padding:20,borderRadius:18,border:"1px solid #bfdbfe"},
+result:{marginTop:24,background:"linear-gradient(135deg,#f8fafc,#eff6ff)",border:"1px solid #bfdbfe",borderRadius:22,padding:24,display:"grid",gap:10,lineHeight:1.45,boxShadow:"0 18px 50px rgba(15,23,42,0.08)"},
 content:{marginTop:32,lineHeight:1.7,fontSize:17}
 }

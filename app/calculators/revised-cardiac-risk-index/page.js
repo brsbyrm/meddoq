@@ -149,13 +149,8 @@ const styles = {
     padding: 14,
     cursor: "pointer",
   },
-  result: {
-    marginTop: 24,
-    background: "linear-gradient(135deg,#eff6ff,#ffffff)",
-    border: "1px solid #bfdbfe",
-    borderRadius: 20,
-    padding: 22,
-  },
+  result:{marginTop:24,background:"linear-gradient(135deg,#f8fafc,#eff6ff)",border:"1px solid #bfdbfe",borderRadius:22,padding:24,display:"grid",gap:10,lineHeight:1.45,boxShadow:"0 18px 50px rgba(15,23,42,0.08)"},
+
   content: {
     marginTop: 32,
     lineHeight: 1.7,
