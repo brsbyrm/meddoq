@@ -157,12 +157,138 @@ export default function Cha2ds2VascPage() {
         />
       </CalculatorPanel>
 
-      <CalculatorReferencePage content={content} />
+      <section style={styles.reference}>
+        <div style={styles.referenceHeader}>
+          <p style={styles.referenceKicker}>Clinical Reference</p>
+          <h2 style={styles.referenceTitle}>CHA₂DS₂-VASc Clinical Reference</h2>
+          <p style={styles.referenceIntro}>
+            CHA₂DS₂-VASc is used to estimate thromboembolic risk in patients with atrial fibrillation and to support structured anticoagulation discussion.
+          </p>
+        </div>
+
+        <div style={styles.referenceGrid}>
+          <article style={styles.referenceCard}>
+            <h3>When to use</h3>
+            <p>
+              Use this score in patients with atrial fibrillation or atrial flutter when estimating stroke or systemic embolism risk and discussing anticoagulation strategy.
+            </p>
+          </article>
+
+          <article style={styles.referenceCard}>
+            <h3>How to interpret</h3>
+            <p>
+              Higher scores indicate higher thromboembolic risk. Age ≥75 years and prior stroke, TIA, or systemic embolism carry the greatest point weights.
+            </p>
+          </article>
+
+          <article style={styles.referenceCard}>
+            <h3>Clinical limitations</h3>
+            <p>
+              The score does not fully capture frailty, AF burden, left atrial appendage anatomy, bleeding risk, renal function, adherence, or patient preference.
+            </p>
+          </article>
+
+          <article style={styles.referenceCard}>
+            <h3>Next clinical step</h3>
+            <p>
+              Interpret together with HAS-BLED or another bleeding risk assessment, renal function, drug interactions, anticoagulant contraindications, and shared decision-making.
+            </p>
+          </article>
+        </div>
+
+        <div style={styles.faqBox}>
+          <h3>FAQ</h3>
+          <details style={styles.detail}>
+            <summary>Does CHA₂DS₂-VASc diagnose atrial fibrillation?</summary>
+            <p>No. It estimates thromboembolic risk after atrial fibrillation has been identified clinically or by rhythm documentation.</p>
+          </details>
+          <details style={styles.detail}>
+            <summary>Is female sex alone enough to define high stroke risk?</summary>
+            <p>No. Female sex is best treated as a risk modifier and should be interpreted with the full clinical profile.</p>
+          </details>
+          <details style={styles.detail}>
+            <summary>Should bleeding risk be assessed separately?</summary>
+            <p>Yes. Bleeding risk should be reviewed separately because CHA₂DS₂-VASc estimates thromboembolic risk, not bleeding risk.</p>
+          </details>
+        </div>
+
+        <div style={styles.referencesBox}>
+          <h3>References</h3>
+          <ol>
+            <li>Lip GYH et al. Refining clinical risk stratification for predicting stroke and thromboembolism in atrial fibrillation. Chest. 2010.</li>
+            <li>2023 ACC/AHA/ACCP/HRS Guideline for the Diagnosis and Management of Atrial Fibrillation.</li>
+            <li>2024 ESC Guidelines for the management of atrial fibrillation.</li>
+          </ol>
+        </div>
+      </section>
     </CalculatorShell>
   );
 }
 
 const styles = {
+  reference: {
+    marginTop: 28,
+    display: "grid",
+    gap: 18,
+  },
+  referenceHeader: {
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: 24,
+    padding: 24,
+    boxShadow: "0 18px 44px rgba(15, 23, 42, 0.06)",
+  },
+  referenceKicker: {
+    margin: 0,
+    color: "#2563eb",
+    fontWeight: 900,
+    textTransform: "uppercase",
+    letterSpacing: "0.08em",
+    fontSize: 12,
+  },
+  referenceTitle: {
+    margin: "8px 0",
+    color: "#0f172a",
+    fontSize: 30,
+    letterSpacing: "-0.04em",
+  },
+  referenceIntro: {
+    margin: 0,
+    color: "#475569",
+    fontSize: 16,
+    lineHeight: 1.65,
+  },
+  referenceGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+    gap: 14,
+  },
+  referenceCard: {
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: 20,
+    padding: 18,
+    boxShadow: "0 14px 34px rgba(15, 23, 42, 0.05)",
+  },
+  faqBox: {
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: 22,
+    padding: 22,
+  },
+  referencesBox: {
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: 22,
+    padding: 22,
+    color: "#334155",
+    lineHeight: 1.65,
+  },
+  detail: {
+    borderTop: "1px solid #e2e8f0",
+    padding: "12px 0",
+    color: "#334155",
+  },
   grid: { display: "grid", gap: 12 },
   option: {
     display: "grid",
