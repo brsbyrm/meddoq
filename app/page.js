@@ -7,13 +7,22 @@ const categoryColors = {
   Vascular: "#2563eb",
   Renal: "#16a34a",
   Cardiovascular: "#dc2626",
+  Cardiology: "#dc2626",
   General: "#7c3aed",
   Perioperative: "#ea580c",
-  Cardiology: "#dc2626",
   Pulmonology: "#0891b2",
   "Pulmonary Embolism": "#0891b2",
   "Critical Care": "#7c3aed",
 };
+
+const featuredIds = [
+  "heart-score",
+  "pesi-score",
+  "sofa-score",
+  "egfr",
+  "wells-dvt",
+  "aortic-size-index",
+];
 
 export default function Home() {
   const [query, setQuery] = useState("");
@@ -30,6 +39,25 @@ export default function Home() {
     );
   }, [query]);
 
+  const featuredCalculators = useMemo(() => {
+    return featuredIds
+      .map((id) => calculators.find((item) => item.id === id))
+      .filter(Boolean);
+  }, []);
+
+  const recentCalculators = useMemo(() => calculators.slice(-6).reverse(), []);
+
+  const categoryStats = useMemo(() => {
+    const counts = calculators.reduce((acc, item) => {
+      acc[item.category] = (acc[item.category] || 0) + 1;
+      return acc;
+    }, {});
+
+    return Object.entries(counts)
+      .map(([category, count]) => ({ category, count }))
+      .sort((a, b) => b.count - a.count);
+  }, []);
+
   return (
     <main style={styles.page}>
       <header style={styles.header}>
@@ -39,7 +67,8 @@ export default function Home() {
 
         <nav style={styles.nav}>
           <a href="#calculators" style={styles.navLink}>Calculators</a>
-          <a href="#why" style={styles.navLink}>Why Meddoq</a>
+          <a href="/calculators" style={styles.navLink}>Library</a>
+          <a href="/search" style={styles.navLink}>Search</a>
           <a href="mailto:contact@meddoq.com" style={styles.contactButton}>Contact</a>
         </nav>
       </header>
@@ -48,16 +77,16 @@ export default function Home() {
         <div style={styles.heroLeft}>
           <div style={styles.badge}>Evidence-based physician tools</div>
           <h1 style={styles.heroTitle}>
-            Clinical calculators for better decisions.
+            Clinical calculators for faster, clearer decisions.
           </h1>
           <p style={styles.heroText}>
-            Fast, clean and clinically interpretable medical calculators for vascular,
-            cardiovascular, renal and perioperative practice.
+            Meddoq brings validated clinical scores, medical formulas and decision-support tools
+            into a clean, fast workflow built for physicians.
           </p>
 
           <div style={styles.heroActions}>
-            <a href="#calculators" style={styles.primaryButton}>Open calculator library</a>
-            <a href="mailto:contact@meddoq.com" style={styles.secondaryButton}>contact@meddoq.com</a>
+            <a href="/calculators" style={styles.primaryButton}>Open calculator library</a>
+            <a href="/search" style={styles.secondaryButton}>Search calculators</a>
           </div>
 
           <div style={styles.heroStats}>
@@ -66,36 +95,34 @@ export default function Home() {
               <span>Calculators</span>
             </div>
             <div style={styles.statItem}>
-              <strong>Free</strong>
-              <span>Open access</span>
+              <strong>{categoryStats.length}</strong>
+              <span>Clinical areas</span>
             </div>
             <div style={styles.statItem}>
-              <strong>Clinical</strong>
-              <span>Interpretation notes</span>
+              <strong>Free</strong>
+              <span>Open access</span>
             </div>
           </div>
         </div>
 
         <div style={styles.heroVisual}>
-          <div style={styles.trustPanel}>
-            <div style={styles.trustCard}>
-              <strong>Evidence-Based</strong>
-              <p>Clinical calculators developed from established formulas and guideline recommendations.</p>
+          <div style={styles.heroPanel}>
+            <div style={styles.heroPanelTop}>
+              <span>Featured tools</span>
+              <strong>Meddoq</strong>
             </div>
-            <div style={styles.trustCard}>
-              <strong>Built for Physicians</strong>
-              <p>Designed for rapid bedside use with clinical interpretation and references.</p>
-            </div>
-            <div style={styles.trustCard}>
-              <strong>Professional Platform</strong>
-              <p>Medical calculators, clinical guides and decision support in one place.</p>
+            <div style={styles.featuredMiniList}>
+              {featuredCalculators.slice(0, 4).map((item) => (
+                <a key={item.id} href={item.href} style={styles.featuredMiniItem}>
+                  <span style={styles.miniIcon}>{item.icon}</span>
+                  <div>
+                    <strong>{item.name}</strong>
+                    <p>{item.category}</p>
+                  </div>
+                </a>
+              ))}
             </div>
           </div>
-          {filteredCalculators.length === 0 && (
-            <div style={styles.noResults}>
-              No calculator found. Try eGFR, DVT, BMI, aortic or CHA₂DS₂-VASc.
-            </div>
-          )}
         </div>
       </section>
 
@@ -111,40 +138,70 @@ export default function Home() {
         </div>
       </section>
 
+      <section style={styles.section}>
+        <div style={styles.sectionTop}>
+          <div>
+            <p style={styles.kicker}>Featured calculators</p>
+            <h2 style={styles.sectionTitle}>Start with common clinical tools</h2>
+          </div>
+          <a href="/calculators" style={styles.sectionLink}>View all →</a>
+        </div>
+
+        <div style={styles.calculatorGrid}>
+          {featuredCalculators.map((item) => (
+            <CalculatorCard key={item.id} item={item} />
+          ))}
+        </div>
+      </section>
+
+      <section style={styles.section}>
+        <div style={styles.sectionTop}>
+          <div>
+            <p style={styles.kicker}>Clinical areas</p>
+            <h2 style={styles.sectionTitle}>Browse by specialty</h2>
+          </div>
+        </div>
+
+        <div style={styles.categoryGrid}>
+          {categoryStats.map((item) => (
+            <a
+              key={item.category}
+              href={`/calculators?category=${encodeURIComponent(item.category)}`}
+              style={{
+                ...styles.categoryCard,
+                borderColor: `${categoryColors[item.category] || "#334155"}33`,
+              }}
+            >
+              <strong style={{ color: categoryColors[item.category] || "#334155" }}>
+                {item.category}
+              </strong>
+              <span>{item.count} calculators</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
       <section id="calculators" style={styles.section}>
         <div style={styles.sectionTop}>
           <div>
-            <p style={styles.kicker}>Calculator library</p>
-            <h2 style={styles.sectionTitle}>Select a calculator</h2>
-            <p style={styles.sectionText}>
-              Each tool opens on its own clinical page with formula, interpretation and references.
-            </p>
+            <p style={styles.kicker}>{query ? "Search results" : "Recently added"}</p>
+            <h2 style={styles.sectionTitle}>
+              {query ? `${filteredCalculators.length} matching calculators` : "Newest calculators"}
+            </h2>
           </div>
         </div>
 
         <div style={styles.calculatorGrid}>
-          {filteredCalculators.map((item) => (
-            <a key={item.id} href={item.href} style={styles.card}>
-              <div style={styles.cardTop}>
-                <div style={styles.iconBubble}>{item.icon}</div>
-                <span
-                  style={{
-                    ...styles.categoryBadge,
-                    color: categoryColors[item.category] || "#334155",
-                    background: `${categoryColors[item.category] || "#334155"}12`,
-                    borderColor: `${categoryColors[item.category] || "#334155"}33`,
-                  }}
-                >
-                  {item.category}
-                </span>
-              </div>
-
-              <h3 style={styles.cardTitle}>{item.name}</h3>
-              <p style={styles.cardText}>{item.description}</p>
-              <div style={styles.cardAction}>Open calculator →</div>
-            </a>
+          {(query ? filteredCalculators : recentCalculators).map((item) => (
+            <CalculatorCard key={item.id} item={item} />
           ))}
         </div>
+
+        {query && filteredCalculators.length === 0 && (
+          <div style={styles.noResults}>
+            No calculator found. Try eGFR, HEART, SOFA, DVT, BMI or aortic.
+          </div>
+        )}
       </section>
 
       <section id="why" style={styles.whyBox}>
@@ -171,6 +228,11 @@ export default function Home() {
           <strong>Meddoq</strong>
           <p>Clinical decision support for physicians.</p>
         </div>
+        <div style={styles.footerLinks}>
+          <a href="/calculators">Calculator Library</a>
+          <a href="/search">Search</a>
+          <a href="/faq">FAQ</a>
+        </div>
         <div style={styles.footerEmail}>contact@meddoq.com</div>
         <div>© {new Date().getFullYear()} Meddoq</div>
       </footer>
@@ -178,153 +240,87 @@ export default function Home() {
   );
 }
 
+function CalculatorCard({ item }) {
+  const color = categoryColors[item.category] || "#334155";
+
+  return (
+    <a href={item.href} style={styles.card}>
+      <div style={styles.cardTop}>
+        <div style={styles.iconBubble}>{item.icon}</div>
+        <span
+          style={{
+            ...styles.categoryBadge,
+            color,
+            background: `${color}12`,
+            borderColor: `${color}33`,
+          }}
+        >
+          {item.category}
+        </span>
+      </div>
+
+      <h3 style={styles.cardTitle}>{item.name}</h3>
+      <p style={styles.cardText}>{item.description}</p>
+      <div style={styles.cardAction}>Open calculator →</div>
+    </a>
+  );
+}
+
 const styles = {
-  searchSection: {
-    maxWidth: 900,
-    margin: "28px auto 0",
-    padding: "0 16px",
-  },
-  searchBox: {
-    display: "flex",
-    alignItems: "center",
-    gap: 14,
-    background: "#ffffff",
-    border: "1px solid #dbeafe",
-    borderRadius: 999,
-    padding: "16px 22px",
-    boxShadow: "0 22px 70px rgba(15,23,42,0.10)",
-  },
-  searchIcon: {
-    fontSize: 24,
-    color: "#2563eb",
-    fontWeight: 900,
-  },
-  searchInput: {
-    width: "100%",
-    border: "none",
-    outline: "none",
-    fontSize: 18,
-    fontWeight: 700,
-    color: "#0f172a",
-    background: "transparent",
-  },
-  noResults: {
-    gridColumn: "1 / -1",
-    background: "#fff7ed",
-    border: "1px solid #fed7aa",
-    color: "#9a3412",
-    borderRadius: 18,
-    padding: 20,
-    fontWeight: 800,
-  },
-
-  trustPanel: {
-    display: "grid",
-    gap: 18,
-  },
-  trustCard: {
-    background: "#ffffff",
-    border: "1px solid #e2e8f0",
-    borderRadius: 24,
-    padding: 24,
-    boxShadow: "0 20px 60px rgba(15,23,42,.08)",
-  },
-
   page: {
     minHeight: "100vh",
+    background:
+      "radial-gradient(circle at top left, rgba(37,99,235,0.14), transparent 32%), linear-gradient(135deg, #f8fafc 0%, #eef6ff 100%)",
+    color: "#0f172a",
     fontFamily:
       'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-    background:
-      "radial-gradient(circle at top right, rgba(37,99,235,0.16), transparent 32%), linear-gradient(180deg, #ffffff 0%, #f8fafc 55%, #eef6ff 100%)",
-    color: "#020617",
-    padding: "20px",
   },
   header: {
     maxWidth: 1180,
     margin: "0 auto",
+    padding: "28px 24px 12px",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
     gap: 18,
-    padding: "14px 0",
   },
   brand: {
-    display: "flex",
+    display: "inline-flex",
     alignItems: "center",
-    gap: 12,
     textDecoration: "none",
-    color: "#020617",
   },
-  logoIcon: {
-    height: 72,
-    width: 72,
-    display: "block",
-    objectFit: "contain",
-  },
-  logoWord: {
-    fontSize: 34,
-    fontWeight: 950,
-    letterSpacing: "-0.04em",
-    color: "#0f172a",
-  },
-
   logoImage: {
-    height: 105,
+    height: 44,
     width: "auto",
     display: "block",
-  },
-
-  logoMark: {
-    width: 42,
-    height: 105,
-    borderRadius: 14,
-    display: "grid",
-    placeItems: "center",
-    color: "white",
-    background: "linear-gradient(135deg, #2563eb, #0f172a)",
-    fontSize: 30,
-    fontWeight: 900,
-  },
-  logoText: {
-    fontSize: 25,
-    fontWeight: 950,
-    letterSpacing: "-0.05em",
-  },
-  logoSubtext: {
-    color: "#64748b",
-    textTransform: "uppercase",
-    letterSpacing: "0.12em",
-    fontSize: 11,
-    fontWeight: 800,
   },
   nav: {
     display: "flex",
     alignItems: "center",
-    gap: 18,
+    gap: 14,
     flexWrap: "wrap",
     justifyContent: "flex-end",
   },
   navLink: {
-    color: "#0f172a",
+    color: "#334155",
     textDecoration: "none",
     fontWeight: 800,
-    fontSize: 14,
   },
   contactButton: {
-    color: "white",
-    background: "#2563eb",
+    background: "#0f172a",
+    color: "#ffffff",
     textDecoration: "none",
-    fontWeight: 900,
-    fontSize: 14,
-    padding: "10px 14px",
+    padding: "11px 14px",
     borderRadius: 999,
+    fontWeight: 900,
   },
   hero: {
     maxWidth: 1180,
-    margin: "46px auto 0",
+    margin: "0 auto",
+    padding: "64px 24px 34px",
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 360px), 1fr))",
-    gap: 34,
+    gridTemplateColumns: "minmax(0, 1.05fr) minmax(320px, 0.95fr)",
+    gap: 36,
     alignItems: "center",
   },
   heroLeft: {
@@ -332,231 +328,289 @@ const styles = {
   },
   badge: {
     display: "inline-flex",
-    color: "#2563eb",
-    background: "#eff6ff",
+    background: "#dbeafe",
+    color: "#1d4ed8",
     border: "1px solid #bfdbfe",
     borderRadius: 999,
-    padding: "9px 13px",
+    padding: "8px 12px",
     fontSize: 13,
     fontWeight: 900,
-    marginBottom: 20,
+    marginBottom: 18,
   },
   heroTitle: {
     margin: 0,
-    maxWidth: 720,
-    fontSize: "clamp(42px, 7vw, 82px)",
-    lineHeight: 0.95,
-    letterSpacing: "-0.075em",
+    fontSize: "clamp(42px, 6vw, 72px)",
+    lineHeight: 0.94,
+    letterSpacing: "-0.065em",
   },
   heroText: {
-    maxWidth: 650,
-    margin: "24px 0 0",
+    margin: "22px 0 0",
+    maxWidth: 680,
     color: "#475569",
-    fontSize: "clamp(17px, 2vw, 21px)",
+    fontSize: 18,
     lineHeight: 1.65,
   },
   heroActions: {
-    marginTop: 30,
     display: "flex",
     gap: 12,
     flexWrap: "wrap",
+    marginTop: 28,
   },
   primaryButton: {
-    background: "linear-gradient(135deg, #0f172a, #2563eb)",
-    color: "white",
+    background: "#2563eb",
+    color: "#ffffff",
     textDecoration: "none",
-    padding: "15px 18px",
+    padding: "14px 18px",
     borderRadius: 16,
-    fontWeight: 950,
-    boxShadow: "0 18px 40px rgba(37,99,235,0.22)",
+    fontWeight: 900,
+    boxShadow: "0 18px 40px rgba(37, 99, 235, 0.24)",
   },
   secondaryButton: {
-    background: "white",
-    color: "#2563eb",
+    background: "#ffffff",
+    color: "#0f172a",
     textDecoration: "none",
-    padding: "15px 18px",
+    padding: "14px 18px",
     borderRadius: 16,
     fontWeight: 900,
-    border: "1px solid #dbeafe",
-    userSelect: "all",
+    border: "1px solid #cbd5e1",
   },
   heroStats: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 150px), 1fr))",
-    gap: 14,
-    marginTop: 32,
-    maxWidth: 650,
+    display: "flex",
+    gap: 12,
+    flexWrap: "wrap",
+    marginTop: 28,
   },
   statItem: {
-    background: "rgba(255,255,255,0.86)",
-    border: "1px solid #e2e8f0",
-    borderRadius: 20,
-    padding: 17,
-    display: "grid",
-    gap: 4,
+    background: "rgba(255,255,255,0.74)",
+    border: "1px solid #dbeafe",
+    borderRadius: 18,
+    padding: "14px 16px",
+    minWidth: 120,
   },
   heroVisual: {
-    minHeight: 360,
-    display: "grid",
-    placeItems: "center",
-    background:
-      "radial-gradient(circle at 20% 20%, rgba(37,99,235,0.18), transparent 24%), radial-gradient(circle at 80% 75%, rgba(14,165,233,0.16), transparent 28%)",
-    borderRadius: 36,
+    minWidth: 0,
   },
-  visualCard: {
-    width: "min(100%, 320px)",
-    aspectRatio: "1 / 1",
-    borderRadius: 32,
-    background: "rgba(255,255,255,0.92)",
+  heroPanel: {
+    background: "rgba(255,255,255,0.86)",
     border: "1px solid #dbeafe",
-    boxShadow: "0 28px 80px rgba(15,23,42,0.12)",
+    borderRadius: 32,
+    padding: 24,
+    boxShadow: "0 30px 80px rgba(15, 23, 42, 0.12)",
+  },
+  heroPanelTop: {
+    display: "flex",
+    justifyContent: "space-between",
+    color: "#64748b",
+    fontWeight: 900,
+    marginBottom: 16,
+  },
+  featuredMiniList: {
+    display: "grid",
+    gap: 12,
+  },
+  featuredMiniItem: {
+    display: "grid",
+    gridTemplateColumns: "46px 1fr",
+    gap: 12,
+    alignItems: "center",
+    textDecoration: "none",
+    color: "#0f172a",
+    background: "#f8fafc",
+    border: "1px solid #e2e8f0",
+    borderRadius: 18,
+    padding: 14,
+  },
+  miniIcon: {
+    width: 46,
+    height: 46,
+    borderRadius: 16,
     display: "grid",
     placeItems: "center",
-    padding: 34,
+    background: "#eff6ff",
+    fontSize: 24,
   },
-  calculatorIcon: {
-    fontSize: 82,
+  searchSection: {
+    maxWidth: 900,
+    margin: "0 auto 22px",
+    padding: "0 24px",
+  },
+  searchBox: {
+    display: "flex",
+    alignItems: "center",
+    gap: 12,
+    background: "#ffffff",
+    border: "1px solid #dbeafe",
+    borderRadius: 22,
+    padding: "0 18px",
+    boxShadow: "0 20px 50px rgba(37, 99, 235, 0.08)",
+  },
+  searchIcon: {
     color: "#2563eb",
+    fontSize: 24,
     fontWeight: 900,
   },
-  visualLine: {
-    width: "70%",
-    height: 105,
-    borderRadius: 999,
-    background: "#dbeafe",
-  },
-  visualGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(2, 1fr)",
-    gap: 10,
-    width: "70%",
+  searchInput: {
+    width: "100%",
+    border: 0,
+    outline: 0,
+    padding: "18px 0",
+    fontSize: 16,
+    background: "transparent",
+    color: "#0f172a",
   },
   section: {
     maxWidth: 1180,
-    margin: "64px auto 0",
+    margin: "0 auto",
+    padding: "34px 24px",
   },
   sectionTop: {
     display: "flex",
     justifyContent: "space-between",
-    gap: 20,
     alignItems: "end",
-    marginBottom: 22,
+    gap: 16,
+    marginBottom: 18,
   },
   kicker: {
-    margin: "0 0 8px",
+    margin: 0,
     color: "#2563eb",
-    fontWeight: 950,
+    fontWeight: 900,
     textTransform: "uppercase",
-    letterSpacing: "0.12em",
+    letterSpacing: "0.08em",
     fontSize: 12,
   },
   sectionTitle: {
-    margin: 0,
-    fontSize: "clamp(30px, 4vw, 44px)",
-    letterSpacing: "-0.055em",
+    margin: "6px 0 0",
+    fontSize: 32,
+    letterSpacing: "-0.04em",
   },
-  sectionText: {
-    margin: "10px 0 0",
-    color: "#64748b",
-    lineHeight: 1.6,
-    fontSize: 16,
+  sectionLink: {
+    color: "#2563eb",
+    fontWeight: 900,
+    textDecoration: "none",
   },
   calculatorGrid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 255px), 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
     gap: 18,
   },
   card: {
-    background: "white",
-    border: "1px solid #e2e8f0",
-    borderRadius: 26,
-    padding: 22,
+    display: "flex",
+    flexDirection: "column",
+    minHeight: 220,
     textDecoration: "none",
-    color: "#020617",
-    boxShadow: "0 18px 44px rgba(15,23,42,0.06)",
-    display: "grid",
-    gap: 12,
+    color: "#0f172a",
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: 24,
+    padding: 22,
+    boxShadow: "0 18px 44px rgba(15, 23, 42, 0.07)",
   },
   cardTop: {
     display: "flex",
-    alignItems: "center",
     justifyContent: "space-between",
     gap: 12,
+    alignItems: "center",
+    marginBottom: 18,
   },
   iconBubble: {
-    width: 52,
-    height: 105,
-    borderRadius: 18,
-    background: "#eff6ff",
+    width: 46,
+    height: 46,
+    borderRadius: 16,
     display: "grid",
     placeItems: "center",
-    fontSize: 26,
+    background: "#eff6ff",
+    fontSize: 24,
   },
   categoryBadge: {
-    border: "1px solid",
+    border: "1px solid #bfdbfe",
     borderRadius: 999,
-    padding: "5px 9px",
-    fontSize: 11,
-    fontWeight: 950,
+    padding: "7px 10px",
+    fontSize: 12,
+    fontWeight: 900,
   },
   cardTitle: {
     margin: 0,
-    fontSize: 21,
-    letterSpacing: "-0.04em",
+    fontSize: 20,
+    lineHeight: 1.2,
+    letterSpacing: "-0.025em",
   },
   cardText: {
-    margin: 0,
+    margin: "10px 0 18px",
     color: "#475569",
     lineHeight: 1.55,
+    fontSize: 14,
+    flex: 1,
   },
   cardAction: {
-    marginTop: 4,
     color: "#2563eb",
-    fontWeight: 950,
-    fontSize: 14,
+    fontWeight: 900,
+  },
+  categoryGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))",
+    gap: 14,
+  },
+  categoryCard: {
+    display: "grid",
+    gap: 6,
+    textDecoration: "none",
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: 20,
+    padding: 18,
+    boxShadow: "0 14px 34px rgba(15, 23, 42, 0.05)",
+  },
+  noResults: {
+    marginTop: 18,
+    padding: 18,
+    borderRadius: 18,
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    color: "#64748b",
+    fontWeight: 800,
   },
   whyBox: {
     maxWidth: 1180,
-    margin: "56px auto 0",
+    margin: "20px auto 0",
+    padding: "34px 24px",
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 220px), 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
     gap: 16,
-    background: "rgba(255,255,255,0.82)",
-    border: "1px solid #dbeafe",
-    borderRadius: 28,
-    padding: 22,
   },
   whyItem: {
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: 22,
+    padding: 20,
     display: "grid",
     gap: 8,
-    color: "#475569",
-    lineHeight: 1.55,
   },
   disclaimerMini: {
+    background: "#0f172a",
+    color: "#ffffff",
+    borderRadius: 22,
+    padding: 20,
     display: "grid",
     gap: 8,
-    color: "#475569",
-    lineHeight: 1.55,
-    border: "1px solid #dbeafe",
-    borderRadius: 20,
-    padding: 16,
-    background: "#f8fafc",
   },
   footer: {
     maxWidth: 1180,
-    margin: "34px auto 0",
-    padding: "24px 0 8px",
-    borderTop: "1px solid #e2e8f0",
-    display: "flex",
-    gap: 18,
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexWrap: "wrap",
+    margin: "0 auto",
+    padding: "34px 24px 48px",
     color: "#475569",
+    display: "flex",
+    justifyContent: "space-between",
+    gap: 20,
+    flexWrap: "wrap",
+    borderTop: "1px solid #dbeafe",
+  },
+  footerLinks: {
+    display: "flex",
+    gap: 14,
+    flexWrap: "wrap",
   },
   footerEmail: {
-    color: "#2563eb",
     fontWeight: 900,
-    userSelect: "all",
+    color: "#0f172a",
   },
 };
