@@ -212,4 +212,13 @@ export const calculators = [
     icon:"🧬",
     description:"Classify severity of chronic liver disease.",
   },
+
+  {
+    id:"meld-score",
+    name:"MELD Score",
+    category:"General",
+    href:"/calculators/meld-score",
+    icon:"🧬",
+    description:"Estimate liver disease severity using MELD.",
+  },
 ];
