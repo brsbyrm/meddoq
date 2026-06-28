@@ -40,29 +40,145 @@ export default function Home() {
 
   return (
     <main style={styles.page}>
-      <div style={styles.shell}>
-        <header style={styles.header}>
+      <style id="meddoq-mobile-responsive-fix">{`
+        @media (max-width: 900px) {
+          .meddoq-shell {
+            width: 100% !important;
+            box-shadow: none !important;
+          }
+
+          .meddoq-header {
+            height: auto !important;
+            padding: 14px 18px !important;
+            align-items: flex-start !important;
+            gap: 12px !important;
+          }
+
+          .meddoq-brand-logo {
+            height: 64px !important;
+          }
+
+          .meddoq-nav {
+            gap: 10px !important;
+            justify-content: flex-start !important;
+          }
+
+          .meddoq-contact-button {
+            padding: 9px 12px !important;
+          }
+
+          .meddoq-hero {
+            height: auto !important;
+            min-height: 0 !important;
+            padding: 28px 18px 24px !important;
+            grid-template-columns: 1fr !important;
+            gap: 16px !important;
+          }
+
+          .meddoq-hero-title {
+            font-size: 42px !important;
+            line-height: 1.04 !important;
+          }
+
+          .meddoq-hero-text {
+            font-size: 17px !important;
+          }
+
+          .meddoq-hero-emblem-wrap {
+            height: 210px !important;
+            min-height: 0 !important;
+          }
+
+          .meddoq-hero-emblem {
+            width: 300px !important;
+            height: 300px !important;
+          }
+
+          .meddoq-featured {
+            padding: 24px 18px 20px !important;
+          }
+
+          .meddoq-card-grid {
+            grid-template-columns: 1fr !important;
+          }
+
+          .meddoq-card {
+            height: auto !important;
+            min-height: 170px !important;
+          }
+
+          .meddoq-benefits {
+            padding: 20px 18px !important;
+            grid-template-columns: 1fr !important;
+          }
+
+          .meddoq-footer {
+            padding: 22px 18px !important;
+            grid-template-columns: 1fr !important;
+            gap: 16px !important;
+          }
+
+          .meddoq-footer-logo {
+            height: 54px !important;
+          }
+        }
+
+        @media (max-width: 520px) {
+          .meddoq-header {
+            display: grid !important;
+            grid-template-columns: 1fr !important;
+          }
+
+          .meddoq-nav {
+            width: 100% !important;
+            display: grid !important;
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+          }
+
+          .meddoq-nav-link,
+          .meddoq-contact-button {
+            text-align: center !important;
+            font-size: 13px !important;
+          }
+
+          .meddoq-hero-title {
+            font-size: 36px !important;
+          }
+
+          .meddoq-trust-row {
+            gap: 10px !important;
+            font-size: 12px !important;
+          }
+
+          .meddoq-section-top {
+            display: grid !important;
+            gap: 8px !important;
+          }
+        }
+      `}</style>
+      <div className="meddoq-shell" style={styles.shell}>
+        <header className="meddoq-header" style={styles.header}>
           <a href="/" style={styles.brand}>
-            <img src="/brand.png" alt="Meddoq" style={styles.brandLogo} />
+            <img className="meddoq-brand-logo" src="/brand.png" alt="Meddoq" style={styles.brandLogo} />
           </a>
 
-          <nav style={styles.nav}>
-            <a href="/calculators" style={styles.navLink}>Calculators</a>
-            <a href="/search" style={styles.navLink}>Search</a>
-            <a href="/faq" style={styles.navLink}>FAQ</a>
-            <a href="mailto:contact@meddoq.com" style={styles.contactButton}>Contact</a>
+          <nav className="meddoq-nav" style={styles.nav}>
+            <a href="/calculators" className="meddoq-nav-link" style={styles.navLink}>Calculators</a>
+            <a href="/search" className="meddoq-nav-link" style={styles.navLink}>Search</a>
+            <a href="/faq" className="meddoq-nav-link" style={styles.navLink}>FAQ</a>
+            <a href="mailto:contact@meddoq.com" className="meddoq-contact-button" style={styles.contactButton}>Contact</a>
           </nav>
         </header>
 
-        <section style={styles.hero}>
+        <section className="meddoq-hero" style={styles.hero}>
           <div style={styles.heroContent}>
-            <h1 style={styles.heroTitle}>
+            <h1 className="meddoq-hero-title" style={styles.heroTitle}>
               Clinical Calculators
               <br />
               & Decision Support
             </h1>
 
-            <p style={styles.heroText}>
+            <p className="meddoq-hero-text" style={styles.heroText}>
               Evidence-based tools to help physicians make better clinical decisions, faster.
             </p>
 
@@ -76,41 +192,41 @@ export default function Home() {
               />
             </div>
 
-            <div style={styles.trustRow}>
+            <div className="meddoq-trust-row" style={styles.trustRow}>
               <span>🛡️ Evidence Based</span>
               <span>🔒 Secure & Private</span>
               <span>👨‍⚕️ Physician Focused</span>
             </div>
           </div>
 
-          <div style={styles.heroEmblemWrap}>
-            <img src="/icon.png" alt="" aria-hidden="true" style={styles.heroEmblem} />
+          <div className="meddoq-hero-emblem-wrap" style={styles.heroEmblemWrap}>
+            <img src="/icon.png" alt="" aria-hidden="true" className="meddoq-hero-emblem" style={styles.heroEmblem} />
           </div>
         </section>
 
-        <section style={styles.featuredSection}>
-          <div style={styles.sectionTop}>
+        <section className="meddoq-featured" style={styles.featuredSection}>
+          <div className="meddoq-section-top" style={styles.sectionTop}>
             <h2 style={styles.sectionTitle}>{query ? "Search Results" : "Featured Calculators"}</h2>
             <a href="/calculators" style={styles.sectionLink}>View all calculators →</a>
           </div>
 
-          <div style={styles.cardGrid}>
+          <div className="meddoq-card-grid" style={styles.cardGrid}>
             {results.slice(0, 4).map((item) => (
               <CalculatorCard key={item.id} item={item} />
             ))}
           </div>
         </section>
 
-        <section style={styles.benefits}>
+        <section className="meddoq-benefits" style={styles.benefits}>
           <Benefit icon="◎" title="Accurate" text="Validated clinical scores and formulas." />
           <Benefit icon="◇" title="Reliable" text="Consistent bedside workflow use." />
           <Benefit icon="⚡" title="Fast" text="Clean inputs and clear results." />
           <Benefit icon="☤" title="For Physicians" text="Built for modern medical practice." />
         </section>
 
-        <footer style={styles.footer}>
+        <footer className="meddoq-footer" style={styles.footer}>
           <div style={styles.footerBrand}>
-            <img src="/brand.png" alt="Meddoq" style={styles.footerLogo} />
+            <img src="/brand.png" alt="Meddoq" className="meddoq-footer-logo" style={styles.footerLogo} />
             <p>Evidence-based clinical calculators for physicians.</p>
           </div>
 
@@ -132,7 +248,7 @@ function CalculatorCard({ item }) {
   const color = categoryColors[item.category] || "#2563eb";
 
   return (
-    <a href={item.href} style={styles.card}>
+    <a href={item.href} className="meddoq-card" style={styles.card}>
       <div style={styles.cardTop}>
         <div style={styles.iconBubble}>{item.icon}</div>
         <span
