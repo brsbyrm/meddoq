@@ -234,7 +234,7 @@ function Score({ title }) {
   return (
     <div style={styles.result}>
       <span>{title}</span>
-      <strong>Dedicated scoring interface coming next.</strong>
+      <strong>Use the dedicated calculator page for full scoring.</strong>
     </div>
   );
 }
