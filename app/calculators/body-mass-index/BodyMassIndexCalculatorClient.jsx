@@ -1,11 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import CalculatorShell from "@/components/calculators/CalculatorShell";
-import CalculatorPanel from "@/components/calculators/CalculatorPanel";
-import CalculatorResult from "@/components/calculators/CalculatorResult";
-import NumericInput from "@/components/calculators/NumericInput";
-import CalculatorReferencePage from "@/components/calculators/CalculatorReferencePage";
+import CalculatorShell from "../../components/calculators/CalculatorShell";
+import CalculatorPanel from "../../components/calculators/CalculatorPanel";
+import CalculatorResult from "../../components/calculators/CalculatorResult";
+import NumericInput from "../../components/NumericInput";
+import CalculatorReferencePage from "../../components/calculators/CalculatorReferencePage";
 
 function classifyBMI(bmi) {
   if (bmi < 18.5) return { label: "Underweight", tone: "warning", detail: "BMI is below the normal adult reference range." };
@@ -94,7 +94,7 @@ export default function BodyMassIndexCalculatorClient() {
           {
             heading: "Clinical note",
             content:
-              "BMI is a population-level screening tool. It does not directly measure adiposity, body composition, sarcopenia, oedema, pregnancy status, or cardiometabolic risk.",
+              "BMI is a screening tool. It does not directly measure adiposity, body composition, oedema, pregnancy status, sarcopenia, or cardiometabolic risk.",
           },
         ]}
         references={[
