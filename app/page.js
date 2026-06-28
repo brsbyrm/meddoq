@@ -344,11 +344,12 @@ const styles = {
     letterSpacing: "-0.065em",
   },
   heroText: {
-    margin: "22px 0 0",
-    maxWidth: 760,
-    color: "#334155",
-    fontSize: 22,
-    lineHeight: 1.65,
+    margin: "30px 0 0",
+    maxWidth: 900,
+    color: "#0f172a",
+    fontSize: 34,
+    fontWeight: 650,
+    lineHeight: 1.55,
   },
   heroActions: {
     display: "flex",
