@@ -134,6 +134,42 @@ function SelectScoreCalculator({ config }) {
 
 
 function calculateSelectScoreResult(config, values) {
+  if (config.resultMode === "sum-score") {
+    const score = Object.values(values).reduce((sum, value) => sum + Number(value || 0), 0);
+    let tone = "green";
+    let label = "Low clinical burden";
+    if (score >= 15) { tone = "red"; label = "High clinical burden"; }
+    else if (score >= 8) { tone = "amber"; label = "Moderate clinical burden"; }
+    return scoreStage(
+      score,
+      "Total Score",
+      label,
+      "Higher scores indicate greater chronic venous disease severity and treatment burden.",
+      "Interpret with CEAP class, venous duplex ultrasound, ulcer status, arterial perfusion, and compression tolerance.",
+      tone,
+      "points"
+    );
+  }
+
+  if (config.resultMode === "villalta") {
+    const ulcer = Number(values.ulcer || 0);
+    const score = Object.entries(values).reduce((sum, [key, value]) => key === "ulcer" ? sum : sum + Number(value || 0), 0);
+    let tone = "green";
+    let label = "No post-thrombotic syndrome";
+    if (ulcer || score >= 15) { tone = "red"; label = "Severe post-thrombotic syndrome"; }
+    else if (score >= 10) { tone = "amber"; label = "Moderate post-thrombotic syndrome"; }
+    else if (score >= 5) { tone = "blue"; label = "Mild post-thrombotic syndrome"; }
+    return scoreStage(
+      score,
+      "Villalta Score",
+      label,
+      "The Villalta score grades post-thrombotic syndrome severity after deep vein thrombosis.",
+      "Interpret after the acute DVT phase and assess venous duplex findings, compression strategy, ulcer status, and recurrent thrombosis risk.",
+      tone,
+      "points"
+    );
+  }
+
   if (config.resultMode === "wifi-stage") {
     const score =
       Number(values.wound || 0) +
@@ -204,12 +240,12 @@ function calculateSelectScoreResult(config, values) {
   );
 }
 
-function scoreStage(score, title, label, interpretation, recommendation, tone) {
+function scoreStage(score, title, label, interpretation, recommendation, tone, unit = "total score") {
   return {
     title,
     value: String(score),
     label,
-    unit: "total score",
+    unit,
     interpretation,
     recommendation,
     tone,
