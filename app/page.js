@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import { calculators } from "./data/calculators";
-import CalculatorIcon from "./components/CalculatorIcon";
 
 const categoryColors = {
   Vascular: "#2563eb",
@@ -127,7 +126,7 @@ export default function Home() {
           {filteredCalculators.map((item) => (
             <a key={item.id} href={item.href} style={styles.card}>
               <div style={styles.cardTop}>
-                <div style={styles.iconBubble}><CalculatorIcon icon={item.icon} category={item.category} /></div>
+                <div style={styles.iconBubble}>{item.icon}</div>
                 <span
                   style={{
                     ...styles.categoryBadge,
