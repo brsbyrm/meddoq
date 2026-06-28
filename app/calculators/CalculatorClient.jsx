@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import NumericInput, { toNumber } from "../components/NumericInput";
+import PremiumResultCard from "../components/calculators/PremiumResultCard";
 
 
 
@@ -117,19 +118,13 @@ function Input({ label, value, setValue, placeholder }) {
 
 function Result({ title, value, unit }) {
   return (
-    <div style={styles.result}>
-      <div style={{fontSize:14,fontWeight:700,color:"#475569",marginBottom:8}}>
-        {title}
-      </div>
-
-      <div style={{fontSize:42,fontWeight:800,lineHeight:1,color:"#0f172a"}}>
-        {value}
-      </div>
-
-      <div style={{marginTop:6,fontSize:16,color:"#64748b",fontWeight:600}}>
-        {unit}
-      </div>
-    </div>
+    <PremiumResultCard
+      title={title}
+      value={value}
+      unit={unit}
+      interpretation="This value should be interpreted together with symptoms, examination findings, comorbidities, medication history, and current clinical guidelines."
+      recommendation="Confirm all inputs and units, review patient-specific risk, and use the result as structured clinical decision support rather than a standalone treatment decision."
+    />
   );
 }
 
