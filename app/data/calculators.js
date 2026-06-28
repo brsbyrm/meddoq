@@ -266,4 +266,13 @@ export const calculators = [
     icon:"🧬",
     description:"Estimate advanced fibrosis in fatty liver disease.",
   },
+
+  {
+    id:"ckd-epi-2021-cystatin-c",
+    name:"CKD-EPI 2021 Cystatin C eGFR",
+    category:"Renal",
+    href:"/calculators/ckd-epi-2021-cystatin-c",
+    icon:"🧪",
+    description:"Estimate eGFR using cystatin C.",
+  },
 ];
