@@ -248,4 +248,13 @@ export const calculators = [
     icon:"🧬",
     description:"Estimate liver fibrosis risk using AST and platelets.",
   },
+
+  {
+    id:"albi-score",
+    name:"ALBI Score",
+    category:"General",
+    href:"/calculators/albi-score",
+    icon:"🧬",
+    description:"Assess liver function using albumin and bilirubin.",
+  },
 ];
