@@ -134,12 +134,138 @@ export default function HasBledPage() {
         />
       </CalculatorPanel>
 
-      <CalculatorReferencePage content={content} />
+      <section style={styles.reference}>
+        <div style={styles.referenceHeader}>
+          <p style={styles.referenceKicker}>Clinical Reference</p>
+          <h2 style={styles.referenceTitle}>HAS-BLED Clinical Reference</h2>
+          <p style={styles.referenceIntro}>
+            HAS-BLED estimates major bleeding risk in patients with atrial fibrillation and helps identify modifiable bleeding risk factors before or during anticoagulation.
+          </p>
+        </div>
+
+        <div style={styles.referenceGrid}>
+          <article style={styles.referenceCard}>
+            <h3>When to use</h3>
+            <p>
+              Use HAS-BLED in patients with atrial fibrillation when evaluating bleeding risk during anticoagulation planning or follow-up.
+            </p>
+          </article>
+
+          <article style={styles.referenceCard}>
+            <h3>How to interpret</h3>
+            <p>
+              A score of 3 or more is commonly considered high bleeding risk and should prompt closer review, monitoring, and correction of modifiable risk factors.
+            </p>
+          </article>
+
+          <article style={styles.referenceCard}>
+            <h3>Clinical limitations</h3>
+            <p>
+              HAS-BLED does not replace individualized assessment of anemia, frailty, falls, renal function, liver disease, drug interactions, or procedural bleeding risk.
+            </p>
+          </article>
+
+          <article style={styles.referenceCard}>
+            <h3>Next clinical step</h3>
+            <p>
+              Do not use a high score alone to deny anticoagulation. Review blood pressure, renal and liver function, alcohol, NSAIDs, antiplatelets, INR control, and follow-up plan.
+            </p>
+          </article>
+        </div>
+
+        <div style={styles.faqBox}>
+          <h3>FAQ</h3>
+          <details style={styles.detail}>
+            <summary>Does HAS-BLED estimate stroke risk?</summary>
+            <p>No. HAS-BLED estimates bleeding risk. Stroke risk should be assessed separately with CHA₂DS₂-VASc or another appropriate tool.</p>
+          </details>
+          <details style={styles.detail}>
+            <summary>Should anticoagulation be withheld if HAS-BLED is high?</summary>
+            <p>Not automatically. A high score should trigger closer monitoring and modification of bleeding risk factors rather than automatic withholding of anticoagulation.</p>
+          </details>
+          <details style={styles.detail}>
+            <summary>What risk factors are modifiable?</summary>
+            <p>Examples include uncontrolled hypertension, interacting drugs, excess alcohol intake, and unstable INR control in patients receiving warfarin.</p>
+          </details>
+        </div>
+
+        <div style={styles.referencesBox}>
+          <h3>References</h3>
+          <ol>
+            <li>Pisters R et al. A novel user-friendly score to assess one-year risk of major bleeding in atrial fibrillation. Chest. 2010.</li>
+            <li>2023 ACC/AHA/ACCP/HRS Guideline for the Diagnosis and Management of Atrial Fibrillation.</li>
+            <li>2024 ESC Guidelines for the management of atrial fibrillation.</li>
+          </ol>
+        </div>
+      </section>
     </CalculatorShell>
   );
 }
 
 const styles = {
+  reference: {
+    marginTop: 28,
+    display: "grid",
+    gap: 18,
+  },
+  referenceHeader: {
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: 24,
+    padding: 24,
+    boxShadow: "0 18px 44px rgba(15, 23, 42, 0.06)",
+  },
+  referenceKicker: {
+    margin: 0,
+    color: "#2563eb",
+    fontWeight: 900,
+    textTransform: "uppercase",
+    letterSpacing: "0.08em",
+    fontSize: 12,
+  },
+  referenceTitle: {
+    margin: "8px 0",
+    color: "#0f172a",
+    fontSize: 30,
+    letterSpacing: "-0.04em",
+  },
+  referenceIntro: {
+    margin: 0,
+    color: "#475569",
+    fontSize: 16,
+    lineHeight: 1.65,
+  },
+  referenceGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+    gap: 14,
+  },
+  referenceCard: {
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: 20,
+    padding: 18,
+    boxShadow: "0 14px 34px rgba(15, 23, 42, 0.05)",
+  },
+  faqBox: {
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: 22,
+    padding: 22,
+  },
+  referencesBox: {
+    background: "#ffffff",
+    border: "1px solid #e2e8f0",
+    borderRadius: 22,
+    padding: 22,
+    color: "#334155",
+    lineHeight: 1.65,
+  },
+  detail: {
+    borderTop: "1px solid #e2e8f0",
+    padding: "12px 0",
+    color: "#334155",
+  },
   grid: { display: "grid", gap: 12 },
   option: {
     display: "grid",
