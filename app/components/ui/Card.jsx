@@ -1,9 +1,5 @@
 export default function Card({ children, style = {} }) {
-  return (
-    <section style={{ ...styles.card, ...style }}>
-      {children}
-    </section>
-  );
+  return <section style={{ ...styles.card, ...style }}>{children}</section>;
 }
 
 const styles = {

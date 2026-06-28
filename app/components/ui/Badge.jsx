@@ -1,11 +1,6 @@
 export default function Badge({ children, tone = "blue" }) {
   const toneStyle = tones[tone] || tones.blue;
-
-  return (
-    <span style={{ ...styles.badge, ...toneStyle }}>
-      {children}
-    </span>
-  );
+  return <span style={{ ...styles.badge, ...toneStyle }}>{children}</span>;
 }
 
 const tones = {
