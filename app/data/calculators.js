@@ -329,4 +329,13 @@ export const calculators = [
     icon:"🧪",
     description:"Estimate base excess from pH and bicarbonate.",
   },
+
+  {
+    id:"oxygenation-index",
+    name:"Oxygenation Index",
+    category:"General",
+    href:"/calculators/oxygenation-index",
+    icon:"🫁",
+    description:"Calculate oxygenation index from FiO₂, MAP and PaO₂.",
+  },
 ];
