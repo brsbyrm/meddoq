@@ -203,4 +203,13 @@ export const calculators = [
     icon:"🩸",
     description:"Risk stratification after upper gastrointestinal bleeding.",
   },
+
+  {
+    id:"child-pugh-score",
+    name:"Child-Pugh Score",
+    category:"General",
+    href:"/calculators/child-pugh-score",
+    icon:"🧬",
+    description:"Classify severity of chronic liver disease.",
+  },
 ];
