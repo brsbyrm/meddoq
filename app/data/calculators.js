@@ -151,4 +151,12 @@ export const calculators = [
     icon: "🦵",
     description: "Assess post-thrombotic syndrome severity after DVT.",
   },
+  {
+    id: "rutherford-classification",
+    name: "Rutherford Classification",
+    category: "Vascular",
+    href: "/calculators/rutherford-classification",
+    icon: "🦵",
+    description: "Classify chronic lower-extremity PAD severity.",
+  },
 ];
